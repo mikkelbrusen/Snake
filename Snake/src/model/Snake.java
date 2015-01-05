@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Deque;
+import javafx.scene.Node;
 
 /**
  * Takes input on Snake.move in form of a char.
@@ -8,7 +9,7 @@ import java.util.Deque;
  * @author Buster K. Mejborn 
  */
 public class Snake {
-    Field currentPosition;
+    SnakePosition currentPosition;
     Deque queue;
     
     public void move(char dir){
@@ -29,7 +30,7 @@ public class Snake {
     }
     
     private void walk(int x, int y){
-        Field newPosition;
+        SnakePosition newPosition;
         if(isReverseDirection(x,y))
             //Do nothing at the moment.
             //Later add function to move the snake in same as last direction.
@@ -45,7 +46,7 @@ public class Snake {
         }
     }
     
-    private boolean hasEatenApple(Field position){
+    private boolean hasEatenApple(SnakePosition position){
         //TODO:
         //Make calls to apple / other model control, find out if there's an apple.
         //If there's an apple, remove it. and return true
@@ -59,5 +60,23 @@ public class Snake {
             return true;
         else
             return false;
+    }
+}
+
+class SnakePosition {   
+    private int x;
+    private int y;
+
+    public int getX() {
+            return x;
+    }
+
+    public int getY() {
+            return y;
+    }
+    
+    public void Move(int x, int y){
+        this.x += x;
+        this.y += y;
     }
 }
