@@ -1,7 +1,6 @@
 package model;
 
 import java.util.Deque;
-import javafx.scene.Node;
 
 /**
  * Takes input on Snake.move in form of a char.
@@ -11,6 +10,14 @@ import javafx.scene.Node;
 public class Snake {
     SnakePosition currentPosition;
     Deque queue;
+    
+    public Snake(int x, int y){
+        this.currentPosition = new SnakePosition();
+        currentPosition.Move(x, y);
+        queue.add(currentPosition);
+        currentPosition.Move(1, 0);
+        queue.add(currentPosition);
+    }
     
     public void move(char dir){
         switch(dir){
