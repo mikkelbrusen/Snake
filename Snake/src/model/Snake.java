@@ -5,14 +5,21 @@ import java.util.Deque;
 /**
  * Takes input on Snake.move in form of a char.
  * Legal values are N, S, E, W representing "North", "South", "East", "West"
- * @author Buster K. Mejborn 
+ * @author Buster K. Mejborn
+ * 
+ * TODO:
+ * Fix start køen.
+ * Fix æble dimsen
  */
 public class Snake {
     SnakePosition currentPosition;
     Deque queue;
+    Model model;
     
-    public Snake(int x, int y){
+    public Snake(int x, int y, Model model){
+        this.model = model;
         this.currentPosition = new SnakePosition();
+        
         currentPosition.Move(x, y);
         queue.add(currentPosition);
         currentPosition.Move(1, 0);
@@ -49,7 +56,7 @@ public class Snake {
             if (hasEatenApple(currentPosition))
               ;  //Dont remove tail from queue
             else
-                queue.remove();//Remove tail from queue   
+                queue.removeLast(); //Remove tail from queue
         }
     }
     
@@ -58,7 +65,13 @@ public class Snake {
         //Make calls to apple / other model control, find out if there's an apple.
         //If there's an apple, remove it. and return true
         //If not, return false
-        return false;
+        if(model.getAppleX() == position.getX() && model.getAppleY() == position.getY()){
+            model.newApple();
+            return true;
+        }
+            
+        else
+            return false;
     }
     
     private boolean isReverseDirection(int x, int y){
