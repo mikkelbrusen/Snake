@@ -1,16 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
+import java.util.Deque;
+
 /**
- *
- * @author BusterK
+ * Takes input on Snake.move in form of a char.
+ * Legal values are N, S, E, W representing "North", "South", "East", "West"
+ * @author Buster K. Mejborn 
  */
 public class Snake {
     Field currentPosition;
+    Deque queue;
     
     public void move(char dir){
         switch(dir){
@@ -28,11 +27,30 @@ public class Snake {
                 break;
         }        
     }
+    
     private void walk(int x, int y){
+        Field newPosition;
         if(isReverseDirection(x,y))
+            //Do nothing at the moment.
+            //Later add function to move the snake in same as last direction.
             currentPosition.Move(0, 0);
-        else
+        else{
             currentPosition.Move(x, y);
+            newPosition = currentPosition;
+            queue.add(newPosition);
+            if (hasEatenApple(currentPosition))
+              ;  //Dont remove tail from queue
+            else
+                queue.remove();//Remove tail from queue   
+        }
+    }
+    
+    private boolean hasEatenApple(Field position){
+        //TODO:
+        //Make calls to apple / other model control, find out if there's an apple.
+        //If there's an apple, remove it. and return true
+        //If not, return false
+        return false;
     }
     
     private boolean isReverseDirection(int x, int y){
