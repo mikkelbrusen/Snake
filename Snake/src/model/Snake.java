@@ -3,13 +3,11 @@ package model;
 import java.util.Deque;
 
 /**
- * Takes input on Snake.move in form of a char.
- * Legal values are N, S, E, W representing "North", "South", "East", "West"
  * @author Buster K. Mejborn
  * 
  * TODO:
- * Fix start køen.
  * Fix æble dimsen
+ * Snake does not check if it has hit a wall or a part of itself.
  */
 public class Snake {
     SnakePosition currentPosition;
@@ -18,32 +16,17 @@ public class Snake {
     
     public Snake(int x, int y, Model model){
         this.model = model;
-        this.currentPosition = new SnakePosition();
+        this.currentPosition = new SnakePosition(x,y);
         
-        currentPosition.Move(x, y);
         queue.add(currentPosition);
-        currentPosition.Move(1, 0);
-        queue.add(currentPosition);
+        model.setFieldValue(Objects.SNAKE, currentPosition.getX(), currentPosition.getY());
+        
+        SnakePosition newPosition = new SnakePosition(x+1,y);
+        queue.add(newPosition);
+        model.setFieldValue(Objects.SNAKE,newPosition.getX(),newPosition.getY());
     }
     
-    public void move(char dir){
-        switch(dir){
-            case 'N':
-                walk(0, 1);
-                break;
-            case 'S':
-                walk(0, -1);
-                break;
-            case 'E':
-                walk(1, 0);
-                break;
-            case 'W':
-                walk(-1, 0);
-                break;
-        }        
-    }
-    
-    private void walk(int x, int y){
+    public void walk(int x, int y){
         SnakePosition newPosition;
         if(isReverseDirection(x,y))
             //Do nothing at the moment.
@@ -53,10 +36,18 @@ public class Snake {
             currentPosition.Move(x, y);
             newPosition = currentPosition;
             queue.add(newPosition);
-            if (hasEatenApple(currentPosition))
-              ;  //Dont remove tail from queue
-            else
-                queue.removeLast(); //Remove tail from queue
+            if (hasEatenApple(currentPosition)){
+                //Dont remove tail from queue
+                //Draw the new snake head
+            }
+            
+            else{
+                //Remove the tail from the queue, and do checks to see if there's a snake or a wall in the new position.
+                 //Remove tail from queue
+                //Insert function to check if snake has died.
+                model.setFieldValue(Objects.BLANK, currentPosition.getX(), currentPosition.getY());
+                queue.removeLast();
+            }
         }
     }
     
@@ -82,6 +73,11 @@ class SnakePosition {
     private int x;
     private int y;
 
+    public SnakePosition(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
+    
     public int getX() {
             return x;
     }
