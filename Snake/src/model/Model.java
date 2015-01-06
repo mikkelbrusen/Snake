@@ -1,9 +1,15 @@
 package model;
 
 /**
- *TODO:
+ * Creates a new game model with a gamefield of size n x m, a snake in the middle, and a random apple.
+ * Valid public functions are:
+ * getGameField() - Returns a array of type Objecs which is an enumerator.
+ * moveSnake(char) - Moves the snake in direction N, E, S or W.
+ * 
+ * @TODO:
  * New apple is not implemented
- * Enumerator needs to be put.
+ * Empty fields are not in a list yet. Needed for Apple
+ * Snake does not check what is in the new position.
  * @author BusterK
  */
 public class Model {
@@ -17,7 +23,7 @@ public class Model {
         this.dim = new Dimension(rows,cols);
         this.gameField = new Objects[dim.getRows()][dim.getCols()];
         this.snake = new Snake(dim.getRows()/2,dim.getCols()/2,this);
-        this.apple = new Apple((int)Math.random()*dim.getRows(),(int)Math.random()*dim.getCols());
+        newApple();
     }
     /*
      * Takes input on Snake.move in form of a char.
@@ -58,11 +64,11 @@ public class Model {
         }
     }
     
-    public int getAppleX(){
+    public int getAppleRow(){
         return apple.getRow();
     }
     
-    public int getAppleY(){
+    public int getAppleCol(){
         return apple.getCol();
     }
     

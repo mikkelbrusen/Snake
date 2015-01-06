@@ -52,7 +52,7 @@ public class Snake {
     }
     
     private boolean hasEatenApple(SnakePosition position){
-        if(model.getAppleX() == position.getX() && model.getAppleY() == position.getY()){
+        if(model.getAppleRow() == position.getX() && model.getAppleCol() == position.getY()){
             model.newApple();
             return true;
         }
