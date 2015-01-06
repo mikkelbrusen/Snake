@@ -61,15 +61,10 @@ public class Snake {
     }
     
     private boolean hasEatenApple(SnakePosition position){
-        //TODO:
-        //Make calls to apple / other model control, find out if there's an apple.
-        //If there's an apple, remove it. and return true
-        //If not, return false
         if(model.getAppleX() == position.getX() && model.getAppleY() == position.getY()){
             model.newApple();
             return true;
         }
-            
         else
             return false;
     }
