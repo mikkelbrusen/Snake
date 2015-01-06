@@ -5,12 +5,18 @@ package model;
  * @author BusterK
  */
 public class Apple{
-    private int row;
-    private int col;
+    private final int row;
+    private final int col;
+    private final Model model;
+    private final int position;
     
-    public Apple(int row, int col){
-        this.row = row;
-        this.col = col;
+    public Apple(Model model){
+        this.model = model;
+        this.position = ((int)(Math.random()*100)*model.getAvailableFields().size())/100;
+        row = model.getAvailableFields().get(position).getRow();
+        col = model.getAvailableFields().get(position).getCol(); 
+        
+        model.getAvailableFields().remove(position);
     }
     
     public int getRow(){

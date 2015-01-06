@@ -6,53 +6,57 @@ import java.util.Deque;
  * @author Buster K. Mejborn
  * 
  * TODO:
- * Fix æble dimsen
+ * Snake does nothing if the directions is reverse
+ * Snake does not know when the edge has been reached yet
+ * Has eaten apple does nothing
  * Snake does not check if it has hit a wall or a part of itself.
  */
 public class Snake {
-    SnakePosition currentPosition;
-    Deque queue;
+    Field currentPosition;
+    Deque<Field> queue;
     Model model;
     
-    public Snake(int x, int y, Model model){
-        this.model = model;
-        this.currentPosition = new SnakePosition(x,y);
+    public Snake(int row, int col, Model model){
+        //Sets the snake at length 2 to go 1 
+        Field field = model.getGameField()[row][col];
+        queue.add(field);
+        model.setFieldValue(Objects.SNAKE, field);
         
-        queue.add(currentPosition);
-        model.setFieldValue(Objects.SNAKE, currentPosition.getX(), currentPosition.getY());
-        
-        SnakePosition newPosition = new SnakePosition(x+1,y);
-        queue.add(newPosition);
-        model.setFieldValue(Objects.SNAKE,newPosition.getX(),newPosition.getY());
+        field = model.getGameField()[row+1][col];
+        queue.add(field);
+        model.setFieldValue(Objects.SNAKE, field);
     }
     
-    public void walk(int x, int y){
-        SnakePosition newPosition;
-        if(isReverseDirection(x,y))
+    public void walk(int row, int col){
+        if(isReverseDirection(row,col)){
             //Do nothing at the moment.
             //Later add function to move the snake in same as last direction.
-            currentPosition.Move(0, 0);
+            }
         else{
-            currentPosition.Move(x, y);
-            newPosition = currentPosition;
-            queue.add(newPosition);
+            currentPosition = model.getGameField()[currentPosition.getRow()+row][currentPosition.getCol()+col];
+            queue.add(currentPosition);
+            
+            //Before marking the field as a snake, check if there's and apple, snake or wall there.
             if (hasEatenApple(currentPosition)){
                 //Dont remove tail from queue
                 //Draw the new snake head
             }
+            else if (hasHitWall(currentPosition)){
+                //Implement Death-by-wall
+            }
             
-            else{
-                //Remove the tail from the queue, and do checks to see if there's a snake or a wall in the new position.
-                 //Remove tail from queue
-                //Insert function to check if snake has died.
-                model.setFieldValue(Objects.BLANK, currentPosition.getX(), currentPosition.getY());
-                queue.removeLast();
+            else if (hasHitSnake(currentPosition)){
+                //Implement Death-by-snake
+            }
+            else {
+                //Current position is OK. Mark it as snake, and continue
+                model.setFieldValue(Objects.SNAKE, currentPosition);
             }
         }
     }
     
-    private boolean hasEatenApple(SnakePosition position){
-        if(model.getAppleRow() == position.getX() && model.getAppleCol() == position.getY()){
+    private boolean hasEatenApple(Field position){
+        if(position.getType() == Objects.APPLE){
             model.newApple();
             return true;
         }
@@ -60,9 +64,27 @@ public class Snake {
             return false;
     }
     
+    private boolean hasHitWall(Field position){
+    if(position.getType() == Objects.WALL)
+        return true;
+    else
+        return false;
+    }
+    
+    private boolean hasHitSnake(Field position){
+        model.setFieldValue(Objects.BLANK, queue.getLast());
+        
+        if(position.getType() == Objects.SNAKE)
+            return true;
+        else{
+            queue.removeLast();
+            return false;
+        }        
+    }
+    
     private boolean isReverseDirection(int x, int y){
-        if ( x == currentPosition.getX()-1 || 
-                y == currentPosition.getY()-1 )
+        if ( x == currentPosition.getCol()-1 || 
+                y == currentPosition.getRow()-1 )
             return true;
         else
             return false;
@@ -70,24 +92,24 @@ public class Snake {
 }
 
 class SnakePosition {   
-    private int x;
-    private int y;
+    private int row;
+    private int col;
 
-    public SnakePosition(int x, int y){
-        this.x = x;
-        this.y = y;
+    public SnakePosition(int row, int col){
+        this.row = row;
+        this.col = col;
     }
     
-    public int getX() {
-            return x;
+    public int getRow() {
+            return row;
     }
 
-    public int getY() {
-            return y;
+    public int getCol() {
+            return col;
     }
     
-    public void Move(int x, int y){
-        this.x += x;
-        this.y += y;
+    public void Move(int row, int col){
+        this.row += row;
+        this.col += col;
     }
 }

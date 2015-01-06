@@ -1,5 +1,7 @@
 package model;
 
+import java.util.LinkedList;
+
 /**
  * Creates a new game model with a gamefield of size n x m, a snake in the middle, and a random apple.
  * Valid public functions are:
@@ -7,27 +9,38 @@ package model;
  * moveSnake(char) - Moves the snake in direction N, E, S or W.
  * 
  * @TODO:
+ * Snake can move outside borders
  * New apple is not implemented
+ * Available fields are not put in list
+ * Only apples are removing available fields
  * Empty fields are not in a list yet. Needed for Apple
  * Snake does not check what is in the new position.
  * @author BusterK
  */
 public class Model {
-    private Objects[][] gameField;
+    private Field[][] gameField;
     private Snake snake;
     private Apple apple;
     private Dimension dim;
     private Objects obj;
     
+    private LinkedList<Field> availableFields;
 
     public Model(int rows, int cols){
         this.dim = new Dimension(rows,cols);
-        this.gameField = new Objects[dim.getRows()][dim.getCols()];
+        this.gameField = new Field[dim.getRows()][dim.getCols()];
+        this.apple = new Apple(this);
+        for (int i = 0; i < rows; i++){
+            for (int j = 0; j < cols; j++){
+                Field field = new Field(i,j);
+                availableFields.add(field);
+                gameField[i][j] = field;
+            }
+        }
         this.snake = new Snake(dim.getRows()/2,dim.getCols()/2,this);
-        newApple();
     }
     /**
-    * Takes input on Snake.move in form of a char, and moves the snake
+    * Takes input and moves the snake
     * Legal values are N, S, E, W representing "North", "South", "East", "West"
     */
     public void moveSnake(char dir){
@@ -47,36 +60,40 @@ public class Model {
         }        
     }
     
-    public Objects[][] getGameField(){
+    protected Field[][] getGameField(){
         return this.gameField;
     }
     
-    public void setFieldValue(Objects val, int x, int y){
+    protected LinkedList<Field> getAvailableFields(){
+        return availableFields;
+    }
+    
+    protected void setFieldValue(Objects val, Field field){
         switch(val){
             case APPLE:
-                this.gameField[x][y] = obj.APPLE;
+                this.gameField[field.getCol()][field.getRow()].setType(obj.APPLE);
+                this.availableFields.remove(field);
                 break;
             case SNAKE:
-                this.gameField[x][y] = obj.SNAKE;
+                this.gameField[field.getCol()][field.getRow()].setType(obj.SNAKE);
+                this.availableFields.remove(field);
                 break;
             case WALL:
-                this.gameField[x][y] = obj.WALL;
+                this.gameField[field.getCol()][field.getRow()].setType(obj.WALL);
+                this.availableFields.remove(field);
+                break;
+            case BLANK:
+                this.gameField[field.getCol()][field.getRow()].setType(obj.BLANK);
+                this.availableFields.add(field);
                 break;
         }
     }
     
-    public int getAppleRow(){
-        return apple.getRow();
-    }
-    
-    public int getAppleCol(){
-        return apple.getCol();
-    }
-    
-    public void newApple(){
-        
+    protected void newApple(){
+        this.apple = new Apple(this);
     }
 }
+
 class Dimension{
     private final int rows;
     private final int cols;
