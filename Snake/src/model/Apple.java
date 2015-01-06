@@ -5,19 +5,19 @@ package model;
  * @author BusterK
  */
 public class Apple{
-    private int x;
-    private int y;
+    private int row;
+    private int col;
     
-    public Apple(int x, int y){
-        this.x = x;
-        this.y = y;
+    public Apple(int row, int col){
+        this.row = row;
+        this.col = col;
     }
     
-    public int getX(){
-        return x;
+    public int getRow(){
+        return row;
     }
     
-    public int getY(){
-        return y;
+    public int getCol(){
+        return col;
     }
 }
