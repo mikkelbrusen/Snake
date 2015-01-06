@@ -16,9 +16,9 @@ public class Controller {
 	}
 	
 	public static void main(String[] args) {
-		// Model model = new Model();
-		View view = new View();
-		//Controller controller = new Controller(model, view);
+		Model model = new Model(100,100);
+		View view = new View(model);
+		Controller controller = new Controller(model, view);
 	}
 
 }

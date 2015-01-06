@@ -6,15 +6,16 @@ import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 
-public class SnakePanel extends JPanel {
+public class MainPanel extends JPanel {
 	
 	private Dimension size;
 	
-	public SnakePanel(Dimension size) {
+	public MainPanel(Dimension size) {
 		super();
 		this.size = size;
 		this.setLayout(new GridLayout(size.height,size.width));
 		this.setBackground(Color.WHITE);
+		this.setPreferredSize(size);
 		
 		
 		

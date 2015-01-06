@@ -1,24 +1,25 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Point;
 
 public class Apple {
 	
-	private Point p;
+	private int x, y;
 	private Color red = Color.RED;
+	private Dimension size;
 	
-	public Apple(Point p) {
-		this.p = p;
+	public Apple(int x, int y) {
+		this.x = x;
+		this.y = y;
+		size = new Dimension(x,y);
 	}
 	
 	public Color getColor(){
         return red;
     }
-    public Point getPosition(){
-        return p;
-    }
-    public int getSize(){
-        return 1;
+    public Dimension getPosition(){
+        return size;
     }
 }

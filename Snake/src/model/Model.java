@@ -12,7 +12,7 @@ public class Model {
     
     public Model(int x, int y){
         this.gameField = new char[x][y];
-        this.snake = new Snake(x/2,y/2,this);
+//        this.snake = new Snake(x/2,y/2,this);
         this.apple = new Apple((int)Math.random()*x,(int)Math.random()*y);
     }
     
