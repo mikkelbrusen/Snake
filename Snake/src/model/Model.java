@@ -25,8 +25,8 @@ public class Model {
         this.snake = new Snake(dim.getRows()/2,dim.getCols()/2,this);
         newApple();
     }
-    /*
-     * Takes input on Snake.move in form of a char.
+    /**
+    * Takes input on Snake.move in form of a char, and moves the snake
     * Legal values are N, S, E, W representing "North", "South", "East", "West"
     */
     public void moveSnake(char dir){
