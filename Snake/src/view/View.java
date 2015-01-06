@@ -9,6 +9,7 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import model.Model;
 
 /**
  *
@@ -17,8 +18,9 @@ import javax.swing.JPanel;
 public class View extends JFrame {
 	
 	private JPanel snakePanel;
+	Model model;
 	
-	public View() {
+	public View(Model model) {
 		
 		super();
 		this.snakePanel = new JPanel();
@@ -28,6 +30,7 @@ public class View extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
+	
 	
     
 }
