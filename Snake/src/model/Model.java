@@ -19,6 +19,7 @@ public class Model {
     private Dimension dim;
     private Objects obj;
     
+
     public Model(int rows, int cols){
         this.dim = new Dimension(rows,cols);
         this.gameField = new Objects[dim.getRows()][dim.getCols()];
