@@ -17,6 +17,7 @@ public class Snake {
     Model model;
     
     public Snake(int row, int col, Model model){
+        this.model = model;
         //Sets the snake at length 2 to go 1 
         Field field = model.getGameField()[row][col];
         queue.add(field);
@@ -25,6 +26,7 @@ public class Snake {
         field = model.getGameField()[row+1][col];
         queue.add(field);
         model.setFieldValue(Objects.SNAKE, field);
+        currentPosition = field;
     }
     
     public void walk(int row, int col){
@@ -33,6 +35,8 @@ public class Snake {
             //Later add function to move the snake in same as last direction.
             }
         else{
+            //Check if next position is at the other edge of the screen.
+            
             currentPosition = model.getGameField()[currentPosition.getRow()+row][currentPosition.getCol()+col];
             queue.add(currentPosition);
             
@@ -91,25 +95,3 @@ public class Snake {
     }
 }
 
-class SnakePosition {   
-    private int row;
-    private int col;
-
-    public SnakePosition(int row, int col){
-        this.row = row;
-        this.col = col;
-    }
-    
-    public int getRow() {
-            return row;
-    }
-
-    public int getCol() {
-            return col;
-    }
-    
-    public void Move(int row, int col){
-        this.row += row;
-        this.col += col;
-    }
-}
