@@ -11,12 +11,13 @@ import java.util.Deque;
  */
 public class Snake {
     SnakePosition currentPosition;
-    Deque queue;
+    LinkedList<int> queue;
     Model model;
     
     public Snake(int x, int y, Model model){
         this.model = model;
         this.currentPosition = new SnakePosition(x,y);
+        
         
         queue.add(currentPosition);
         model.setFieldValue(Objects.SNAKE, currentPosition.getX(), currentPosition.getY());
