@@ -11,7 +11,6 @@ public class MainPanel extends JPanel {
 	
 	public static final int SCALE = 25;
 	
-	private Box[][] fields;
 	private Dimension size;
 	
 	public MainPanel(Dimension size) {
@@ -27,8 +26,16 @@ public class MainPanel extends JPanel {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.setColor(Color.RED);
-		g.fillRect(0, 0, SCALE, SCALE);
+		
+		for(int i = 0; i < size.width; i++) {
+			for(int j = 0; j < size.height; j++) {
+				
+				g.setColor(Color.RED);
+				g.fillRect(i*SCALE*2, j*SCALE, SCALE, SCALE);
+			}
+			
+			
+		}
 	}
 
 }
