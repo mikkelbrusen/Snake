@@ -11,7 +11,7 @@ import java.util.Deque;
  */
 public class Snake {
     SnakePosition currentPosition;
-    LinkedList<int> queue;
+    LinkedList<Dimension> queue;
     Model model;
     
     public Snake(int x, int y, Model model){
