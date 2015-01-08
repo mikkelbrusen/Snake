@@ -26,5 +26,4 @@ public class View extends JFrame {
             this.setLocationRelativeTo(null);
             this.setVisible(true);
         }
-    
 }
