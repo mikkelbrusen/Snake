@@ -9,6 +9,7 @@ import javax.swing.Timer;
 import model.Model;
 import view.*;
 
+
 public class Controller {
         private final static int INTERVAL = 50;
 	private Model model;
@@ -37,8 +38,8 @@ public class Controller {
             DirectionListener d = new DirectionListener(model,view,this);
             view.addKeyListener(d);
             
-            MenuListener m = new MenuListener(view,model);
-            newGame.addMouseListener(m);
+            
+            
 	}
         
         protected void newModel(){
