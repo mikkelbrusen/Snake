@@ -29,14 +29,14 @@ public class Model {
     public Model(int rows, int cols){
         this.dim = new Dimension(rows,cols);
         this.gameField = new Field[dim.getRows()][dim.getCols()];
-        this.apple = new Apple(this);
         for (int i = 0; i < rows; i++){
             for (int j = 0; j < cols; j++){
                 Field field = new Field(i,j);
-                availableFields.add(field);
+                availableFields.push(field);
                 gameField[i][j] = field;
             }
         }
+        this.apple = new Apple(this);
         this.snake = new Snake(dim.getRows()/2,dim.getCols()/2,this);
     }
     /**
@@ -60,7 +60,7 @@ public class Model {
         }        
     }
     
-    protected Field[][] getGameField(){
+    public Field[][] getGameField(){
         return this.gameField;
     }
     

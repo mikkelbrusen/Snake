@@ -12,12 +12,10 @@ import model.Model;
 public class View extends JFrame {
 	
 	private MainPanel snakePanel;
-//	private Apple apple;
-//	private Model model;
+	private Model model;
 	
-	public View(Model model) {
+	public View() {
 		super();
-//		this.model = model;
 		this.snakePanel = new MainPanel(new Dimension(700,400));
 		this.getContentPane().add(snakePanel, BorderLayout.CENTER);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,7 +25,7 @@ public class View extends JFrame {
 	}
 	
 	public static void main(String[] args) {
-		View view = new View(null);
+		View view = new View();
 	}
     
 }
