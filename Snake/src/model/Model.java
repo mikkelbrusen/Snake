@@ -24,6 +24,7 @@ public class Model {
     private Apple apple;
     private Dimension dim;
     private Objects obj;
+    private boolean gameOver;
     
     private LinkedList<Field> availableFields;
 
@@ -31,6 +32,7 @@ public class Model {
         this.dim = dimension;
         this.gameField = new Field[dimension.height][dimension.width];
         this.availableFields = new LinkedList<Field>();
+        this.gameOver = false;
         
         for (int i = 0; i < dimension.height; i++){
             for (int j = 0; j < dimension.width; j++){
@@ -40,13 +42,21 @@ public class Model {
                 gameField[i][j] = field;
             }
         }
-        this.apple = new Apple(this);
         this.snake = new Snake(dimension.height/2,dimension.width/2,this);
+        this.apple = new Apple(this);
     }
     /**
     * Takes input and moves the snake
     * Legal values are N, S, E, W representing "North", "South", "East", "West"
     */
+    public boolean isGameOver(){
+        return gameOver;
+    }
+    
+    protected void setGameOver(){
+        this.gameOver = true;
+    }
+    
     public void moveSnake(char dir){
         switch(dir){
             case 'N':

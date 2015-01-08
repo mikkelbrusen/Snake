@@ -31,8 +31,7 @@ public class MainPanel extends JPanel {
 		super.paintComponent(g);
 		
 		Field[][] gameField = model.getGameField();
-		
-		
+
 		for(int i = 0; i < size.height; i++) {
 			for(int j = 0; j < size.width; j++) {
 				gameField[i][j].getType();
