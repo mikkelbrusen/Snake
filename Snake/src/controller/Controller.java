@@ -35,6 +35,9 @@ public class Controller {
 
             DirectionListener d = new DirectionListener(model,view,this);
             view.addKeyListener(d);
+            
+            MenuListener m = new MenuListener(view,model);
+            newGame.addMouseListener(m);
 	}
         
         protected void newModel(){
