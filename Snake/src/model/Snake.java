@@ -14,35 +14,60 @@ public class Snake {
     Field currentPosition;
     LinkedList<Field> queue;
     Model model;
+    char reverseDirection;
+    boolean isReverseDirection;
     
-    public Snake(int row, int col, Model model){
+    public Snake(int width, int height, Model model){
         this.model = model;
         this.queue = new LinkedList<Field>();
         //Sets the snake at length 2 to go 1 
-        Field field = model.getGameField()[row][col];
+        Field field = model.getGameField()[width][height];
         queue.add(field);
         model.setFieldValue(Objects.SNAKE, field);
         
-        field = model.getGameField()[row+1][col];
+        field = model.getGameField()[width+1][height];
         queue.add(field);
         model.setFieldValue(Objects.SNAKE, field);
         currentPosition = field;
+        this.reverseDirection = 'E';
+        this.isReverseDirection = false;
+    }
+    public void setDirection(char direction){
+        if (this.reverseDirection == direction){
+            this.isReverseDirection = true;
+        }
+        else{
+            this.isReverseDirection = false;
+            
+            switch(direction){
+            case 'N':
+                this.reverseDirection = 'S';
+                break;
+            case 'S':
+                this.reverseDirection = 'N';
+                break;
+            case 'E':
+                this.reverseDirection = 'W';
+                break;
+            case 'W':
+                this.reverseDirection = 'E';
+                break;
+            }
+        }      
     }
     
-    public void walk(int row, int col){
-        if(isReverseDirection(row,col)){
+    public void walk(int widht, int height){
+        if(isReverseDirection){
             //Do nothing at the moment.
             //Later add function to move the snake in same as last direction.
             }
         else{
             //Check if next position is at the other edge of the screen.
-            
-            currentPosition = model.getGameField()[currentPosition.getHeight()+row][currentPosition.getWidth()+col];
+            currentPosition = model.getGameField()[currentPosition.getHeight()+widht][currentPosition.getWidth()+height];
             queue.add(currentPosition);
             
             //Before marking the field as a snake, check if there's and apple, snake or wall there.
             model.setFieldValue(Objects.BLANK, queue.getFirst());
-            System.out.println(queue.getFirst().getHeight() + " " + queue.getFirst().getWidth());
             
             switch(currentPosition.getType()){
                 case APPLE:
@@ -61,14 +86,6 @@ public class Snake {
                     break;  
             }
         }
-    }
-    
-    private boolean isReverseDirection(int x, int y){
-        if ( x == currentPosition.getWidth()-1 || 
-                y == currentPosition.getHeight()-1 )
-            return true;
-        else
-            return false;
     }
 }
 

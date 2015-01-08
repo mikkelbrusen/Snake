@@ -50,15 +50,19 @@ public class Model {
     public void moveSnake(char dir){
         switch(dir){
             case 'N':
+                snake.setDirection('N');
                 snake.walk(0, -1);
                 break;
             case 'S':
+                snake.setDirection('S');
                 snake.walk(0, 1);
                 break;
             case 'E':
+                snake.setDirection('E');
                 snake.walk(1, 0);
                 break;
             case 'W':
+                snake.setDirection('W');
                 snake.walk(-1, 0);
                 break;
         }        
@@ -89,7 +93,6 @@ public class Model {
             case BLANK:
                 this.gameField[field.getHeight()][field.getWidth()].setType(obj.BLANK);
                 this.availableFields.add(field);
-                System.out.println(field.getType());
                 break;
         }
     }
