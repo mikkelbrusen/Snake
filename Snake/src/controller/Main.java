@@ -1,6 +1,8 @@
 package controller;
 
 import java.awt.Dimension;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 /**
  *
@@ -8,16 +10,26 @@ import java.awt.Dimension;
  */
 public class Main {
     public static void main(String[] args) {
-            try{
-                int x = Integer.parseInt(args[0]);
-                int y = Integer.parseInt(args[1]);
-                Controller controller = new Controller(new Dimension(x,y),null);
-            }
-            catch(ArrayIndexOutOfBoundsException e){
-                Controller controller = new Controller(new Dimension(50,25),null);
-            }
-            catch(NumberFormatException e){
-                Controller controller = new Controller(new Dimension(50,25),null);
-            }
-	}
+        String fileName;
+        
+        try{
+            fileName = args[3];
+        }
+        catch(ArrayIndexOutOfBoundsException e){
+            fileName = "Track.txt";
+        }
+            
+        
+        try{
+            int x = Integer.parseInt(args[0]);
+            int y = Integer.parseInt(args[1]);
+            Controller controller = new Controller(new Dimension(x,y),fileName);
+        }
+        catch(ArrayIndexOutOfBoundsException e){
+            Controller controller = new Controller(new Dimension(50,25),fileName);
+        }
+        catch(NumberFormatException e){
+            Controller controller = new Controller(new Dimension(50,25),fileName);
+        }
+    }
 }
