@@ -73,12 +73,13 @@ public class Snake {
                 case APPLE:
                     model.newApple(currentPosition);
                     model.setFieldValue(Objects.SNAKE, currentPosition);
+                    model.setFieldValue(Objects.SNAKE, queue.getFirst());
                     break;
                 case WALL:
-                    
+                    model.setGameOver();
                     break;
                 case SNAKE:
-                    
+                    model.setGameOver();
                     break;
                 default:
                     model.setFieldValue(Objects.SNAKE, currentPosition);
