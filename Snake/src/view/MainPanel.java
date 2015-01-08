@@ -67,21 +67,6 @@ public class MainPanel extends JPanel {
 				if(gameField[i][j].getType() == Objects.SNAKE) {
 					g.drawImage(IHEAD, i*SCALE, j*SCALE, SCALE, SCALE, null);
 				}
-//				if(gameField[i][j].getType() == Objects.APPLE){
-//					g.setColor(Color.RED);
-//					g.fillRect(i*SCALE, j*SCALE, SCALE, SCALE);
-//					g.drawImage(IAPPLE, i*SCALE, j*SCALE, SCALE, SCALE, null);
-//				}
-//				
-//				else if(gameField[i][j].getType() == Objects.SNAKE){
-//					g.setColor(Color.GREEN);
-//					g.fillRect(i*SCALE, j*SCALE, SCALE, SCALE);
-//				}
-//				
-//				else {
-//					g.setColor(freeTiles);
-//					g.fillRect(i*SCALE, j*SCALE, SCALE, SCALE);
-//				}	
 			}
 		}
 	}
