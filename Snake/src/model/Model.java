@@ -33,6 +33,7 @@ public class Model {
         for (int i = 0; i < rows; i++){
             for (int j = 0; j < cols; j++){
                 Field field = new Field(i,j);
+                field.setType(obj.BLANK);
                 availableFields.add(field);
                 gameField[i][j] = field;
             }
@@ -60,7 +61,7 @@ public class Model {
         }        
     }
     
-    protected Field[][] getGameField(){
+    public Field[][] getGameField(){
         return this.gameField;
     }
     
