@@ -14,10 +14,10 @@ public class Main {
                 Controller controller = new Controller(new Dimension(x,y),null);
             }
             catch(ArrayIndexOutOfBoundsException e){
-                Controller controller = new Controller(new Dimension(50,25),null);
+                Controller controller = new Controller(new Dimension(25,20),null);
             }
             catch(NumberFormatException e){
-                Controller controller = new Controller(new Dimension(50,25),null);
+                Controller controller = new Controller(new Dimension(25,20),null);
             }
 	}
 }
