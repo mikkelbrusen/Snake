@@ -19,7 +19,7 @@ public class Controller {
 	}
 	
 	public static void main(String[] args) {
-		Model model = new Model(new Dimension(50,100));
+		Model model = new Model(new Dimension(50,50));
 		View view = new View(model);
 		Controller controller = new Controller(model, view);
 	}

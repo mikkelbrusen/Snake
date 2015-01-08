@@ -29,7 +29,7 @@ public class Model {
 
     public Model(Dimension dimension){
         this.dim = dimension;
-        this.gameField = new Field[dimension.height][dimension.width]();
+        this.gameField = new Field[dimension.height][dimension.width];
         this.availableFields = new LinkedList<Field>();
         
         for (int i = 0; i < dimension.height; i++){
@@ -50,10 +50,10 @@ public class Model {
     public void moveSnake(char dir){
         switch(dir){
             case 'N':
-                snake.walk(0, 1);
+                snake.walk(0, -1);
                 break;
             case 'S':
-                snake.walk(0, -1);
+                snake.walk(0, 1);
                 break;
             case 'E':
                 snake.walk(1, 0);
@@ -89,6 +89,7 @@ public class Model {
             case BLANK:
                 this.gameField[field.getHeight()][field.getWidth()].setType(obj.BLANK);
                 this.availableFields.add(field);
+                System.out.println(field.getType());
                 break;
         }
     }
