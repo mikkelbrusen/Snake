@@ -9,11 +9,12 @@ import javax.swing.Timer;
 import model.Model;
 import view.*;
 
+
 public class Controller {
-        private final static int INTERVAL = 500;
+        private final static int INTERVAL = 100;
 	private Model model;
 	private View view;
-        private Dimension dimension;
+    private Dimension dimension;
 	
 	public Controller(Dimension dimension,String fileName) {
             this.dimension = dimension;
@@ -36,5 +37,8 @@ public class Controller {
 
             DirectionListener d = new DirectionListener(model,view,this);
             view.addKeyListener(d);
+            
+            
+            
 	}
 }
