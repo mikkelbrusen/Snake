@@ -5,7 +5,9 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
 
 import model.Model;
 
@@ -26,4 +28,8 @@ public class View extends JFrame {
             this.setLocationRelativeTo(null);
             this.setVisible(true);
         }
+	public void doAnnounce() {
+		String m = "Game Over";
+		JOptionPane.showMessageDialog(this, m);
+	}
 }

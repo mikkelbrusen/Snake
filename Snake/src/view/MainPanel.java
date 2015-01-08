@@ -20,7 +20,7 @@ public class MainPanel extends JPanel {
 		super();
 		this.size = size;
 		this.setLayout(new GridLayout(size.height*SCALE,size.width*SCALE));
-		this.setBackground(Color.WHITE);
+		this.setBackground(Color.BLUE);
 		this.setPreferredSize(new Dimension(size.height*SCALE,size.width*SCALE));
 		this.setOpaque(true);
 		this.model = model;
