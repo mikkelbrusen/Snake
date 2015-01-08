@@ -11,7 +11,7 @@ import model.*;
 
 public class MainPanel extends JPanel {
 	
-	public static final int SCALE = 10;
+	public static final int SCALE = 15;
 	
 	private Model model;
 	private Dimension size;
@@ -54,8 +54,7 @@ public class MainPanel extends JPanel {
 				}
 				
 			}
-			
-			
+
 		}
 	}
 

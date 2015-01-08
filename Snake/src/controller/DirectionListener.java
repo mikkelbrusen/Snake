@@ -50,7 +50,7 @@ public class DirectionListener implements KeyListener {
 		} else if ( keyCode == 39 || keyCode == 68) {
 			model.moveSnake('E');
 		}
-                view.Repaint();
+                view.repaint();
 		
 	}
 
