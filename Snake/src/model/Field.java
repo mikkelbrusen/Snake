@@ -10,17 +10,17 @@ public class Field{
     private final int width;
     private Objects type;
     
-    public Field(int height, int width){
-        this.height = height;
+    public Field(int width, int height){
         this.width = width;
+        this.height = height;
     }
     
     public int getWidth(){
-        return height;
+        return width;
     }
     
     public int getHeight(){
-        return width;
+        return height;
     }
     
     public void setType(Objects type){

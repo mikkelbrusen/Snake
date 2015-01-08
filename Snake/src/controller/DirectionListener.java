@@ -10,10 +10,12 @@ public class DirectionListener implements KeyListener {
 	
 	private Model model;
 	private View view;
-	
-	public DirectionListener(Model model, View view) {
+        private Controller controller;
+        
+	public DirectionListener(Model model, View view, Controller controller) {
 		super();
 		
+                this.controller = controller;
 		this.model = model;
 		this.view = view;
 	}
@@ -54,8 +56,8 @@ public class DirectionListener implements KeyListener {
         view.repaint();
         
         if (model.isGameOver() == true) {
-        	view.doAnnounce();
-        	
+            view.doAnnounce();
+            controller.newModel();
         }
         
 	}

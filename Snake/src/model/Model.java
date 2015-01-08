@@ -16,27 +16,27 @@ public class Model {
     private Field[][] gameField;
     private Snake snake;
     private Apple apple;
-    private Dimension dim;
+    private Dimension dimension;
     private Objects obj;
     private boolean gameOver;
     
     private LinkedList<Field> availableFields;
 
     public Model(Dimension dimension){
-        this.dim = dimension;
-        this.gameField = new Field[dimension.height][dimension.width];
+        this.dimension = dimension;
+        this.gameField = new Field[dimension.width][dimension.height];
         this.availableFields = new LinkedList<Field>();
         this.gameOver = false;
         
-        for (int i = 0; i < dimension.height; i++){
-            for (int j = 0; j < dimension.width; j++){
+        for (int i = 0; i < dimension.width; i++){
+            for (int j = 0; j < dimension.height; j++){
                 Field field = new Field(i,j);
                 field.setType(obj.BLANK);
                 availableFields.addFirst(field);
                 gameField[i][j] = field;
             }
         }
-        this.snake = new Snake(dimension.height/2,dimension.width/2,this);
+        this.snake = new Snake(dimension.width/2,dimension.height/2,this);
         this.apple = new Apple(this);
     }
     /**
@@ -65,6 +65,23 @@ public class Model {
                 snake.setDirection('W');
                 break;
         }        
+    }
+    
+    public void doReset(){
+        this.gameField = new Field[this.dimension.height][dimension.width];
+        this.availableFields = new LinkedList<Field>();
+        this.gameOver = false;
+        
+        for (int i = 0; i < dimension.height; i++){
+            for (int j = 0; j < dimension.width; j++){
+                Field field = new Field(i,j);
+                field.setType(obj.BLANK);
+                availableFields.addFirst(field);
+                gameField[i][j] = field;
+            }
+        }
+        this.snake = new Snake(dimension.width/2,dimension.height/2,this);
+        this.apple = new Apple(this);
     }
     
     public void moveSnake(){
@@ -140,6 +157,6 @@ public class Model {
     }
     
     public Dimension getDimension(){
-        return this.dim;
+        return this.dimension;
     }
 }

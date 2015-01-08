@@ -19,9 +19,9 @@ public class MainPanel extends JPanel {
 	public MainPanel(Dimension size, Model model) {
 		super();
 		this.size = size;
-		this.setLayout(new GridLayout(size.height*SCALE,size.width*SCALE));
+		this.setLayout(new GridLayout(size.width*SCALE,size.height*SCALE));
 		this.setBackground(Color.WHITE);
-		this.setPreferredSize(new Dimension(size.height*SCALE,size.width*SCALE));
+		this.setPreferredSize(new Dimension(size.width*SCALE,size.height*SCALE));
 		this.setOpaque(true);
 		this.model = model;
 		
@@ -40,8 +40,8 @@ public class MainPanel extends JPanel {
 		}
 		else freeTiles = Color.WHITE;
 		
-		for(int i = 0; i < size.height; i++) {
-			for(int j = 0; j < size.width; j++) {
+		for(int i = 0; i < size.width; i++) {
+			for(int j = 0; j < size.height; j++) {
 				gameField[i][j].getType();
 				if(gameField[i][j].getType() == Objects.APPLE){
 					g.setColor(Color.RED);

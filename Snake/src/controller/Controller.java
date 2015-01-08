@@ -40,10 +40,4 @@ public class Controller {
         protected void newModel(){
             model.doReset();
         }
-        
-        
-	public static void main(String[] args) {
-		Controller controller = new Controller(new Dimension(50,50));
-	}
-
 }
