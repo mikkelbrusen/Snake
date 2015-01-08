@@ -17,7 +17,7 @@ public class Snake {
     char reverseDirection;
     boolean isReverseDirection;
     
-    public Snake(int width, int height, Model model){
+    protected Snake(int width, int height, Model model){
         this.model = model;
         this.queue = new LinkedList<Field>();
         //Sets the snake at length 2 to go 1 
@@ -32,7 +32,7 @@ public class Snake {
         this.reverseDirection = 'E';
         this.isReverseDirection = false;
     }
-    public void setDirection(char direction){
+    protected void setDirection(char direction){
         if (this.reverseDirection == direction){
             this.isReverseDirection = true;
         }
@@ -56,7 +56,7 @@ public class Snake {
         }      
     }
     
-    public void walk(int widht, int height){
+    protected void walk(int widht, int height){
         if(isReverseDirection){
             //Do nothing at the moment.
             //Later add function to move the snake in same as last direction.
