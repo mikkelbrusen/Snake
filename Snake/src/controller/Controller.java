@@ -12,15 +12,18 @@ public class Controller {
         private final static int INTERVAL = 50;
 	private Model model;
 	private View view;
+        private Dimension dimension;
 	
-	public Controller(Model model, View view) {
-            this.model = model;
+	public Controller(Dimension dimension) {
+            this.dimension = dimension;
+            this.model = new Model(dimension);
+            View view = new View(model);
             this.view = view;
             Timer timer = new Timer(INTERVAL,new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if(model.isGameOver()){
-                            //timer.stop();
+                           // timer.stop();
                         }
                         else
                             model.moveSnake();
@@ -30,16 +33,17 @@ public class Controller {
                 
             timer.start();
 
-            DirectionListener d = new DirectionListener(model,view);
+            DirectionListener d = new DirectionListener(model,view,this);
             view.addKeyListener(d);
 	}
         
+        protected void newModel(){
+            model.doReset();
+        }
         
         
 	public static void main(String[] args) {
-		Model model = new Model(new Dimension(50,50));
-		View view = new View(model);
-		Controller controller = new Controller(model, view);
+		Controller controller = new Controller(new Dimension(50,50));
 	}
 
 }
