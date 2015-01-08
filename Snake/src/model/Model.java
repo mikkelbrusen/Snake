@@ -50,6 +50,23 @@ public class Model {
     protected void setGameOver(){
         this.gameOver = true;
     }
+    public void changeSnakeDirection(char dir){
+        switch(dir){
+            case 'N':
+                snake.setDirection('N');
+                break;
+            case 'S':
+                snake.setDirection('S');
+                break;
+            case 'E':
+                snake.setDirection('E');
+                break;
+            case 'W':
+                snake.setDirection('W');
+                break;
+        }        
+    }
+    
     public void moveSnake(){
         switch(snake.getReverseDirection()){
             case 'N':
@@ -67,7 +84,7 @@ public class Model {
         }
     }
     
-    public void moveSnake(char dir){
+    protected void moveSnake(char dir){
         switch(dir){
             case 'N':
                 snake.setDirection('N');

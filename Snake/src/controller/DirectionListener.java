@@ -42,13 +42,13 @@ public class DirectionListener implements KeyListener {
 		int keyCode = e.getKeyCode();
 		
 		if( keyCode==38 || keyCode==87) {
-			model.moveSnake('N');
+			model.changeSnakeDirection('N');
 		} else if ( keyCode == 40 || keyCode == 83) {
-			model.moveSnake('S');
+			model.changeSnakeDirection('S');
 		} else if ( keyCode == 37 || keyCode == 65) {
-			model.moveSnake('W');
+			model.changeSnakeDirection('W');
 		} else if ( keyCode == 39 || keyCode == 68) {
-			model.moveSnake('E');
+			model.changeSnakeDirection('E');
 		}
 		
         view.repaint();
