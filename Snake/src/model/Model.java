@@ -89,19 +89,19 @@ public class Model {
     protected void setFieldValue(Objects val, Field field){
         switch(val){
             case APPLE:
-                this.gameField[field.getHeight()][field.getWidth()].setType(obj.APPLE);
+                this.gameField[field.getWidth()][field.getHeight()].setType(obj.APPLE);
                 this.availableFields.remove(field);
                 break;
             case SNAKE:
-                this.gameField[field.getHeight()][field.getWidth()].setType(obj.SNAKE);
+                this.gameField[field.getWidth()][field.getHeight()].setType(obj.SNAKE);
                 this.availableFields.remove(field);
                 break;
             case WALL:
-                this.gameField[field.getHeight()][field.getWidth()].setType(obj.WALL);
+                this.gameField[field.getWidth()][field.getHeight()].setType(obj.WALL);
                 this.availableFields.remove(field);
                 break;
             case BLANK:
-                this.gameField[field.getHeight()][field.getWidth()].setType(obj.BLANK);
+                this.gameField[field.getWidth()][field.getHeight()].setType(obj.BLANK);
                 this.availableFields.add(field);
                 break;
         }

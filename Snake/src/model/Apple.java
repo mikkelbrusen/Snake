@@ -13,8 +13,8 @@ public class Apple{
     public Apple(Model model){
         this.model = model;
         this.position = ((int)(Math.random()*100)*model.getAvailableFields().size())/100;
-        height = model.getAvailableFields().get(position).getHeight();
-        width = model.getAvailableFields().get(position).getWidth(); 
+        height = model.getAvailableFields().get(position).getWidth();
+        width = model.getAvailableFields().get(position).getHeight(); 
         
         model.setFieldValue(Objects.APPLE, model.getGameField()[height][width]);
     }

@@ -11,7 +11,7 @@ import java.util.LinkedList;
  * Snake does not check if it has hit a wall or a part of itself.
  */
 public class Snake {
-    Field currentPosition;
+    Field position;
     LinkedList<Field> queue;
     Model model;
     char reverseDirection;
@@ -28,7 +28,7 @@ public class Snake {
         field = model.getGameField()[width+1][height];
         queue.add(field);
         model.setFieldValue(Objects.SNAKE, field);
-        currentPosition = field;
+        position = field;
         this.reverseDirection = 'E';
         this.isReverseDirection = false;
     }
@@ -55,6 +55,27 @@ public class Snake {
             }
         }      
     }
+    protected boolean hasHitEdge(Field positon){
+        if(position.getHeight() == 0 && this.reverseDirection == 'S'){
+            this.position = model.getGameField()[position.getWidth()][model.getDimension().height-1];
+            return true;
+        }
+        if(position.getHeight() == model.getDimension().getHeight()-1 && this.reverseDirection == 'N'){
+            this.position = model.getGameField()[position.getWidth()][0];
+            return true;
+        }
+        if(position.getWidth() == 0 && this.reverseDirection == 'E'){
+            this.position = model.getGameField()[model.getDimension().width-1][position.getHeight()];
+            return true;
+        }
+        if(position.getWidth() == model.getDimension().getWidth()-1 && this.reverseDirection == 'W'){
+            this.position = model.getGameField()[0][position.getHeight()];
+            return true;
+        }
+        
+        else
+            return false;
+    }
     
     protected void walk(int widht, int height){
         if(isReverseDirection){
@@ -63,16 +84,19 @@ public class Snake {
             }
         else{
             //Check if next position is at the other edge of the screen.
-            currentPosition = model.getGameField()[currentPosition.getHeight()+widht][currentPosition.getWidth()+height];
-            queue.add(currentPosition);
+            if(!hasHitEdge(position)){
+                position = model.getGameField()[position.getWidth()+widht][position.getHeight()+height];
+            }
+            
+            queue.add(position);
             
             //Before marking the field as a snake, check if there's and apple, snake or wall there.
             model.setFieldValue(Objects.BLANK, queue.getFirst());
             
-            switch(currentPosition.getType()){
+            switch(position.getType()){
                 case APPLE:
-                    model.newApple(currentPosition);
-                    model.setFieldValue(Objects.SNAKE, currentPosition);
+                    model.newApple(position);
+                    model.setFieldValue(Objects.SNAKE, position);
                     model.setFieldValue(Objects.SNAKE, queue.getFirst());
                     break;
                 case WALL:
@@ -82,7 +106,7 @@ public class Snake {
                     model.setGameOver();
                     break;
                 default:
-                    model.setFieldValue(Objects.SNAKE, currentPosition);
+                    model.setFieldValue(Objects.SNAKE, position);
                     queue.removeFirst();
                     break;  
             }

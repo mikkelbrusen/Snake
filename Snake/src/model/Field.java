@@ -15,11 +15,11 @@ public class Field{
         this.width = width;
     }
     
-    public int getHeight(){
+    public int getWidth(){
         return height;
     }
     
-    public int getWidth(){
+    public int getHeight(){
         return width;
     }
     
