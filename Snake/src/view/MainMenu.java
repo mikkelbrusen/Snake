@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JApplet;
 import javax.swing.JMenu;
@@ -12,18 +13,18 @@ public class MainMenu extends JMenuBar{
 
 	public MainMenu(){
 		JMenu menu = new JMenu("Menu");
-		menu.setAccelerator(KeyStroke.getKeyStroke('M'));
+		menu.setMnemonic(KeyEvent.VK_M);
 		
         JMenuItem newGame = new JMenuItem("New game", 'N');
-        newGame.setAccelerator(KeyStroke.getKeyStroke('N'));
+        newGame.setMnemonic(KeyEvent.VK_N);
         menu.add(newGame);
         
         JMenuItem highScores = new JMenuItem("Highscores", 'H');
-        newGame.setAccelerator(KeyStroke.getKeyStroke('H'));
+        highScores.setMnemonic(KeyEvent.VK_H);
         menu.add(highScores);
         
         JMenuItem options = new JMenuItem("Options", 'O');
-        newGame.setAccelerator(KeyStroke.getKeyStroke('O'));
+        options.setMnemonic(KeyEvent.VK_O);
         menu.add(options);
         
         this.add(menu);
