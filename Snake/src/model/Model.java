@@ -2,6 +2,9 @@ package model;
 
 import java.util.LinkedList;
 import java.awt.Dimension;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 /**
  * Creates a new game model with a game field of size n x m, a snake in the middle, and a random apple.
@@ -19,30 +22,57 @@ public class Model {
     private Dimension dimension;
     private Objects obj;
     private boolean gameOver;
+    private File track;
     
     private LinkedList<Field> availableFields;
 
-    public Model(Dimension dimension){
+    public Model(Dimension dimension, File track){
+        this.track = track;
         this.dimension = dimension;
         this.gameField = new Field[dimension.width][dimension.height];
         this.availableFields = new LinkedList<Field>();
         this.gameOver = false;
-        
-        for (int i = 0; i < dimension.width; i++){
-            for (int j = 0; j < dimension.height; j++){
-                Field field = new Field(i,j);
-                field.setType(obj.BLANK);
-                availableFields.addFirst(field);
-                gameField[i][j] = field;
+        if(!(track == null)){
+            //Create the track
+        }else{
+            for (int i = 0; i < dimension.width; i++){
+                for (int j = 0; j < dimension.height; j++){
+                    Field field = new Field(i,j);
+                    field.setType(obj.BLANK);
+                    availableFields.addFirst(field);
+                    gameField[i][j] = field;
+                }
             }
         }
+        
         this.snake = new Snake(dimension.width/2,dimension.height/2,this);
         this.apple = new Apple(this);
     }
+    public boolean loadTrack(File track){
+        try {
+            Scanner sc = new Scanner(track);
+            
+            while (sc.hasNext()){
+              
+                int i = sc.nextInt();
+                System.out.println(i);
+            }
+            sc.close();
+            return true;
+        } 
+        catch (FileNotFoundException e) {
+            return false;
+        }
+    }
+    
     /**
     * Takes input and moves the snake
     * Legal values are N, S, E, W representing "North", "South", "East", "West"
     */
+    public void setTrack(File track){
+        this.track = track;
+    }
+    
     public boolean isGameOver(){
         return gameOver;
     }
@@ -68,12 +98,12 @@ public class Model {
     }
     
     public void doReset(){
-        this.gameField = new Field[this.dimension.height][dimension.width];
+        this.gameField = new Field[this.dimension.width][dimension.height];
         this.availableFields = new LinkedList<Field>();
         this.gameOver = false;
         
-        for (int i = 0; i < dimension.height; i++){
-            for (int j = 0; j < dimension.width; j++){
+        for (int i = 0; i < dimension.width; i++){
+            for (int j = 0; j < dimension.height; j++){
                 Field field = new Field(i,j);
                 field.setType(obj.BLANK);
                 availableFields.addFirst(field);
