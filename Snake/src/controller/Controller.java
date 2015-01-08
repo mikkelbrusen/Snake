@@ -13,7 +13,7 @@ public class Controller {
         private final static int INTERVAL = 50;
 	private Model model;
 	private View view;
-        private Dimension dimension;
+    private Dimension dimension;
 	
 	public Controller(Dimension dimension,File track) {
             this.dimension = dimension;
