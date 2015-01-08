@@ -16,14 +16,14 @@ public class MainPanel extends JPanel {
 	private Model model;
 	private Dimension size;
 	
-	public MainPanel(Dimension size) {
+	public MainPanel(Dimension size, Model model) {
 		super();
 		this.size = size;
-		this.setLayout(new GridLayout(size.height,size.width));
+		this.setLayout(new GridLayout(size.height*SCALE,size.width*SCALE));
 		this.setBackground(Color.WHITE);
-		this.setPreferredSize(size);
+		this.setPreferredSize(new Dimension(size.height*SCALE,size.width*SCALE));
 		this.setOpaque(true);
-		this.model = new Model(size.width/SCALE, size.height/SCALE);
+		this.model = model;
 	}
 
 	@Override
@@ -33,8 +33,8 @@ public class MainPanel extends JPanel {
 		Field[][] gameField = model.getGameField();
 		
 		
-		for(int i = 0; i < size.width/SCALE; i++) {
-			for(int j = 0; j < size.height/SCALE; j++) {
+		for(int i = 0; i < size.height; i++) {
+			for(int j = 0; j < size.width; j++) {
 				gameField[i][j].getType();
 				if(gameField[i][j].getType() == Objects.APPLE){
 					g.setColor(Color.RED);

@@ -38,7 +38,7 @@ public class Snake {
         else{
             //Check if next position is at the other edge of the screen.
             
-            currentPosition = model.getGameField()[currentPosition.getRow()+row][currentPosition.getCol()+col];
+            currentPosition = model.getGameField()[currentPosition.getHeight()+row][currentPosition.getWidth()+col];
             queue.add(currentPosition);
             
             //Before marking the field as a snake, check if there's and apple, snake or wall there.
@@ -64,8 +64,8 @@ public class Snake {
     }
     
     private boolean isReverseDirection(int x, int y){
-        if ( x == currentPosition.getCol()-1 || 
-                y == currentPosition.getRow()-1 )
+        if ( x == currentPosition.getWidth()-1 || 
+                y == currentPosition.getHeight()-1 )
             return true;
         else
             return false;

@@ -14,18 +14,17 @@ public class View extends JFrame {
 	private MainPanel snakePanel;
 	private Model model;
 	
-	public View() {
-		super();
-		this.snakePanel = new MainPanel(new Dimension(700,400));
-		this.getContentPane().add(snakePanel, BorderLayout.CENTER);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.pack();
-		this.setLocationRelativeTo(null);
-		this.setVisible(true);
-	}
-	
-	public static void main(String[] args) {
-		View view = new View();
-	}
+	public View(Model model) {
+            super();
+            this.model = model;
+            this.snakePanel = new MainPanel(model.getDimension(),model);
+            
+            
+            this.getContentPane().add(snakePanel, BorderLayout.CENTER);
+            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.pack();
+            this.setLocationRelativeTo(null);
+            this.setVisible(true);
+        }
     
 }

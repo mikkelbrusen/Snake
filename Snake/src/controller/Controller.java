@@ -4,7 +4,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionListener;
 
 import model.Model;
-import view.View;
+import view.*;
 
 public class Controller {
 	private Model model;
@@ -19,7 +19,7 @@ public class Controller {
 	}
 	
 	public static void main(String[] args) {
-		Model model = new Model(100,100);
+		Model model = new Model(new Dimension(50,100));
 		View view = new View(model);
 		Controller controller = new Controller(model, view);
 	}

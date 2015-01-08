@@ -1,6 +1,7 @@
 package model;
 
 import java.util.LinkedList;
+import java.awt.Dimension;
 
 /**
  * Creates a new game model with a gamefield of size n x m, a snake in the middle, and a random apple.
@@ -26,13 +27,13 @@ public class Model {
     
     private LinkedList<Field> availableFields;
 
-    public Model(int rows, int cols){
-        this.dim = new Dimension(rows,cols);
-        this.gameField = new Field[dim.getRows()][dim.getCols()];
+    public Model(Dimension dimension){
+        this.dim = dimension;
+        this.gameField = new Field[dimension.height][dimension.width]();
         this.availableFields = new LinkedList<Field>();
         
-        for (int i = 0; i < rows; i++){
-            for (int j = 0; j < cols; j++){
+        for (int i = 0; i < dimension.height; i++){
+            for (int j = 0; j < dimension.width; j++){
                 Field field = new Field(i,j);
                 field.setType(obj.BLANK);
                 availableFields.addFirst(field);
@@ -40,7 +41,7 @@ public class Model {
             }
         }
         this.apple = new Apple(this);
-        this.snake = new Snake(dim.getRows()/2,dim.getCols()/2,this);
+        this.snake = new Snake(dimension.height/2,dimension.width/2,this);
     }
     /**
     * Takes input and moves the snake
@@ -74,19 +75,19 @@ public class Model {
     protected void setFieldValue(Objects val, Field field){
         switch(val){
             case APPLE:
-                this.gameField[field.getRow()][field.getCol()].setType(obj.APPLE);
+                this.gameField[field.getHeight()][field.getWidth()].setType(obj.APPLE);
                 this.availableFields.remove(field);
                 break;
             case SNAKE:
-                this.gameField[field.getRow()][field.getCol()].setType(obj.SNAKE);
+                this.gameField[field.getHeight()][field.getWidth()].setType(obj.SNAKE);
                 this.availableFields.remove(field);
                 break;
             case WALL:
-                this.gameField[field.getRow()][field.getCol()].setType(obj.WALL);
+                this.gameField[field.getHeight()][field.getWidth()].setType(obj.WALL);
                 this.availableFields.remove(field);
                 break;
             case BLANK:
-                this.gameField[field.getRow()][field.getCol()].setType(obj.BLANK);
+                this.gameField[field.getHeight()][field.getWidth()].setType(obj.BLANK);
                 this.availableFields.add(field);
                 break;
         }
@@ -96,22 +97,8 @@ public class Model {
         this.availableFields.add(oldPosition);
         this.apple = new Apple(this);
     }
-}
-
-class Dimension{
-    private final int rows;
-    private final int cols;
     
-    public Dimension(int rows, int cols){
-        this.rows = rows;
-        this.cols = cols;
-    }
-    
-    public int getRows(){
-        return rows;
-    }
-    
-    public int getCols(){
-        return cols;
+    public Dimension getDimension(){
+        return this.dim;
     }
 }

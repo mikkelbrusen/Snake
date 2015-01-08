@@ -5,25 +5,25 @@ package model;
  * @author BusterK
  */
 public class Apple{
-    private final int row;
-    private final int col;
+    private final int height;
+    private final int width;
     private final Model model;
     private final int position;
     
     public Apple(Model model){
         this.model = model;
         this.position = ((int)(Math.random()*100)*model.getAvailableFields().size())/100;
-        row = model.getAvailableFields().get(position).getRow();
-        col = model.getAvailableFields().get(position).getCol(); 
+        height = model.getAvailableFields().get(position).getHeight();
+        width = model.getAvailableFields().get(position).getWidth(); 
         
-        model.setFieldValue(Objects.APPLE, model.getGameField()[row][col]);
+        model.setFieldValue(Objects.APPLE, model.getGameField()[height][width]);
     }
     
     public int getRow(){
-        return row;
+        return height;
     }
     
     public int getCol(){
-        return col;
+        return width;
     }
 }
