@@ -4,18 +4,12 @@ import java.util.LinkedList;
 import java.awt.Dimension;
 
 /**
- * Creates a new game model with a gamefield of size n x m, a snake in the middle, and a random apple.
+ * Creates a new game model with a game field of size n x m, a snake in the middle, and a random apple.
  * Valid public functions are:
  * getGameField() - Returns a array of type Objecs which is an enumerator.
  * moveSnake(char) - Moves the snake in direction N, E, S or W.
  * 
  * @TODO:
- * Snake can move outside borders
- * New apple is not implemented
- * Available fields are not put in list
- * Only apples are removing available fields
- * Empty fields are not in a list yet. Needed for Apple
- * Snake does not check what is in the new position.
  * @author BusterK
  */
 public class Model {
@@ -55,6 +49,22 @@ public class Model {
     
     protected void setGameOver(){
         this.gameOver = true;
+    }
+    public void moveSnake(){
+        switch(snake.getReverseDirection()){
+            case 'N':
+                moveSnake('S');
+                break;
+            case 'S':
+                moveSnake('N');
+                break;
+            case 'E':
+                moveSnake('W');
+                break;
+            case 'W':
+                moveSnake('E');
+                break;
+        }
     }
     
     public void moveSnake(char dir){

@@ -6,9 +6,6 @@ import java.util.LinkedList;
  * @author Buster K. Mejborn
  * 
  * TODO:
- * Snake does nothing if the directions is reverse
- * Snake does not know when the edge has been reached yet
- * Snake does not check if it has hit a wall or a part of itself.
  */
 public class Snake {
     Field position;
@@ -75,6 +72,10 @@ public class Snake {
         
         else
             return false;
+    }
+    
+    protected char getReverseDirection(){
+        return reverseDirection;
     }
     
     protected void walk(int widht, int height){
