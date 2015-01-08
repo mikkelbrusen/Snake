@@ -20,10 +20,11 @@ public class MainPanel extends JPanel {
 		super();
 		this.size = size;
 		this.setLayout(new GridLayout(size.height*SCALE,size.width*SCALE));
-		this.setBackground(Color.BLUE);
+		this.setBackground(Color.WHITE);
 		this.setPreferredSize(new Dimension(size.height*SCALE,size.width*SCALE));
 		this.setOpaque(true);
 		this.model = model;
+		
 	}
 
 	@Override
@@ -32,6 +33,13 @@ public class MainPanel extends JPanel {
 		
 		Field[][] gameField = model.getGameField();
 
+		
+		Color freeTiles;
+		if(model.isGameOver()){
+			freeTiles = Color.RED;
+		}
+		else freeTiles = Color.WHITE;
+		
 		for(int i = 0; i < size.height; i++) {
 			for(int j = 0; j < size.width; j++) {
 				gameField[i][j].getType();
@@ -46,7 +54,7 @@ public class MainPanel extends JPanel {
 				}
 				
 				else {
-					g.setColor(Color.WHITE);
+					g.setColor(freeTiles);
 					g.fillRect(i*SCALE, j*SCALE, SCALE, SCALE);
 				}
 				
