@@ -21,15 +21,16 @@ public class View extends JFrame {
             this.model = model;
             this.snakePanel = new MainPanel(model.getDimension(),model);
             
-            
             this.getContentPane().add(snakePanel, BorderLayout.CENTER);
             this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             this.pack();
             this.setLocationRelativeTo(null);
             this.setVisible(true);
+            
         }
 	public void doAnnounce() {
 		String m = "Game Over";
 		JOptionPane.showMessageDialog(this, m);
+		
 	}
 }
