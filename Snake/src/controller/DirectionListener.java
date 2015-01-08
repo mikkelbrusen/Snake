@@ -55,9 +55,9 @@ public class DirectionListener implements KeyListener {
 		
         view.repaint();
         
-        if (model.isGameOver() == true) {
+        if (model.isGameOver()) {
             view.doAnnounce();
-            controller.newModel();
+            model.doReset();
         }
         
 	}

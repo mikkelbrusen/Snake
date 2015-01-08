@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.Scanner;
 
 /**
@@ -22,19 +23,19 @@ public class Model {
     private Dimension dimension;
     private Objects obj;
     private boolean gameOver;
-    private File track;
+    private String fileName;
     
     private LinkedList<Field> availableFields;
 
-    public Model(Dimension dimension, File track){
-        this.track = track;
-        this.dimension = dimension;
-        this.gameField = new Field[dimension.width][dimension.height];
+    public Model(Dimension dimension, String fileName){
         this.availableFields = new LinkedList<Field>();
         this.gameOver = false;
-        if(!(track == null)){
-            //Create the track
-        }else{
+        this.fileName = fileName;
+
+        if (!(loadTrack(fileName))){
+            System.out.println("Loading simple track!");
+            this.dimension = dimension;
+            this.gameField = new Field[dimension.width][dimension.height];
             for (int i = 0; i < dimension.width; i++){
                 for (int j = 0; j < dimension.height; j++){
                     Field field = new Field(i,j);
@@ -42,22 +43,40 @@ public class Model {
                     availableFields.addFirst(field);
                     gameField[i][j] = field;
                 }
-            }
+            }   
         }
-        
-        this.snake = new Snake(dimension.width/2,dimension.height/2,this);
+        this.snake = new Snake(this);
         this.apple = new Apple(this);
     }
-    public boolean loadTrack(File track){
+    public boolean loadTrack(String fileName){
         try {
-            Scanner sc = new Scanner(track);
+            Scanner sc = new Scanner(new FileReader(fileName));
+            int width = sc.nextInt();
+            int height = sc.nextInt();
+            this.dimension = new Dimension(width,height);
+            this.gameField = new Field[dimension.width][dimension.height];
             
-            while (sc.hasNext()){
-              
-                int i = sc.nextInt();
-                System.out.println(i);
+            sc.nextLine();
+            
+            int lineno = 0;
+            while (sc.hasNextLine()){
+                String line = sc.nextLine();
+                for(int i = 0; i < width; i++){
+                    Field field = new Field(i,lineno);
+                    if(line.charAt(i) == '#'){
+                        field.setType(obj.WALL);
+                        gameField[i][lineno] = field;
+                    }
+                    else{
+                        field.setType(obj.BLANK);
+                        availableFields.addFirst(field);
+                        gameField[i][lineno] = field;
+                    }
+                }
+                lineno++;
             }
             sc.close();
+            System.out.println("Track was loaded from file!");
             return true;
         } 
         catch (FileNotFoundException e) {
@@ -69,8 +88,8 @@ public class Model {
     * Takes input and moves the snake
     * Legal values are N, S, E, W representing "North", "South", "East", "West"
     */
-    public void setTrack(File track){
-        this.track = track;
+    public void setTrack(String fileName){
+        this.fileName = fileName;
     }
     
     public boolean isGameOver(){
@@ -98,19 +117,22 @@ public class Model {
     }
     
     public void doReset(){
-        this.gameField = new Field[this.dimension.width][dimension.height];
-        this.availableFields = new LinkedList<Field>();
-        this.gameOver = false;
-        
-        for (int i = 0; i < dimension.width; i++){
-            for (int j = 0; j < dimension.height; j++){
-                Field field = new Field(i,j);
-                field.setType(obj.BLANK);
-                availableFields.addFirst(field);
-                gameField[i][j] = field;
+        if (!(loadTrack(fileName))){
+            this.gameField = new Field[this.dimension.width][dimension.height];
+            this.availableFields = new LinkedList<Field>();
+            this.gameOver = false;
+
+            for (int i = 0; i < dimension.width; i++){
+                for (int j = 0; j < dimension.height; j++){
+                    Field field = new Field(i,j);
+                    field.setType(obj.BLANK);
+                    availableFields.addFirst(field);
+                    gameField[i][j] = field;
+                }
             }
         }
-        this.snake = new Snake(dimension.width/2,dimension.height/2,this);
+        
+        this.snake = new Snake(this);
         this.apple = new Apple(this);
     }
     

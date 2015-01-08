@@ -10,14 +10,14 @@ import model.Model;
 import view.*;
 
 public class Controller {
-        private final static int INTERVAL = 50;
+        private final static int INTERVAL = 500;
 	private Model model;
 	private View view;
         private Dimension dimension;
 	
-	public Controller(Dimension dimension,File track) {
+	public Controller(Dimension dimension,String fileName) {
             this.dimension = dimension;
-            this.model = new Model(dimension,track);
+            this.model = new Model(dimension,fileName);
             View view = new View(model);
             this.view = view;
             Timer timer = new Timer(INTERVAL,new ActionListener() {
@@ -37,8 +37,4 @@ public class Controller {
             DirectionListener d = new DirectionListener(model,view,this);
             view.addKeyListener(d);
 	}
-        
-        protected void newModel(){
-            model.doReset();
-        }
 }
