@@ -11,7 +11,7 @@ import view.*;
 
 
 public class Controller {
-        private final static int INTERVAL = 100;
+        private final static int INTERVAL = 500;
 	private Model model;
 	private View view;
     private Dimension dimension;

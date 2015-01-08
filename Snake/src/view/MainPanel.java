@@ -66,7 +66,10 @@ public class MainPanel extends JPanel {
 				} else 
 				if(gameField[i][j].getType() == Objects.SNAKE) {
 					g.drawImage(IHEAD, i*SCALE, j*SCALE, SCALE, SCALE, null);
-				}
+				} else if(gameField[i][j].getType() == Objects.WALL){
+                                    g.setColor(Color.BLACK);
+                                    g.fillRect(i*SCALE, j*SCALE, SCALE, SCALE);
+                                }
 			}
 		}
 	}
