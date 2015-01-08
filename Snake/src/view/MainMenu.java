@@ -12,6 +12,7 @@ public class MainMenu extends JMenuBar{
 
 	public MainMenu(){
 		JMenu menu = new JMenu("Menu");
+		menu.setAccelerator(KeyStroke.getKeyStroke('M'));
 		
         JMenuItem newGame = new JMenuItem("New game", 'N');
         newGame.setAccelerator(KeyStroke.getKeyStroke('N'));
