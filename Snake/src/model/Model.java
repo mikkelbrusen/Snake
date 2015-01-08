@@ -29,11 +29,13 @@ public class Model {
     public Model(int rows, int cols){
         this.dim = new Dimension(rows,cols);
         this.gameField = new Field[dim.getRows()][dim.getCols()];
+        this.availableFields = new LinkedList<Field>();
+        
         for (int i = 0; i < rows; i++){
             for (int j = 0; j < cols; j++){
                 Field field = new Field(i,j);
                 field.setType(obj.BLANK);
-                availableFields.add(field);
+                availableFields.addFirst(field);
                 gameField[i][j] = field;
             }
         }
@@ -72,19 +74,19 @@ public class Model {
     protected void setFieldValue(Objects val, Field field){
         switch(val){
             case APPLE:
-                this.gameField[field.getCol()][field.getRow()].setType(obj.APPLE);
+                this.gameField[field.getRow()][field.getCol()].setType(obj.APPLE);
                 this.availableFields.remove(field);
                 break;
             case SNAKE:
-                this.gameField[field.getCol()][field.getRow()].setType(obj.SNAKE);
+                this.gameField[field.getRow()][field.getCol()].setType(obj.SNAKE);
                 this.availableFields.remove(field);
                 break;
             case WALL:
-                this.gameField[field.getCol()][field.getRow()].setType(obj.WALL);
+                this.gameField[field.getRow()][field.getCol()].setType(obj.WALL);
                 this.availableFields.remove(field);
                 break;
             case BLANK:
-                this.gameField[field.getCol()][field.getRow()].setType(obj.BLANK);
+                this.gameField[field.getRow()][field.getCol()].setType(obj.BLANK);
                 this.availableFields.add(field);
                 break;
         }

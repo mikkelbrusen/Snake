@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Deque;
+import java.util.LinkedList;
 
 /**
  * @author Buster K. Mejborn
@@ -12,11 +13,12 @@ import java.util.Deque;
  */
 public class Snake {
     Field currentPosition;
-    Deque<Field> queue;
+    LinkedList<Field> queue;
     Model model;
     
     public Snake(int row, int col, Model model){
         this.model = model;
+        this.queue = new LinkedList<Field>();
         //Sets the snake at length 2 to go 1 
         Field field = model.getGameField()[row][col];
         queue.add(field);
