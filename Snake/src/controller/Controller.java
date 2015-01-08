@@ -13,6 +13,9 @@ public class Controller {
 	public Controller(Model model, View view) {
 		this.model = model;
 		this.view = view;
+		
+		DirectionListener d = new DirectionListener(model,view);
+		view.addKeyListener(d);
 	}
 	
 	public static void main(String[] args) {

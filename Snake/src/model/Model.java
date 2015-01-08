@@ -89,7 +89,8 @@ public class Model {
         }
     }
     
-    protected void newApple(){
+    protected void newApple(Field oldPosition){
+        this.availableFields.add(oldPosition);
         this.apple = new Apple(this);
     }
 }

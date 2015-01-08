@@ -16,7 +16,7 @@ public class Apple{
         row = model.getAvailableFields().get(position).getRow();
         col = model.getAvailableFields().get(position).getCol(); 
         
-        model.getAvailableFields().remove(position);
+        model.setFieldValue(Objects.APPLE, model.getGameField()[row][col]);
     }
     
     public int getRow(){
