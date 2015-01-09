@@ -24,6 +24,7 @@ public class Model {
     private String fileName;
     private int score;
     private int highScore;
+    private boolean pause;
     
     private LinkedList<Field> availableFields;
 
@@ -80,6 +81,15 @@ public class Model {
     protected void setGameOver(){
         this.gameOver = true;
     }
+    
+    public boolean isPaused(){
+        return pause;
+    }
+    
+    public void setPaused(){
+        this.pause = !pause;
+    }
+    
     public void changeSnakeDirection(char dir){
         switch(dir){
             case 'N':
@@ -99,6 +109,7 @@ public class Model {
     
     public final void doReset(){
         this.gameOver = false;
+        this.pause = false;
         if (!(loadTrack(fileName))){
             this.gameField = new Field[this.dimension.width][dimension.height];
             this.availableFields = new LinkedList<>();
