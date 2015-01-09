@@ -17,7 +17,7 @@ import model.*;
 
 public class MainPanel extends JPanel {
 	
-	public static final int SCALE = 30;
+	public static final int SCALE = 15;
 	
 	static BufferedImage IHEAD;
 	static BufferedImage IBODY;
