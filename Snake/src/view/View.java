@@ -1,20 +1,9 @@
 package view;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Event;
-import java.awt.Graphics;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
-
-
-
-
-
-import javax.swing.KeyStroke;
 
 import model.Model;
 

@@ -36,8 +36,6 @@ public class Snake {
         this.reverseDirection = 'E';
         this.isReverseDirection = false;
         this.hasTakenStep = true;
-        
-        System.out.println(field.getHeight() + " " + field.getWidth());
     }
     protected void setDirection(char direction){
         if (this.reverseDirection == direction){
@@ -87,7 +85,6 @@ public class Snake {
             this.position = model.getGameField()[0][position.getHeight()];
             return true;
         }
-        
         else
             return false;
     }
@@ -114,9 +111,7 @@ public class Snake {
             }
             
             queue.add(position);
-            
             //Before marking the field as a snake, check if there's and apple, snake or wall there.
-            //model.setFieldValue(Objects.BLANK, queue.getFirst());
             
             switch(position.getType()){
                 case APPLE:
