@@ -45,7 +45,7 @@ public class KeyboardListener implements KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		System.out.println(e);
+		
 	}
 
 	private void forceDirection(KeyEvent e) {
