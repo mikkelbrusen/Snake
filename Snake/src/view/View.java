@@ -9,9 +9,9 @@ import model.Model;
 
 public class View extends JFrame {
 	
-	private MainPanel snakePanel;
-	private Model model;
-	private MainMenu mainMenu;
+	private final MainPanel snakePanel;
+	private final Model model;
+	private final MainMenu mainMenu;
 	
 	public View(Model model) {
             super();

@@ -9,22 +9,17 @@ import view.View;
 import java.util.*;
 public class KeyboardListener implements KeyListener {
 	
-	private Model model;
-	private View view;
-    private Controller controller;
+    private final Model model;
+    private final View view;
+    
     private List<Integer> Directions;
     private List<Integer> Shortcuts;
         
-	public KeyboardListener(Model model, View view, Controller controller) {
+	public KeyboardListener(Model model, View view) {
 		super();
 		this.Directions = Arrays.asList(38,87,40,83,37,65,39,68); 
 		this.Shortcuts = Arrays.asList(78,80,79,72,77);		
-        this.controller = controller;
-		this.model = model;
-		this.view = view;
-	}
-	
-	public KeyboardListener(Model model, View view){
+        
 		this.model = model;
 		this.view = view;
 	}

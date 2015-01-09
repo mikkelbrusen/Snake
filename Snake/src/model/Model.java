@@ -20,7 +20,6 @@ public class Model {
     private Snake snake;
     private Apple apple;
     private Dimension dimension;
-    private Objects obj;
     private boolean gameOver;
     private String fileName;
     private int score;
@@ -29,7 +28,7 @@ public class Model {
     private LinkedList<Field> availableFields;
 
     public Model(Dimension dimension, String fileName){
-        this.availableFields = new LinkedList<Field>();
+        this.availableFields = new LinkedList<>();
         this.fileName = fileName;
         this.dimension = dimension;
 
@@ -51,11 +50,11 @@ public class Model {
                 for(int i = 0; i < width; i++){
                     Field field = new Field(i,lineno);
                     if(line.charAt(i) == '#'){
-                        field.setType(obj.WALL);
+                        field.setType(Objects.WALL);
                         gameField[i][lineno] = field;
                     }
                     else{
-                        field.setType(obj.BLANK);
+                        field.setType(Objects.BLANK);
                         availableFields.addFirst(field);
                         gameField[i][lineno] = field;
                     }
@@ -70,10 +69,6 @@ public class Model {
         }
     }
     
-    /**
-    * Takes input and moves the snake
-    * Legal values are N, S, E, W representing "North", "South", "East", "West"
-    */
     public void setTrack(String fileName){
         this.fileName = fileName;
     }
@@ -102,17 +97,17 @@ public class Model {
         }        
     }
     
-    public void doReset(){
+    public final void doReset(){
         this.gameOver = false;
         if (!(loadTrack(fileName))){
             this.gameField = new Field[this.dimension.width][dimension.height];
-            this.availableFields = new LinkedList<Field>();
+            this.availableFields = new LinkedList<>();
             this.gameOver = false;
 
             for (int i = 0; i < dimension.width; i++){
                 for (int j = 0; j < dimension.height; j++){
                     Field field = new Field(i,j);
-                    field.setType(obj.BLANK);
+                    field.setType(Objects.BLANK);
                     availableFields.addFirst(field);
                     gameField[i][j] = field;
                 }
@@ -157,26 +152,26 @@ public class Model {
     protected void setFieldValue(Objects val, Field field){
         switch(val){
             case APPLE:
-                this.gameField[field.getWidth()][field.getHeight()].setType(obj.APPLE);
+                this.gameField[field.getWidth()][field.getHeight()].setType(Objects.APPLE);
                 this.availableFields.remove(field);
                 break;
             case SNAKE:
-                this.gameField[field.getWidth()][field.getHeight()].setType(obj.SNAKE);
+                this.gameField[field.getWidth()][field.getHeight()].setType(Objects.SNAKE);
                 this.availableFields.remove(field);
                 break;
             case WALL:
-                this.gameField[field.getWidth()][field.getHeight()].setType(obj.WALL);
+                this.gameField[field.getWidth()][field.getHeight()].setType(Objects.WALL);
                 this.availableFields.remove(field);
                 break;
             case BLANK:
-                this.gameField[field.getWidth()][field.getHeight()].setType(obj.BLANK);
+                this.gameField[field.getWidth()][field.getHeight()].setType(Objects.BLANK);
                 this.availableFields.add(field);
                 break;
             case HEAD:
-                this.gameField[field.getWidth()][field.getHeight()].setType(obj.HEAD);
+                this.gameField[field.getWidth()][field.getHeight()].setType(Objects.HEAD);
                 break;
             case TAIL:
-                this.gameField[field.getWidth()][field.getHeight()].setType(obj.TAIL);
+                this.gameField[field.getWidth()][field.getHeight()].setType(Objects.TAIL);
                 break;
         }
     }
