@@ -200,12 +200,22 @@ public class Model {
                 this.gameField[field.getWidth()][field.getHeight()].setType(obj.BLANK);
                 this.availableFields.add(field);
                 break;
+            case HEAD:
+                this.gameField[field.getWidth()][field.getHeight()].setType(obj.HEAD);
+                break;
+            case TAIL:
+                this.gameField[field.getWidth()][field.getHeight()].setType(obj.TAIL);
+                break;
         }
     }
     
     protected void newApple(Field oldPosition){
         this.availableFields.add(oldPosition);
         this.apple = new Apple(this);
+    }
+    
+    public char getSnakeDirection(){
+        return snake.getDirection();
     }
     
     public Dimension getDimension(){

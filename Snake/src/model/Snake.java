@@ -8,12 +8,14 @@ import java.util.LinkedList;
  * TODO:
  */
 public class Snake {
-    Field position;
-    LinkedList<Field> queue;
-    Model model;
-    char reverseDirection;
-    boolean isReverseDirection;
-    boolean hasTakenStep;
+    private Field position;
+    private Field oldPosition;
+    private LinkedList<Field> queue;
+    private Model model;
+    private char reverseDirection;
+    private char direction;
+    private boolean isReverseDirection;
+    private boolean hasTakenStep;
     
     protected Snake(Model model){
         int width = model.getDimension().width/2;
@@ -24,12 +26,13 @@ public class Snake {
         //Sets the snake at length 2 to go 1 
         Field field = model.getGameField()[width][height];
         queue.add(field);
-        model.setFieldValue(Objects.SNAKE, field);
+        model.setFieldValue(Objects.TAIL, field);
         
-        field = model.getGameField()[width+1][height];
+        field = model.getGameField()[width-1][height];
         queue.add(field);
-        model.setFieldValue(Objects.SNAKE, field);
+        model.setFieldValue(Objects.HEAD, field);
         position = field;
+        this.direction = 'W';
         this.reverseDirection = 'E';
         this.isReverseDirection = false;
         this.hasTakenStep = true;
@@ -47,15 +50,19 @@ public class Snake {
             switch(direction){
             case 'N':
                 this.reverseDirection = 'S';
+                this.direction = 'N';
                 break;
             case 'S':
                 this.reverseDirection = 'N';
+                this.direction = 'S';
                 break;
             case 'E':
                 this.reverseDirection = 'W';
+                this.direction = 'E';
                 break;
             case 'W':
                 this.reverseDirection = 'E';
+                this.direction = 'W';
                 break;
             }
         }
@@ -89,6 +96,10 @@ public class Snake {
         return reverseDirection;
     }
     
+    protected char getDirection(){
+        return direction;
+    }
+    
     protected void walk(int widht, int height){
         if(isReverseDirection){
             //Do nothing at the moment.
@@ -96,6 +107,7 @@ public class Snake {
             }
         else{
             this.hasTakenStep = true;
+            this.oldPosition = position;
             //Check if next position is at the other edge of the screen.
             if(!hasHitEdge(position)){
                 position = model.getGameField()[position.getWidth()+widht][position.getHeight()+height];
@@ -109,8 +121,9 @@ public class Snake {
             switch(position.getType()){
                 case APPLE:
                     model.newApple(position);
-                    model.setFieldValue(Objects.SNAKE, position);
-                    model.setFieldValue(Objects.SNAKE, queue.getFirst());
+                    model.setFieldValue(Objects.HEAD, position);
+                    model.setFieldValue(Objects.SNAKE, oldPosition);
+                    model.setFieldValue(Objects.TAIL, queue.getFirst());
                     break;
                 case WALL:
                     model.setGameOver();
@@ -119,8 +132,10 @@ public class Snake {
                     model.setGameOver();
                     break;
                 default:
-                    model.setFieldValue(Objects.SNAKE, position);
+                    model.setFieldValue(Objects.HEAD, position);
+                    model.setFieldValue(Objects.SNAKE, oldPosition);
                     queue.removeFirst();
+                    model.setFieldValue(Objects.TAIL, queue.getFirst());
                     break;  
             }
         }

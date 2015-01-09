@@ -69,7 +69,13 @@ public class MainPanel extends JPanel {
 				} else if(gameField[i][j].getType() == Objects.WALL){
                                     g.setColor(Color.BLACK);
                                     g.fillRect(i*SCALE, j*SCALE, SCALE, SCALE);
-                                }
+                                } else if(gameField[i][j].getType() == Objects.HEAD){
+                                    g.setColor(Color.BLUE);
+                                    g.fillRect(i*SCALE, j*SCALE, SCALE, SCALE);
+                                } else if(gameField[i][j].getType() == Objects.TAIL){
+                                    g.setColor(Color.GREEN);
+                                    g.fillRect(i*SCALE, j*SCALE, SCALE, SCALE);
+                                } 
 			}
 		}
 	}
