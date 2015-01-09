@@ -50,6 +50,10 @@ public class MainPanel extends JPanel {
 		
 		
 	}
+	
+	public Dimension getSize(){
+		return this.size;
+	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
