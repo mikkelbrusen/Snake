@@ -116,7 +116,7 @@ public class Snake {
             queue.add(position);
             
             //Before marking the field as a snake, check if there's and apple, snake or wall there.
-            model.setFieldValue(Objects.BLANK, queue.getFirst());
+            //model.setFieldValue(Objects.BLANK, queue.getFirst());
             
             switch(position.getType()){
                 case APPLE:
@@ -132,6 +132,7 @@ public class Snake {
                     model.setGameOver();
                     break;
                 default:
+                    model.setFieldValue(Objects.BLANK, queue.getFirst());
                     model.setFieldValue(Objects.HEAD, position);
                     model.setFieldValue(Objects.SNAKE, oldPosition);
                     queue.removeFirst();
