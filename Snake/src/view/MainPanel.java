@@ -19,9 +19,7 @@ public class MainPanel extends JPanel {
 	
 	public static final int SCALE = 15;
 	
-	static BufferedImage IHEAD;
-	static BufferedImage IBODY;
-	static BufferedImage IAPPLE;
+	static BufferedImage IWALL,IHEAD,IBODY,IAPPLE,IOBAMA,ITBODY,ITW;
 	
 	private final Model model;
 	private final Dimension size;
@@ -35,9 +33,15 @@ public class MainPanel extends JPanel {
 		this.setOpaque(true);
 		this.model = model;
 		
+		this.IWALL = loadImage("Brick.png");
 		this.IHEAD = loadImage("NHead.png");
 		this.IBODY = loadImage("Body.png");
 		this.IAPPLE = loadImage("Apple.png");
+		this.IOBAMA = loadImage("Obama.png");
+		this.ITBODY = loadImage("BodyTerrorist.png");
+		this.ITW = loadImage("WLeadTerrorist");
+		
+		
 		
 	}
 
@@ -64,28 +68,22 @@ public class MainPanel extends JPanel {
 				
 				// draw apple
 				if(gameField[i][j].getType() == Objects.APPLE){
-					g.drawImage(IAPPLE, i*SCALE, j*SCALE, SCALE, SCALE, null);
+					g.drawImage(IOBAMA, i*SCALE, j*SCALE, SCALE, SCALE, null);
 				} 
-				// draw snake
-				else if(gameField[i][j].getType() == Objects.SNAKE) {
-					g.drawImage(IHEAD, i*SCALE, j*SCALE, SCALE, SCALE, null);
 				// draw wall
-				} else if(gameField[i][j].getType() == Objects.WALL){
-<<<<<<< Upstream, based on branch 'master' of https://github.com/mikkelbrusen/Snake
-                                    g.setColor(Color.BLACK);
-                                    g.fillRect(i*SCALE, j*SCALE, SCALE, SCALE);
-                                } else if(gameField[i][j].getType() == Objects.HEAD){
-                                    g.setColor(Color.BLUE);
-                                    g.fillRect(i*SCALE, j*SCALE, SCALE, SCALE);
-                                } else if(gameField[i][j].getType() == Objects.TAIL){
-                                    g.setColor(Color.GREEN);
-                                    g.fillRect(i*SCALE, j*SCALE, SCALE, SCALE);
-                                } 
-=======
-                    g.setColor(Color.BLACK);
-                    g.fillRect(i*SCALE, j*SCALE, SCALE, SCALE);
-                }
->>>>>>> ec98765 comments
+				else if(gameField[i][j].getType() == Objects.WALL){
+					g.drawImage(IWALL, i*SCALE, j*SCALE, SCALE, SCALE, null);
+				}
+				// draw snake body
+				else if(gameField[i][j].getType() == Objects.SNAKE) {
+					g.drawImage(ITBODY, i*SCALE, j*SCALE, SCALE, SCALE, null);
+				// draw head
+                } else if(gameField[i][j].getType() == Objects.HEAD){
+                	g.drawImage(ITW, i*SCALE, j*SCALE, SCALE, SCALE, null);
+                // draw tail
+                } else if(gameField[i][j].getType() == Objects.TAIL){
+                	g.drawImage(IOBAMA, i*SCALE, j*SCALE, SCALE, SCALE, null);
+                } 
 			}
 		} // end of painting fields
 	}
