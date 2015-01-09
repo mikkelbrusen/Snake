@@ -2,7 +2,6 @@ package model;
 
 import java.util.LinkedList;
 import java.awt.Dimension;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
@@ -25,6 +24,7 @@ public class Model {
     private boolean gameOver;
     private String fileName;
     private int score;
+    private int highScore;
     
     private LinkedList<Field> availableFields;
 
@@ -120,6 +120,8 @@ public class Model {
         }
         this.snake = new Snake(this);
         this.apple = new Apple(this);
+        if(this.score > this.highScore)
+            this.highScore = this.score;
         this.score = 0;
     }
     
@@ -191,6 +193,10 @@ public class Model {
     
     public int getScore(){
         return this.score;
+    }
+    
+    public int getHighScore(){
+        return this.highScore;
     }
     
     public Dimension getDimension(){
