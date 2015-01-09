@@ -169,6 +169,7 @@ public class Model {
                 break;
             case HEAD:
                 this.gameField[field.getWidth()][field.getHeight()].setType(Objects.HEAD);
+                this.availableFields.remove(field);
                 break;
             case TAIL:
                 this.gameField[field.getWidth()][field.getHeight()].setType(Objects.TAIL);
@@ -178,7 +179,6 @@ public class Model {
     
     protected void newApple(Field oldPosition){
         this.score += 1;
-        this.availableFields.add(oldPosition);
         this.apple = new Apple(this);
     }
     

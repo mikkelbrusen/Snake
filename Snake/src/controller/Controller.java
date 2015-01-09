@@ -8,7 +8,7 @@ import view.*;
 
 
 public class Controller {
-        private final static int INTERVAL = 100;
+        private final static int INTERVAL = 200;
 	private Model model;
 	private final View view;
 	

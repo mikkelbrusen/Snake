@@ -22,7 +22,7 @@ public class Snake {
         int height = model.getDimension().height/2;
         
         this.model = model;
-        this.queue = new LinkedList<Field>();
+        this.queue = new LinkedList<>();
         //Sets the snake at length 2 to go 1 
         Field field = model.getGameField()[width][height];
         queue.add(field);
@@ -115,10 +115,10 @@ public class Snake {
             
             switch(position.getType()){
                 case APPLE:
-                    model.newApple(position);
                     model.setFieldValue(Objects.HEAD, position);
                     model.setFieldValue(Objects.SNAKE, oldPosition);
                     model.setFieldValue(Objects.TAIL, queue.getFirst());
+                    model.newApple(position);
                     break;
                 case WALL:
                     model.setGameOver();
