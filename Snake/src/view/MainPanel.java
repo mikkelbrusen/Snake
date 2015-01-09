@@ -40,6 +40,10 @@ public class MainPanel extends JPanel {
 		this.IAPPLE = loadImage("Apple.png");
 		
 	}
+	
+	public Dimension getSize(){
+		return this.size;
+	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
