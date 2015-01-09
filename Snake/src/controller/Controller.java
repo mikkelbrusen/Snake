@@ -11,10 +11,8 @@ public class Controller {
         private final static int INTERVAL = 100;
 	private Model model;
 	private final View view;
-        private final Dimension dimension;
 	
 	public Controller(Dimension dimension,String fileName) {
-            this.dimension = dimension;
             this.model = new Model(dimension,fileName);
             this.view = new View(model);
           
