@@ -35,7 +35,7 @@ public class Controller {
                 
             timer.start();
 
-            DirectionListener d = new DirectionListener(model,view,this);
+            KeyboardListener d = new KeyboardListener(model,view,this);
             view.addKeyListener(d);
             
 	}
