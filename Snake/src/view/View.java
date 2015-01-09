@@ -1,7 +1,9 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -9,21 +11,27 @@ import model.Model;
 
 public class View extends JFrame {
 	
-	private final MainPanel snakePanel;
-	private final Model model;
-	private final MainMenu mainMenu;
+
+	private MainPanel snakePanel;
+	private Model model;
+	private MainMenu mainMenu;
+	private OptionsPanel options;
 	
 	public View(Model model) {
             super();
+            this.setTitle("Snake - the super, mega, awesome quest for epic awesomeness!");
             this.model = model;
-            this.snakePanel = new MainPanel(model.getDimension(),model);
-            this.mainMenu = new MainMenu();
+            snakePanel = new MainPanel(model.getDimension(),model);
+            mainMenu = new MainMenu();
+            options = new OptionsPanel(new Dimension(640,360));
+    		BoxLayout layout = new BoxLayout(options, BoxLayout.Y_AXIS);
             this.getContentPane().add(mainMenu, BorderLayout.NORTH);
             this.getContentPane().add(snakePanel, BorderLayout.CENTER);
             this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             this.pack();
             this.setLocationRelativeTo(null);
             this.setVisible(true);
+            
             
         }
 	public void doAnnounce() {
