@@ -17,7 +17,7 @@ import model.*;
 
 public class MainPanel extends JPanel {
 	
-	public static final int SCALE = 15;
+	public static final int SCALE = 25;
 	
 	static BufferedImage IWALL,IHEAD,IBODY,IAPPLE,IOBAMA,ITBODY,ITW;
 	
@@ -39,7 +39,7 @@ public class MainPanel extends JPanel {
 		this.IAPPLE = loadImage("Apple.png");
 		this.IOBAMA = loadImage("Obama.png");
 		this.ITBODY = loadImage("BodyTerrorist.png");
-		this.ITW = loadImage("WLeadTerrorist");
+		this.ITW = loadImage("WLeadTerrorist.png");
 		
 		
 		

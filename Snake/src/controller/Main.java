@@ -24,7 +24,7 @@ public class Main {
             Controller controller = new Controller(new Dimension(x,y),fileName);
         }
         catch(ArrayIndexOutOfBoundsException | NumberFormatException e){
-            Controller controller = new Controller(new Dimension(50,25),fileName);
+            Controller controller = new Controller(new Dimension(30,25),fileName);
         }
     }
 }
