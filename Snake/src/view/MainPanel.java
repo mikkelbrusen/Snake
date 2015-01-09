@@ -54,6 +54,7 @@ public class MainPanel extends JPanel {
 		}
 		else freeTiles = Color.WHITE;
 		
+		// paint fields
 		for(int i = 0; i < size.width; i++) {
 			for(int j = 0; j < size.height; j++) {
 				gameField[i][j].getType();
@@ -61,12 +62,16 @@ public class MainPanel extends JPanel {
 				g.setColor(freeTiles);
 				g.fillRect(i*SCALE, j*SCALE, SCALE, SCALE);
 				
+				// draw apple
 				if(gameField[i][j].getType() == Objects.APPLE){
 					g.drawImage(IAPPLE, i*SCALE, j*SCALE, SCALE, SCALE, null);
-				} else 
-				if(gameField[i][j].getType() == Objects.SNAKE) {
+				} 
+				// draw snake
+				else if(gameField[i][j].getType() == Objects.SNAKE) {
 					g.drawImage(IHEAD, i*SCALE, j*SCALE, SCALE, SCALE, null);
+				// draw wall
 				} else if(gameField[i][j].getType() == Objects.WALL){
+<<<<<<< Upstream, based on branch 'master' of https://github.com/mikkelbrusen/Snake
                                     g.setColor(Color.BLACK);
                                     g.fillRect(i*SCALE, j*SCALE, SCALE, SCALE);
                                 } else if(gameField[i][j].getType() == Objects.HEAD){
@@ -76,8 +81,13 @@ public class MainPanel extends JPanel {
                                     g.setColor(Color.GREEN);
                                     g.fillRect(i*SCALE, j*SCALE, SCALE, SCALE);
                                 } 
+=======
+                    g.setColor(Color.BLACK);
+                    g.fillRect(i*SCALE, j*SCALE, SCALE, SCALE);
+                }
+>>>>>>> ec98765 comments
 			}
-		}
+		} // end of painting fields
 	}
 	
 	private BufferedImage loadImage(String s) {
