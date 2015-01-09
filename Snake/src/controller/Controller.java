@@ -3,7 +3,7 @@ package controller;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
+
 import javax.swing.Timer;
 
 import model.Model;
@@ -11,10 +11,10 @@ import view.*;
 
 
 public class Controller {
-        private final static int INTERVAL = 500;
+        private final static int INTERVAL = 100;
 	private Model model;
 	private View view;
-    private Dimension dimension;
+        private Dimension dimension;
 	
 	public Controller(Dimension dimension,String fileName) {
             this.dimension = dimension;
@@ -37,8 +37,6 @@ public class Controller {
 
             KeyboardListener d = new KeyboardListener(model,view,this);
             view.addKeyListener(d);
-            
-            
             
 	}
 }

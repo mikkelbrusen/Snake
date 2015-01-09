@@ -24,29 +24,16 @@ public class Model {
     private Objects obj;
     private boolean gameOver;
     private String fileName;
+    private int score;
     
     private LinkedList<Field> availableFields;
 
     public Model(Dimension dimension, String fileName){
         this.availableFields = new LinkedList<Field>();
-        this.gameOver = false;
         this.fileName = fileName;
+        this.dimension = dimension;
 
-        if (!(loadTrack(fileName))){
-            System.out.println("Loading simple track!");
-            this.dimension = dimension;
-            this.gameField = new Field[dimension.width][dimension.height];
-            for (int i = 0; i < dimension.width; i++){
-                for (int j = 0; j < dimension.height; j++){
-                    Field field = new Field(i,j);
-                    field.setType(obj.BLANK);
-                    availableFields.addFirst(field);
-                    gameField[i][j] = field;
-                }
-            }   
-        }
-        this.snake = new Snake(this);
-        this.apple = new Apple(this);
+        doReset();
     }
     public boolean loadTrack(String fileName){
         try {
@@ -76,7 +63,6 @@ public class Model {
                 lineno++;
             }
             sc.close();
-            System.out.println("Track was loaded from file!");
             return true;
         } 
         catch (FileNotFoundException e) {
@@ -117,6 +103,8 @@ public class Model {
     }
     
     public void doReset(){
+        System.out.println("You died! Your score was: " + this.score);
+        this.gameOver = false;
         if (!(loadTrack(fileName))){
             this.gameField = new Field[this.dimension.width][dimension.height];
             this.availableFields = new LinkedList<Field>();
@@ -131,30 +119,13 @@ public class Model {
                 }
             }
         }
-        
         this.snake = new Snake(this);
         this.apple = new Apple(this);
+        this.score = 0;
     }
     
     public void moveSnake(){
-        switch(snake.getReverseDirection()){
-            case 'N':
-                moveSnake('S');
-                break;
-            case 'S':
-                moveSnake('N');
-                break;
-            case 'E':
-                moveSnake('W');
-                break;
-            case 'W':
-                moveSnake('E');
-                break;
-        }
-    }
-    
-    protected void moveSnake(char dir){
-        switch(dir){
+        switch(snake.getDirection()){
             case 'N':
                 snake.setDirection('N');
                 snake.walk(0, -1);
@@ -171,7 +142,7 @@ public class Model {
                 snake.setDirection('W');
                 snake.walk(-1, 0);
                 break;
-        }        
+        }
     }
     
     public Field[][] getGameField(){
@@ -200,12 +171,27 @@ public class Model {
                 this.gameField[field.getWidth()][field.getHeight()].setType(obj.BLANK);
                 this.availableFields.add(field);
                 break;
+            case HEAD:
+                this.gameField[field.getWidth()][field.getHeight()].setType(obj.HEAD);
+                break;
+            case TAIL:
+                this.gameField[field.getWidth()][field.getHeight()].setType(obj.TAIL);
+                break;
         }
     }
     
     protected void newApple(Field oldPosition){
+        this.score += 1;
         this.availableFields.add(oldPosition);
         this.apple = new Apple(this);
+    }
+    
+    public char getSnakeDirection(){
+        return snake.getDirection();
+    }
+    
+    public int getScore(){
+        return this.score;
     }
     
     public Dimension getDimension(){

@@ -1,8 +1,6 @@
 package controller;
 
 import java.awt.Dimension;
-import java.io.File;
-import java.io.FileNotFoundException;
 
 /**
  *
@@ -13,10 +11,10 @@ public class Main {
         String fileName;
         
         try{
-            fileName = args[3];
+            fileName = args[2];
         }
         catch(ArrayIndexOutOfBoundsException e){
-            fileName = "Track.txt";
+            fileName = "track2.txt";
         }
             
         
