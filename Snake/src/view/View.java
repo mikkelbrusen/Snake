@@ -27,8 +27,7 @@ public class View extends JFrame {
             
         }
 	public void doAnnounce() {
-		String m = "Game Over";
+		String m = "Game Over!\n Your score was: " + model.getScore();
 		JOptionPane.showMessageDialog(this, m);
-		
 	}
 }

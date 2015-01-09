@@ -103,7 +103,6 @@ public class Model {
     }
     
     public void doReset(){
-        System.out.println("You died! Your score was: " + this.score);
         this.gameOver = false;
         if (!(loadTrack(fileName))){
             this.gameField = new Field[this.dimension.width][dimension.height];

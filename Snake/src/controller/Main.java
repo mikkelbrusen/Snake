@@ -23,10 +23,7 @@ public class Main {
             int y = Integer.parseInt(args[1]);
             Controller controller = new Controller(new Dimension(x,y),fileName);
         }
-        catch(ArrayIndexOutOfBoundsException e){
-            Controller controller = new Controller(new Dimension(50,25),fileName);
-        }
-        catch(NumberFormatException e){
+        catch(ArrayIndexOutOfBoundsException | NumberFormatException e){
             Controller controller = new Controller(new Dimension(50,25),fileName);
         }
     }

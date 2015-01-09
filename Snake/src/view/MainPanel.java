@@ -23,8 +23,8 @@ public class MainPanel extends JPanel {
 	static BufferedImage IBODY;
 	static BufferedImage IAPPLE;
 	
-	private Model model;
-	private Dimension size;
+	private final Model model;
+	private final Dimension size;
 	
 	public MainPanel(Dimension size, Model model) {
 		super();

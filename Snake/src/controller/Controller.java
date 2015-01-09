@@ -25,7 +25,8 @@ public class Controller {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if(model.isGameOver()){
-                           // timer.stop();
+                           view.doAnnounce();
+                           model.doReset();
                         }
                         else
                             model.moveSnake();

@@ -72,14 +72,11 @@ public class KeyboardListener implements KeyListener {
 		} else if ( keyCode == 39 || keyCode == 68) {
 			model.changeSnakeDirection('E');
 		}
-		
+	if (model.isGameOver()) {
+            
+        }	
         view.repaint();
-        
-        if (model.isGameOver()) {
-            view.doAnnounce();
-            model.doReset();
-        }
-        
+
 	}
 	
 	private void shortCuts(KeyEvent e){
