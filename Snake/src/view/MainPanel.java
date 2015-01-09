@@ -17,7 +17,8 @@ import model.*;
 
 public class MainPanel extends JPanel {
 	
-	public static final int SCALE = 25;
+	public static final int res[] = new int[] {800,600};
+	public static int SCALE;
 	
 	static BufferedImage IWALL,IHEAD,IBODY,IAPPLE,IOBAMA,ITBODY,ITN,ITS,ITE,ITW,ISAND,IBOMB;
 	
@@ -27,6 +28,7 @@ public class MainPanel extends JPanel {
 	public MainPanel(Dimension size, Model model) {
 		super();
 		this.size = size;
+		this.SCALE = res[0]/size.width;
 		this.setLayout(new GridLayout(size.width*SCALE,size.height*SCALE));
 		this.setBackground(Color.WHITE);
 		this.setPreferredSize(new Dimension(size.width*SCALE,size.height*SCALE));
@@ -49,6 +51,10 @@ public class MainPanel extends JPanel {
 		
 		
 		
+	}
+	
+	public Dimension getSize(){
+		return this.size;
 	}
 
 	@Override

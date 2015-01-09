@@ -21,9 +21,11 @@ public class Controller {
                     view.doAnnounce();
                     model.doReset();
                 }
+                else if(model.isPaused()) {
+                }
                 else
                     model.moveSnake();
-                view.repaint();
+                	view.repaint();
             });
                 
             timer.start();

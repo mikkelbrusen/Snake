@@ -89,7 +89,7 @@ public class KeyboardListener implements KeyListener {
 			model.doReset();
 		}
 		if (keyCode == 80){
-//			pause the game
+			model.setPaused();
 		}
 		if (keyCode == 79){
 //			enter options menu
