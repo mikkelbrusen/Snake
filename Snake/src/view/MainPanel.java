@@ -19,7 +19,7 @@ public class MainPanel extends JPanel {
 	
 	public static final int SCALE = 25;
 	
-	static BufferedImage IWALL,IHEAD,IBODY,IAPPLE,IOBAMA,ITBODY,ITW;
+	static BufferedImage IWALL,IHEAD,IBODY,IAPPLE,IOBAMA,ITBODY,ITN,ITS,ITE,ITW,ISAND,IBOMB;
 	
 	private final Model model;
 	private final Dimension size;
@@ -39,7 +39,13 @@ public class MainPanel extends JPanel {
 		this.IAPPLE = loadImage("Apple.png");
 		this.IOBAMA = loadImage("Obama.png");
 		this.ITBODY = loadImage("BodyTerrorist.png");
+		this.ITN = loadImage("NLeadTerrorist.png");
+		this.ITS = loadImage("SLeadTerrorist.png");
+		this.ITE = loadImage("ELeadTerrorist.png");
 		this.ITW = loadImage("WLeadTerrorist.png");
+		this.IBOMB = loadImage("Bomb.png");
+		this.ISAND = loadImage("Sand.png");
+		
 		
 		
 		
@@ -50,36 +56,41 @@ public class MainPanel extends JPanel {
 		super.paintComponent(g);
 		
 		Field[][] gameField = model.getGameField();
-
-		
-		Color freeTiles;
-		if(model.isGameOver()){
-			freeTiles = Color.RED;
-		}
-		else freeTiles = Color.WHITE;
 		
 		// paint fields
 		for(int i = 0; i < size.width; i++) {
 			for(int j = 0; j < size.height; j++) {
-				gameField[i][j].getType();
-				
-				g.setColor(freeTiles);
-				g.fillRect(i*SCALE, j*SCALE, SCALE, SCALE);
+
+				//draw sand
+				g.drawImage(ISAND, i*SCALE, j*SCALE, SCALE, SCALE, null);
 				
 				// draw apple
 				if(gameField[i][j].getType() == Objects.APPLE){
-					g.drawImage(IOBAMA, i*SCALE, j*SCALE, SCALE, SCALE, null);
+					g.drawImage(IBOMB, i*SCALE, j*SCALE, SCALE, SCALE, null);
 				} 
 				// draw wall
 				else if(gameField[i][j].getType() == Objects.WALL){
 					g.drawImage(IWALL, i*SCALE, j*SCALE, SCALE, SCALE, null);
 				}
 				// draw snake body
-				else if(gameField[i][j].getType() == Objects.SNAKE) {
+				else if(gameField[i][j].getType() == Objects.SNAKE) {		                	
 					g.drawImage(ITBODY, i*SCALE, j*SCALE, SCALE, SCALE, null);
 				// draw head
                 } else if(gameField[i][j].getType() == Objects.HEAD){
-                	g.drawImage(ITW, i*SCALE, j*SCALE, SCALE, SCALE, null);
+                	switch(model.getSnakeDirection()){
+		                case 'N':
+		                	g.drawImage(ITN, i*SCALE, j*SCALE, SCALE, SCALE, null);
+		                    break;
+		                case 'S':
+		                	g.drawImage(ITS, i*SCALE, j*SCALE, SCALE, SCALE, null);
+		                    break;
+		                case 'E':
+		                	g.drawImage(ITE, i*SCALE, j*SCALE, SCALE, SCALE, null);
+		                    break;
+		                case 'W':
+		                	g.drawImage(ITW, i*SCALE, j*SCALE, SCALE, SCALE, null);
+		                    break;
+					}
                 // draw tail
                 } else if(gameField[i][j].getType() == Objects.TAIL){
                 	g.drawImage(IOBAMA, i*SCALE, j*SCALE, SCALE, SCALE, null);
