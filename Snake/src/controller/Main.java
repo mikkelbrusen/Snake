@@ -14,7 +14,7 @@ public class Main {
             fileName = args[2];
         }
         catch(ArrayIndexOutOfBoundsException e){
-            fileName = "track3.txt";
+            fileName = "track2.txt";
         }
             
         
@@ -24,7 +24,7 @@ public class Main {
             Controller controller = new Controller(new Dimension(x,y),fileName);
         }
         catch(ArrayIndexOutOfBoundsException | NumberFormatException e){
-            Controller controller = new Controller(new Dimension(30,25),fileName);
+            Controller controller = new Controller(new Dimension(100,80),fileName);
         }
     }
 }
