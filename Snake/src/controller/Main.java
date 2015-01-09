@@ -13,10 +13,10 @@ public class Main {
         String fileName;
         
         try{
-            fileName = args[3];
+            fileName = args[2];
         }
         catch(ArrayIndexOutOfBoundsException e){
-            fileName = "Track.txt";
+            fileName = "";
         }
             
         

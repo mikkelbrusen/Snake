@@ -13,6 +13,7 @@ public class Snake {
     Model model;
     char reverseDirection;
     boolean isReverseDirection;
+    boolean hasTakenStep;
     
     protected Snake(Model model){
         int width = model.getDimension().width/2;
@@ -31,6 +32,7 @@ public class Snake {
         position = field;
         this.reverseDirection = 'E';
         this.isReverseDirection = false;
+        this.hasTakenStep = true;
         
         System.out.println(field.getHeight() + " " + field.getWidth());
     }
@@ -38,8 +40,9 @@ public class Snake {
         if (this.reverseDirection == direction){
             this.isReverseDirection = true;
         }
-        else{
+        else if (this.hasTakenStep){
             this.isReverseDirection = false;
+            this.hasTakenStep = false;
             
             switch(direction){
             case 'N':
@@ -55,7 +58,10 @@ public class Snake {
                 this.reverseDirection = 'E';
                 break;
             }
-        }      
+        }
+        else{
+            
+        }
     }
     protected boolean hasHitEdge(Field positon){
         if(position.getHeight() == 0 && this.reverseDirection == 'S'){
@@ -89,6 +95,7 @@ public class Snake {
             //Later add function to move the snake in same as last direction.
             }
         else{
+            this.hasTakenStep = true;
             //Check if next position is at the other edge of the screen.
             if(!hasHitEdge(position)){
                 position = model.getGameField()[position.getWidth()+widht][position.getHeight()+height];
