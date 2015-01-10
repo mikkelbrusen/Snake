@@ -37,6 +37,7 @@ public class Snake {
         this.isReverseDirection = false;
         this.hasTakenStep = true;
     }
+    
     protected void setDirection(char direction){
         if (this.reverseDirection == direction){
             this.isReverseDirection = true;
@@ -68,7 +69,7 @@ public class Snake {
             
         }
     }
-    protected boolean hasHitEdge(Field positon){
+    private boolean hasHitEdge(){
         if(position.getHeight() == 0 && this.reverseDirection == 'S'){
             this.position = model.getGameField()[position.getWidth()][model.getDimension().height-1];
             return true;
@@ -89,10 +90,10 @@ public class Snake {
             return false;
     }
     
-    protected char getReverseDirection(){
-        return reverseDirection;
+    private boolean hasHitWormHole(){
+        return (position.getType() == Objects.WORMHOLE);
     }
-    
+
     protected char getDirection(){
         return direction;
     }
@@ -106,8 +107,19 @@ public class Snake {
             this.hasTakenStep = true;
             this.oldPosition = position;
             //Check if next position is at the other edge of the screen.
-            if(!hasHitEdge(position)){
+            if(!hasHitEdge()){
                 position = model.getGameField()[position.getWidth()+widht][position.getHeight()+height];
+            }
+            if(hasHitWormHole()){
+                
+                for (Field wh : model.getWormHoles()){
+                    //System.out.println(wh.getWhNumber());
+                    if ((position != wh) && (wh.getWhNumber() == position.getWhNumber())) {
+                        position = wh;
+                        break;
+                    }       
+                }
+                
             }
             
             queue.add(position);

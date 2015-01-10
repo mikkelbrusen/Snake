@@ -13,5 +13,5 @@ WALL = 4
 */
 
 public enum Objects {
-    BLANK, SNAKE, APPLE, WALL, HEAD, TAIL
+    BLANK, SNAKE, APPLE, WALL, HEAD, TAIL, WORMHOLE
 }

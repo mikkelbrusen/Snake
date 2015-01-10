@@ -16,6 +16,7 @@ import java.util.Scanner;
  * @author BusterK
  */
 public class Model {
+    protected static int MAX_WORMHOLES = 10;
     private Field[][] gameField;
     private Snake snake;
     private Apple apple;
@@ -27,17 +28,20 @@ public class Model {
     private boolean pause;
     
     private LinkedList<Field> availableFields;
+    private Field[] wormHoles;
 
     public Model(Dimension dimension, String fileName){
         this.availableFields = new LinkedList<>();
+        this.wormHoles = new Field[MAX_WORMHOLES];
         this.fileName = fileName;
         this.dimension = dimension;
 
         doReset();
     }
-    public boolean loadTrack(String fileName){
+    private boolean loadTrack(String fileName){
         try {
             Scanner sc = new Scanner(new FileReader(fileName));
+            int whcount = 0;
             int width = sc.nextInt();
             int height = sc.nextInt();
             this.dimension = new Dimension(width,height);
@@ -52,13 +56,18 @@ public class Model {
                     Field field = new Field(i,lineno);
                     if(line.charAt(i) == '#'){
                         field.setType(Objects.WALL);
-                        gameField[i][lineno] = field;
+                    }
+                    else if(Character.isDigit(line.charAt(i))){
+                        field.setType(Objects.WORMHOLE);
+                        field.setWhNumber(line.charAt(i));
+                        wormHoles[whcount] = field;
+                        whcount++;
                     }
                     else{
                         field.setType(Objects.BLANK);
                         availableFields.addFirst(field);
-                        gameField[i][lineno] = field;
                     }
+                    gameField[i][lineno] = field;
                 }
                 lineno++;
             }
@@ -69,7 +78,7 @@ public class Model {
             return false;
         }
     }
-    
+        
     public void setTrack(String fileName){
         this.fileName = fileName;
     }
@@ -161,30 +170,32 @@ public class Model {
     }
     
     protected void setFieldValue(Objects val, Field field){
-        switch(val){
-            case APPLE:
-                this.gameField[field.getWidth()][field.getHeight()].setType(Objects.APPLE);
-                this.availableFields.remove(field);
-                break;
-            case SNAKE:
-                this.gameField[field.getWidth()][field.getHeight()].setType(Objects.SNAKE);
-                this.availableFields.remove(field);
-                break;
-            case WALL:
-                this.gameField[field.getWidth()][field.getHeight()].setType(Objects.WALL);
-                this.availableFields.remove(field);
-                break;
-            case BLANK:
-                this.gameField[field.getWidth()][field.getHeight()].setType(Objects.BLANK);
-                this.availableFields.add(field);
-                break;
-            case HEAD:
-                this.gameField[field.getWidth()][field.getHeight()].setType(Objects.HEAD);
-                this.availableFields.remove(field);
-                break;
-            case TAIL:
-                this.gameField[field.getWidth()][field.getHeight()].setType(Objects.TAIL);
-                break;
+        if(field.getType() != Objects.WORMHOLE){
+            switch(val){
+                case APPLE:
+                    this.gameField[field.getWidth()][field.getHeight()].setType(Objects.APPLE);
+                    this.availableFields.remove(field);
+                    break;
+                case SNAKE:
+                    this.gameField[field.getWidth()][field.getHeight()].setType(Objects.SNAKE);
+                    this.availableFields.remove(field);
+                    break;
+                case WALL:
+                    this.gameField[field.getWidth()][field.getHeight()].setType(Objects.WALL);
+                    this.availableFields.remove(field);
+                    break;
+                case BLANK:
+                    this.gameField[field.getWidth()][field.getHeight()].setType(Objects.BLANK);
+                    this.availableFields.add(field);
+                    break;
+                case HEAD:
+                    this.gameField[field.getWidth()][field.getHeight()].setType(Objects.HEAD);
+                    this.availableFields.remove(field);
+                    break;
+                case TAIL:
+                    this.gameField[field.getWidth()][field.getHeight()].setType(Objects.TAIL);
+                    break;
+            }
         }
     }
     
@@ -207,5 +218,9 @@ public class Model {
     
     public Dimension getDimension(){
         return this.dimension;
+    }
+    
+    protected Field[] getWormHoles(){
+        return this.wormHoles;
     }
 }

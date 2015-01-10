@@ -100,10 +100,12 @@ public class MainPanel extends JPanel {
                 // draw tail
                 } else if(gameField[i][j].getType() == Objects.TAIL){
                 	g.drawImage(IOBAMA, i*SCALE, j*SCALE, SCALE, SCALE, null);
-                } 
-			}
-		} // end of painting fields
-	}
+		} else if(gameField[i][j].getType() == Objects.WORMHOLE){
+                        g.drawImage(ITBODY, i*SCALE, j*SCALE, null);
+                        }
+                        }
+                // end of painting fields
+	}}
 	
 	private BufferedImage loadImage(String s) {
 		BufferedImage image;
