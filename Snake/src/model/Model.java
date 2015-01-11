@@ -1,5 +1,6 @@
 package model;
 
+import AI.AI;
 import java.util.LinkedList;
 import java.awt.Dimension;
 import java.io.FileNotFoundException;
@@ -17,6 +18,7 @@ import java.util.Scanner;
  */
 public class Model {
     protected static int MAX_WORMHOLES = 10;
+    private boolean useAI;
     private Field[][] gameField;
     private Snake snake;
     private Apple apple;
@@ -26,11 +28,13 @@ public class Model {
     private int score;
     private int highScore;
     private boolean pause;
+    private AI ai;
     
     private LinkedList<Field> availableFields;
     private Field[] wormHoles;
 
     public Model(Dimension dimension, String fileName){
+        this.useAI = true;
         this.availableFields = new LinkedList<>();
         this.wormHoles = new Field[MAX_WORMHOLES];
         this.fileName = fileName;
@@ -145,9 +149,14 @@ public class Model {
         if(this.score > this.highScore)
             this.highScore = this.score;
         this.score = 0;
+        this.ai = new AI(this);
     }
     
-    public void moveSnake(){
+    public void moveSnake() throws InterruptedException{
+        if(useAI){
+            snake.setDirection(ai.runAI());
+            System.out.println(" : " + snake.getDirection());
+        }
         switch(snake.getDirection()){
             case 'N':
                 snake.setDirection('N');

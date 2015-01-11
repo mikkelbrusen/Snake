@@ -8,17 +8,21 @@ package AI;
 import java.awt.Dimension;
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 import model.*;
 
 public class AI {
     final Model model;
     final Dimension dim;
     final Field[][] map;
-    final Field position;
+    Field position;
     final Deque<Node> queue = new LinkedList<>();
     final LinkedList<Field> visited = new LinkedList<>();
     
-    StringBuilder path;
+    private StringBuilder path;
+    private String pathString;
+    private int pathStringIterator;
+    
     boolean searching;
     
     public AI(Model model){
@@ -30,40 +34,78 @@ public class AI {
         this.searching = true;
     }
     
-    public void runAI() throws InterruptedException{
-        findRoute();
-        for(char c : path.toString().toCharArray()){
-            while(!model.snakeHasTakenStep()){
-            }
-            model.changeSnakeDirection(c);
+    public char runAI() throws InterruptedException{
+        if (path.length() == 0) {
+            this.position = model.getSnakePosition();
+            this.queue.clear();
+            this.visited.clear();
+            searching = true;
+            findRoute();
         }
+        char c = ' ';
+        if (!(path.length() == 0)){
+            c = path.charAt(0);
+            System.out.print(c);
+            path.deleteCharAt(0);
+            if (!(path.length() == 0)){
+                path.deleteCharAt(0);
+            }
+        }
+        return c;
     }
     
     private void findRoute() {
             findApple();
             while(searching){
-                    BFS(queue.getFirst());
+                    try{
+                        BFS(queue.getFirst());
+                    }catch(NoSuchElementException e){
+                        this.queue.clear();
+                        this.visited.clear();
+                        this.searching = false;
+                    }
+                    
+                    System.out.print(".");
             }
+            System.out.println("Done Searching");
     }
     
     private void BFS(Node head){
             queue.removeFirst();
-            int i = (int) head.key.getHeight();
-            int j = (int) head.key.getWidth();
-
-            if(!(i == dim.width) && (model.getAvailableFields().contains(map[i+1][j])) && !(visited.contains(map[i+1][j]))){
+            int i = (int) head.key.getWidth();
+            int j = (int) head.key.getHeight();
+            
+            if(isWithinMap(i,j)){
+                if(!(i == dim.width-1) &&
+                        (model.getAvailableFields().contains(map[i+1][j]) ||
+                            model.getSnakePosition() == map[i+1][j]) && 
+                        !(visited.contains(map[i+1][j]))){
                     createNode(head, i+1, j);
-            }
+                }
 
-            if(!(j == dim.height) && (model.getAvailableFields().contains(map[i][j+1])) &&(visited.contains(map[i][j+1]))){
+                if(!(i == dim.width-1) &&
+                        (model.getAvailableFields().contains(map[i][j+1]) ||
+                            model.getSnakePosition() == map[i][j+1]) && 
+                        !(visited.contains(map[i][j+1]))){
                     createNode(head, i, j+1);
-            }
-            if(!(i == 0) && (model.getAvailableFields().contains(map[i-1][j])) &&(visited.contains(map[i-1][j]))){
+                }
+                if(!(i == 0) &&
+                        (model.getAvailableFields().contains(map[i-1][j]) ||
+                            model.getSnakePosition() == map[i-1][j]) && 
+                        !(visited.contains(map[i-1][j]))){
                     createNode(head, i-1, j);
-            }
-            if(!(j == 0) && (model.getAvailableFields().contains(map[i][j-1])) &&(visited.contains(map[i][j-1]))){
+                }
+                if(!(i == 0) &&
+                        (model.getAvailableFields().contains(map[i][j-1]) ||
+                            model.getSnakePosition() == map[i][j-1]) && 
+                        !(visited.contains(map[i][j-1]))){
                     createNode(head, i, j-1);
-            }
+                }
+            }  
+    }
+    
+    private boolean isWithinMap(int i, int j){
+        return !((i == dim.width) || (j == dim.height) || (i == 0) || (j == 0));
     }
     
     private void findApple(){
@@ -77,7 +119,7 @@ public class AI {
                             }
                     }
             }
-    }
+    }   
     
     private void createNode(Node head, int i, int j) {
             Node node = new Node(i,j);
@@ -102,16 +144,18 @@ public class AI {
 //		#### GENERATE STRING ###
             while(node.next != null){
                     if(node.next.key.getHeight() == (node.key.getHeight() - 1)) {
-                    path = path.append("W ");	
+                    path = path.append("S ");	
             } else if(node.next.key.getHeight() == (node.key.getHeight() + 1)) {
-                    path = path.append("E ");
-            } else if(node.next.key.getWidth() == (node.key.getWidth() - 1)) {
                     path = path.append("N ");
+            } else if(node.next.key.getWidth() == (node.key.getWidth() - 1)) {
+                    path = path.append("E ");
             } else if(node.next.key.getWidth() == (node.key.getWidth() + 1)) {
-                    path = path.append("S ");
+                    path = path.append("W ");
             }
                     node = node.next;
             }
+            this.path.reverse();
+            this.path.deleteCharAt(0);
             this.searching = false;
     }
 }
