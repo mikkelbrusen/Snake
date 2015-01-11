@@ -21,8 +21,19 @@ public class Controller {
           
             Timer timer = new Timer(INTERVAL, (ActionEvent e) -> {
                 if(model.isGameOver()){
-                    view.doAnnounce();
-                    model.doReset();
+                    if(!model.isRunningAI()){
+                        view.doAnnounce();
+                        model.doReset();
+                    }else{
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        model.doReset();
+                    }
+                        
+                    
                 }
                 else if(model.isPaused()) {
                 }

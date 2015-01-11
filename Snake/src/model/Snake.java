@@ -121,7 +121,6 @@ public class Snake {
             if(hasHitWormHole()){
                 
                 for (Field wh : model.getWormHoles()){
-                    //System.out.println(wh.getWhNumber());
                     if ((position != wh) && (wh.getWhNumber() == position.getWhNumber())) {
                         position = wh;
                         break;

@@ -20,8 +20,6 @@ public class AI {
     final LinkedList<Field> visited = new LinkedList<>();
     
     private StringBuilder path;
-    private String pathString;
-    private int pathStringIterator;
     
     boolean searching;
     
@@ -35,17 +33,15 @@ public class AI {
     }
     
     public char runAI() throws InterruptedException{
-        if (path.length() == 0) {
-            this.position = model.getSnakePosition();
-            this.queue.clear();
-            this.visited.clear();
-            searching = true;
-            findRoute();
-        }
+        this.position = model.getSnakePosition();
+        this.queue.clear();
+        this.visited.clear();
+        searching = true;
+        findRoute();
+
         char c = ' ';
         if (!(path.length() == 0)){
             c = path.charAt(0);
-            System.out.print(c);
             path.deleteCharAt(0);
             if (!(path.length() == 0)){
                 path.deleteCharAt(0);
@@ -58,44 +54,64 @@ public class AI {
             findApple();
             while(searching){
                     try{
-                        BFS(queue.getFirst());
+                        findPathToApple(queue.getFirst());
                     }catch(NoSuchElementException e){
+                        //No viable route found. 
                         this.queue.clear();
                         this.visited.clear();
+                        this.path = new StringBuilder();
+                        moveToNearestClearSpace();
                         this.searching = false;
                     }
-                    
-                    System.out.print(".");
             }
-            System.out.println("Done Searching");
     }
     
-    private void BFS(Node head){
+    private void moveToNearestClearSpace(){
+        if(model.getAvailableFields().contains(map[position.getWidth()+1][position.getHeight()])){
+            this.path.append('E');
+        }
+            
+        else if(model.getAvailableFields().contains(map[position.getWidth()-1][position.getHeight()])){
+            this.path.append('W');
+        }
+            
+        else if(model.getAvailableFields().contains(map[position.getWidth()][position.getHeight()+1])){
+            this.path.append('S');
+        }
+            
+        else if (model.getAvailableFields().contains(map[position.getWidth()][position.getHeight()-1])){
+            this.path.append('N');
+        }
+        if (path.length() == 0)
+            System.out.println("No more routes, I'm dead!");
+    }
+    
+    private void findPathToApple(Node head){
             queue.removeFirst();
             int i = (int) head.key.getWidth();
             int j = (int) head.key.getHeight();
             
             if(isWithinMap(i,j)){
-                if(!(i == dim.width-1) &&
+                if(
                         (model.getAvailableFields().contains(map[i+1][j]) ||
                             model.getSnakePosition() == map[i+1][j]) && 
                         !(visited.contains(map[i+1][j]))){
                     createNode(head, i+1, j);
                 }
 
-                if(!(i == dim.width-1) &&
+                if(
                         (model.getAvailableFields().contains(map[i][j+1]) ||
                             model.getSnakePosition() == map[i][j+1]) && 
                         !(visited.contains(map[i][j+1]))){
                     createNode(head, i, j+1);
                 }
-                if(!(i == 0) &&
+                if(
                         (model.getAvailableFields().contains(map[i-1][j]) ||
                             model.getSnakePosition() == map[i-1][j]) && 
                         !(visited.contains(map[i-1][j]))){
                     createNode(head, i-1, j);
                 }
-                if(!(i == 0) &&
+                if(
                         (model.getAvailableFields().contains(map[i][j-1]) ||
                             model.getSnakePosition() == map[i][j-1]) && 
                         !(visited.contains(map[i][j-1]))){
@@ -115,7 +131,7 @@ public class AI {
                                     Node head = new Node(i,j);
                                     queue.addFirst(head);
 
-                                    BFS(queue.getFirst());
+                                    findPathToApple(queue.getFirst());
                             }
                     }
             }

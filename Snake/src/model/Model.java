@@ -151,11 +151,13 @@ public class Model {
         this.score = 0;
         this.ai = new AI(this);
     }
+    public boolean isRunningAI(){
+        return this.useAI;
+    }
     
     public void moveSnake() throws InterruptedException{
         if(useAI){
             snake.setDirection(ai.runAI());
-            System.out.println(" : " + snake.getDirection());
         }
         switch(snake.getDirection()){
             case 'N':

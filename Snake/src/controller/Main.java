@@ -14,7 +14,7 @@ public class Main {
             fileName = args[2];
         }
         catch(ArrayIndexOutOfBoundsException e){
-            fileName = "track6.txt";
+            fileName = "track5.txt";
         }
             
         try{
