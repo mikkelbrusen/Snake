@@ -1,5 +1,6 @@
 package view;
 
+import controller.Controller;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
@@ -17,12 +18,12 @@ public class View extends JFrame {
 	private MainMenu mainMenu;
 	private OptionsPanel options;
 	
-	public View(Model model) {
+	public View(Model model,Controller controller) {
             super();
             this.setTitle("Snake - the super, mega, awesome quest for epic awesomeness!");
             this.model = model;
             snakePanel = new MainPanel(model.getDimension(),model);
-            mainMenu = new MainMenu();
+            mainMenu = new MainMenu(controller);
             options = new OptionsPanel(new Dimension(640,360));
     		BoxLayout layout = new BoxLayout(options, BoxLayout.Y_AXIS);
             this.getContentPane().add(mainMenu, BorderLayout.NORTH);
@@ -42,4 +43,8 @@ public class View extends JFrame {
                     m += "\n You beat the high score!";
 		JOptionPane.showMessageDialog(this, m);
 	}
+        
+        public void showHighScore(){
+            JOptionPane.showMessageDialog(this, "Current Highscore is: " + model.getHighScore());
+        }
 }

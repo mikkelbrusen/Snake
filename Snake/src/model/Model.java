@@ -42,6 +42,15 @@ public class Model {
 
         doReset();
     }
+    
+    public void setUseAI(boolean b){
+        this.useAI = b;
+    }
+    
+    public boolean getUseAI(){
+        return this.useAI;
+    }
+
     private boolean loadTrack(String fileName){
         try {
             Scanner sc = new Scanner(new FileReader(fileName));
@@ -150,9 +159,6 @@ public class Model {
             this.highScore = this.score;
         this.score = 0;
         this.ai = new AI(this);
-    }
-    public boolean isRunningAI(){
-        return this.useAI;
     }
     
     public void moveSnake() throws InterruptedException{
