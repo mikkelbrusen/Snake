@@ -17,11 +17,11 @@ public class Field{
         this.whNumber = 0;
     }
     
-    protected int getWidth(){
+    public int getWidth(){
         return width;
     }
     
-    protected int getHeight(){
+    public int getHeight(){
         return height;
     }
     

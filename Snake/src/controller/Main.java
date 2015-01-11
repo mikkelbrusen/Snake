@@ -14,10 +14,9 @@ public class Main {
             fileName = args[2];
         }
         catch(ArrayIndexOutOfBoundsException e){
-            fileName = "track2.txt";
+            fileName = "track6.txt";
         }
             
-        
         try{
             int x = Integer.parseInt(args[0]);
             int y = Integer.parseInt(args[1]);

@@ -1,14 +1,17 @@
 package controller;
 
+import AI.AI;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Timer;
 import model.Model;
 import view.*;
 
 
 public class Controller {
-        private final static int INTERVAL = 200;
+        private final static int INTERVAL = 50;
 	private Model model;
 	private final View view;
 	
@@ -24,8 +27,12 @@ public class Controller {
                 else if(model.isPaused()) {
                 }
                 else
-                    model.moveSnake();
-                	view.repaint();
+                    try {
+                        model.moveSnake();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                    view.repaint();
             });
                 
             timer.start();
