@@ -10,8 +10,8 @@ import java.util.LinkedList;
 public class Snake {
     private Field position;
     private Field oldPosition;
-    private LinkedList<Field> queue;
-    private Model model;
+    private final LinkedList<Field> queue;
+    private final Model model;
     private char reverseDirection;
     private char direction;
     private boolean isReverseDirection;
@@ -69,6 +69,14 @@ public class Snake {
             
         }
     }
+    protected boolean hasTakenStep(){
+        return this.hasTakenStep;
+    }
+    
+    protected Field getPosition(){
+        return this.position;
+    }
+    
     private boolean hasHitEdge(){
         if(position.getHeight() == 0 && this.reverseDirection == 'S'){
             this.position = model.getGameField()[position.getWidth()][model.getDimension().height-1];

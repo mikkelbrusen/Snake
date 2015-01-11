@@ -78,7 +78,11 @@ public class Model {
             return false;
         }
     }
-        
+    
+    public Field getSnakePosition(){
+        return snake.getPosition();
+    }
+    
     public void setTrack(String fileName){
         this.fileName = fileName;
     }
@@ -114,6 +118,9 @@ public class Model {
                 snake.setDirection('W');
                 break;
         }        
+    }
+    public LinkedList<Field> getAvailableFields(){
+        return this.availableFields;
     }
     
     public final void doReset(){
@@ -165,8 +172,8 @@ public class Model {
         return this.gameField;
     }
     
-    protected LinkedList<Field> getAvailableFields(){
-        return availableFields;
+    public boolean snakeHasTakenStep(){
+        return snake.hasTakenStep();
     }
     
     protected void setFieldValue(Objects val, Field field){
