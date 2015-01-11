@@ -12,7 +12,7 @@ import view.*;
 
 
 public class Controller {
-        private int INTERVAL = 256;
+        private int INTERVAL = 128;
 	private Model model;
 	private final View view;
         Timer timer;
