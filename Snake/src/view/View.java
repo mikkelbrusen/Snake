@@ -29,6 +29,7 @@ public class View extends JFrame {
             this.getContentPane().add(mainMenu, BorderLayout.NORTH);
             this.getContentPane().add(snakePanel, BorderLayout.CENTER);
             this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.setResizable(false);
             this.pack();
             this.setLocationRelativeTo(null);
             this.setVisible(true);
