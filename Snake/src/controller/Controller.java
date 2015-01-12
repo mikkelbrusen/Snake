@@ -12,17 +12,16 @@ import view.*;
 
 
 public class Controller {
-        private int INTERVAL = 128;
+    private int INTERVAL = 128;
 	private Model model;
 	private final View view;
-        Timer timer;
+    Timer timer;
 	
 	public Controller(Dimension dimension,String fileName) {
             this.model = new Model(dimension,fileName);
             this.view = new View(model,this);
           
-            newTimer();
-                
+            newTimer();   
             timer.start();
 
             KeyboardListener d = new KeyboardListener(model,view);
