@@ -68,13 +68,13 @@ public class View extends JFrame {
 
 	public void doAnnounce() {
 
-		String m = "Game Over!\n"
-                        + "Your score is: " + model.getScore() + "\n";
-                        //+ "High score is: " + model.getHighScore();
+		String m = "Game Over!\n" + "Your score is: " + model.getScore() + "\n"
+                        + "High score is: " + model.getHighScores() + "Please enter your name:";
                // if(model.getScore() > model.getHighScore())
                     //m += "\n You beat the high score!";
 
-		JOptionPane.showMessageDialog(this, m);
+		String input = JOptionPane.showInputDialog(m);
+		System.out.println(input);
 	}
 
 

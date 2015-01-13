@@ -72,6 +72,7 @@ public class StartMenu extends JPanel implements ActionListener {
 		JButton quit = new JButton("Quit game");
 		quit.setFont(new Font("Quit game", Font.PLAIN, 24));
 		quit.setAlignmentX(CENTER_ALIGNMENT);
+		
 		quit.addActionListener(new ActionListener() {
 			
 			@Override
