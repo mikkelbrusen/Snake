@@ -20,7 +20,8 @@ public class MainPanel extends JPanel {
 	public static final int res[] = new int[] {800,600};
 	public static int SCALE;
 	
-	static BufferedImage IWALL,IHEAD,IBODY,IAPPLE,IOBAMA,ITBODY,ITN,ITS,ITE,ITW,ISAND,IBOMB;
+	static BufferedImage[] THEME_OBAMA = new BufferedImage[10];
+	static BufferedImage[] THEME_SNAKE = new BufferedImage[10];
 	
 	private final Model model;
 	private final Dimension size;
@@ -35,20 +36,27 @@ public class MainPanel extends JPanel {
 		this.setOpaque(true);
 		this.model = model;
 		
-		this.IWALL = loadImage("Brick.png");
-		this.IHEAD = loadImage("NHead.png");
-		this.IBODY = loadImage("Body.png");
-		this.IAPPLE = loadImage("Apple.png");
-		this.IOBAMA = loadImage("Obama.png");
-		this.ITBODY = loadImage("BodyTerrorist.png");
-		this.ITN = loadImage("NLeadTerrorist.png");
-		this.ITS = loadImage("SLeadTerrorist.png");
-		this.ITE = loadImage("ELeadTerrorist.png");
-		this.ITW = loadImage("WLeadTerrorist.png");
-		this.IBOMB = loadImage("Bomb.png");
-		this.ISAND = loadImage("Sand.png");
+		this.THEME_OBAMA[0] = loadImage("Sand.png");
+		this.THEME_OBAMA[1] = loadImage("Brick.png");
+		this.THEME_OBAMA[2] = loadImage("Bomb.png");
+		this.THEME_OBAMA[3] = loadImage("NLeadTerrorist.png");
+		this.THEME_OBAMA[4] = loadImage("SLeadTerrorist.png");
+		this.THEME_OBAMA[5] = loadImage("ELeadTerrorist.png");
+		this.THEME_OBAMA[6] = loadImage("WLeadTerrorist.png");
+		this.THEME_OBAMA[7] = loadImage("BodyTerrorist.png");
+		this.THEME_OBAMA[8] = loadImage("Obama.png");
+		this.THEME_OBAMA[9] = loadImage("Wormhole.png");
 		
-		
+		this.THEME_SNAKE[0] = loadImage("Sand.png");
+		this.THEME_SNAKE[1] = loadImage("Brick.png");
+		this.THEME_SNAKE[2] = loadImage("Apple.png");
+		this.THEME_SNAKE[3] = loadImage("NHead.png");
+		this.THEME_SNAKE[4] = loadImage("SHead.png");
+		this.THEME_SNAKE[5] = loadImage("EHead.png");
+		this.THEME_SNAKE[6] = loadImage("WHead.png");
+		this.THEME_SNAKE[7] = loadImage("Body.png");
+		this.THEME_SNAKE[8] = loadImage("Body.png");
+		this.THEME_SNAKE[9]	= loadImage("Wormhole.png");
 		
 		
 	}
@@ -61,51 +69,12 @@ public class MainPanel extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
-		Field[][] gameField = model.getGameField();
-		
-		// paint fields
-		for(int i = 0; i < size.width; i++) {
-			for(int j = 0; j < size.height; j++) {
-
-				//draw sand
-				g.drawImage(ISAND, i*SCALE, j*SCALE, SCALE, SCALE, null);
-				
-				// draw apple
-				if(gameField[i][j].getType() == Objects.APPLE){
-					g.drawImage(IBOMB, i*SCALE, j*SCALE, SCALE, SCALE, null);
-				} 
-				// draw wall
-				else if(gameField[i][j].getType() == Objects.WALL){
-					g.drawImage(IWALL, i*SCALE, j*SCALE, SCALE, SCALE, null);
-				}
-				// draw snake body
-				else if(gameField[i][j].getType() == Objects.SNAKE) {		                	
-					g.drawImage(ITBODY, i*SCALE, j*SCALE, SCALE, SCALE, null);
-				// draw head
-                } else if(gameField[i][j].getType() == Objects.HEAD){
-                	switch(model.getSnakeDirection()){
-		                case 'N':
-		                	g.drawImage(ITN, i*SCALE, j*SCALE, SCALE, SCALE, null);
-		                    break;
-		                case 'S':
-		                	g.drawImage(ITS, i*SCALE, j*SCALE, SCALE, SCALE, null);
-		                    break;
-		                case 'E':
-		                	g.drawImage(ITE, i*SCALE, j*SCALE, SCALE, SCALE, null);
-		                    break;
-		                case 'W':
-		                	g.drawImage(ITW, i*SCALE, j*SCALE, SCALE, SCALE, null);
-		                    break;
-					}
-                // draw tail
-                } else if(gameField[i][j].getType() == Objects.TAIL){
-                	g.drawImage(IOBAMA, i*SCALE, j*SCALE, SCALE, SCALE, null);
-		} else if(gameField[i][j].getType() == Objects.WORMHOLE){
-                        g.drawImage(ITBODY, i*SCALE, j*SCALE, null);
-                        }
-                        }
-                // end of painting fields
-	}}
+		if (model.getTheme() == 1) {
+			paintFields(g,THEME_SNAKE);
+		} else {
+			paintFields(g,THEME_OBAMA);
+		}
+	}
 	
 	private BufferedImage loadImage(String s) {
 		BufferedImage image;
@@ -116,6 +85,60 @@ public class MainPanel extends JPanel {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	private void paintFields(Graphics g, BufferedImage[] bi) {
+		Field[][] gameField = model.getGameField();
+		
+		// paint fields
+		for(int i = 0; i < size.width; i++) {
+			for(int j = 0; j < size.height; j++) {
+
+				//draw sand
+				g.drawImage(bi[0], i*SCALE, j*SCALE, SCALE, SCALE, null);
+				
+				// draw wall
+				if(gameField[i][j].getType() == Objects.WALL){
+					g.drawImage(bi[1], i*SCALE, j*SCALE, SCALE, SCALE, null);
+				}
+				
+				// draw snake body
+				else if(gameField[i][j].getType() == Objects.SNAKE) {		                	
+					g.drawImage(bi[7], i*SCALE, j*SCALE, SCALE, SCALE, null);
+				}
+				
+				// draw apple
+				else if(gameField[i][j].getType() == Objects.APPLE){
+					g.drawImage(bi[2], i*SCALE, j*SCALE, SCALE, SCALE, null);
+				} 
+					
+				// draw head
+                else if(gameField[i][j].getType() == Objects.HEAD){
+                	switch(model.getSnakeDirection()){
+		                case 'N':
+		                	g.drawImage(bi[3], i*SCALE, j*SCALE, SCALE, SCALE, null);
+		                    break;
+		                case 'S':
+		                	g.drawImage(bi[4], i*SCALE, j*SCALE, SCALE, SCALE, null);
+		                    break;
+		                case 'E':
+		                	g.drawImage(bi[5], i*SCALE, j*SCALE, SCALE, SCALE, null);
+		                    break;
+		                case 'W':
+		                	g.drawImage(bi[6], i*SCALE, j*SCALE, SCALE, SCALE, null);
+		                    break;
+					}
+                }
+                // draw tail
+                else if(gameField[i][j].getType() == Objects.TAIL){
+                	g.drawImage(bi[8], i*SCALE, j*SCALE, SCALE, SCALE, null);
+                }
+                // draw wormhole
+                else if(gameField[i][j].getType() == Objects.WORMHOLE){
+                        g.drawImage(bi[9], i*SCALE, j*SCALE, null);
+                }
+			} // end j
+		} // end i
 	}
 	
 	

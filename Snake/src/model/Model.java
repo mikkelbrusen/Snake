@@ -29,6 +29,7 @@ public class Model {
     private int highScore;
     private boolean pause;
     private AI ai;
+    private int theme;
     
     private LinkedList<Field> availableFields;
     private Field[] wormHoles;
@@ -39,6 +40,7 @@ public class Model {
         this.wormHoles = new Field[MAX_WORMHOLES];
         this.fileName = fileName;
         this.dimension = dimension;
+        this.theme = 0;
 
         doReset();
     }
@@ -244,6 +246,16 @@ public class Model {
     
     public int getHighScore(){
         return this.highScore;
+    }
+    
+    public void setTheme(int i) {
+    	if(i == 0 || i == 1) {
+    		this.theme = i;
+    	}
+    }
+    
+    public int getTheme(){
+    	return this.theme;
     }
     
     public Dimension getDimension(){
