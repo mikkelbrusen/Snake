@@ -37,7 +37,15 @@ public class AI {
         this.queue.clear();
         this.visited.clear();
         searching = true;
-        findRoute();
+        
+        try{
+            findRoute();
+        }catch(ArrayIndexOutOfBoundsException e){
+            model.setUseAI(false);
+            this.searching = false;
+            System.out.println("AI: I made a bobo (AI Crashed!):(");
+        }
+        
 
         char c = ' ';
         if (!(path.length() == 0)){
@@ -83,41 +91,41 @@ public class AI {
             this.path.append('N');
         }
         if (path.length() == 0)
-            System.out.println("No more routes, I'm dead!");
+            System.out.println("AI: No more routes, I'm dead!");
     }
     
     private void findPathToApple(Node head){
-            queue.removeFirst();
-            int i = (int) head.key.getWidth();
-            int j = (int) head.key.getHeight();
-            
-            if(isWithinMap(i,j)){
-                if(
-                        (model.getAvailableFields().contains(map[i+1][j]) ||
-                            model.getSnakePosition() == map[i+1][j]) && 
-                        !(visited.contains(map[i+1][j]))){
-                    createNode(head, i+1, j);
-                }
+        queue.removeFirst();
+        int i = (int) head.key.getWidth();
+        int j = (int) head.key.getHeight();
+        
+        if(isWithinMap(i,j)){
+            if(
+                (model.getAvailableFields().contains(map[i+1][j]) ||
+                    model.getSnakePosition() == map[i+1][j]) && 
+                    !(visited.contains(map[i+1][j]))){
+                createNode(head, i+1, j);
+            }
 
-                if(
-                        (model.getAvailableFields().contains(map[i][j+1]) ||
-                            model.getSnakePosition() == map[i][j+1]) && 
-                        !(visited.contains(map[i][j+1]))){
-                    createNode(head, i, j+1);
-                }
-                if(
-                        (model.getAvailableFields().contains(map[i-1][j]) ||
-                            model.getSnakePosition() == map[i-1][j]) && 
-                        !(visited.contains(map[i-1][j]))){
-                    createNode(head, i-1, j);
-                }
-                if(
-                        (model.getAvailableFields().contains(map[i][j-1]) ||
-                            model.getSnakePosition() == map[i][j-1]) && 
-                        !(visited.contains(map[i][j-1]))){
-                    createNode(head, i, j-1);
-                }
-            }  
+            if(
+                (model.getAvailableFields().contains(map[i][j+1]) ||
+                    model.getSnakePosition() == map[i][j+1]) && 
+                    !(visited.contains(map[i][j+1]))){
+                createNode(head, i, j+1);
+            }
+            if(
+                (model.getAvailableFields().contains(map[i-1][j]) ||
+                    model.getSnakePosition() == map[i-1][j]) && 
+                    !(visited.contains(map[i-1][j]))){
+                createNode(head, i-1, j);
+            }
+            if(
+                (model.getAvailableFields().contains(map[i][j-1]) ||
+                    model.getSnakePosition() == map[i][j-1]) && 
+                    !(visited.contains(map[i][j-1]))){
+                createNode(head, i, j-1);
+            }
+        }      
     }
     
     private boolean isWithinMap(int i, int j){
