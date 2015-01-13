@@ -2,13 +2,16 @@ package view;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
@@ -90,13 +93,20 @@ public class OptionsMenu extends JPanel{
 	    characterSlider.setLabelTable(labelTable);
 	    this.add(characterSlider, "Icon labels");
 		
+	    this.add(Box.createRigidArea(new Dimension(0,100)));
+
+		JButton back = new JButton("Back");
+		back.setFont(new Font("Start game", Font.PLAIN, 24));
+		back.setAlignmentX(CENTER_ALIGNMENT);
+		back.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				View.toStart();
+			}
+		});
+		this.add(back);
 	}
 	
-
-	  public static void main(String s[]) {
-	    JFrame frame = new JFrame("Slider Example");
-	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    frame.pack();
-	    frame.setVisible(true);
-	  }
 }
