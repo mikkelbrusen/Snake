@@ -17,43 +17,44 @@ public class KeyboardListener implements KeyListener {
         
 	public KeyboardListener(Model model, View view) {
 		super();
+		// Insert the needed keyCodes so that we can easy check if we are to respond to a keystroke or not.
 		this.Directions = Arrays.asList(38,87,40,83,37,65,39,68); 
 		this.Shortcuts = Arrays.asList(78,80,79,72,77);		
-        
+		
 		this.model = model;
 		this.view = view;
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if (Directions.contains(e.getKeyCode())){
+		// Check if the pressed key is a direction key or a shortcut key, and call the respective method,
+		
+		// IMPORTANT!! - Need to check if game is paused to prevent pause+change direction abuse
+		if (Directions.contains(e.getKeyCode())&&!model.isPaused()){
 		forceDirection(e);
 		}
-		if (Shortcuts.contains(e.getKeyCode())){
+		else if (Shortcuts.contains(e.getKeyCode())){
 		shortCuts(e);
 		}
 	}
 
+	// The following two overrides are just formalizes and does nothing.
 	@Override
 	public void keyReleased(KeyEvent e) {
 	}
-
 	@Override
 	public void keyTyped(KeyEvent e) {
 		
 	}
 
+	/** Change direction by calling the model.changeSnakeDirection with an argument,
+	 * based on the KeyEven e */
 	private void forceDirection(KeyEvent e) {
 		/*
 		 * UP: 38 or 87
 		 * DOWN: 40 or 83
 		 * LEFT: 37 or 65
 		 * RIGHT: 39 or 68
-		 * N: 78
-		 * P: 80
-		 * O: 79
-		 * H: 72
-		 * M: 77 
 		 */
 		
 		int keyCode = e.getKeyCode();
@@ -67,13 +68,11 @@ public class KeyboardListener implements KeyListener {
 		} else if ( keyCode == 39 || keyCode == 68) {
 			model.changeSnakeDirection('E');
 		}
-	if (model.isGameOver()) {
-            
-        }	
+
         view.repaint();
 
 	}
-	
+	/** Call different shortcuts implemented in the model, depending on the KeyEvent e */
 	private void shortCuts(KeyEvent e){
 		/*
 		 * N: 78
