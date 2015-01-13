@@ -14,7 +14,7 @@ public class Main {
             fileName = args[2];
         }
         catch(ArrayIndexOutOfBoundsException e){
-            fileName = "track6.txt";
+            fileName = "50x25_noAI_withWormHoles";
         }
             
         try{
