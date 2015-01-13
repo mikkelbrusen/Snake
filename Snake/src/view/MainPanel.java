@@ -92,56 +92,49 @@ public class MainPanel extends JPanel {
 	}
 	
 	/** Takes a theme bi and draws images depending on the selected theme. */
+	@SuppressWarnings("incomplete-switch")
 	private void paintFields(Graphics g, BufferedImage[] bi) {
 		Field[][] gameField = model.getGameField();
 		
 		// paint fields
 		for(int i = 0; i < size.width; i++) {
 			for(int j = 0; j < size.height; j++) {
-
 				//draw sand
 				g.drawImage(bi[0], i*SCALE, j*SCALE, SCALE, SCALE, null);
 				
-				// draw wall
-				if(gameField[i][j].getType() == Objects.WALL){
-					g.drawImage(bi[1], i*SCALE, j*SCALE, SCALE, SCALE, null);
+				switch(gameField[i][j].getType()) {
+					case WALL: 
+						g.drawImage(bi[1], i*SCALE, j*SCALE, SCALE, SCALE, null);
+						break;
+					case SNAKE:
+						g.drawImage(bi[7], i*SCALE, j*SCALE, SCALE, SCALE, null);
+						break;
+					case APPLE: 
+						g.drawImage(bi[2], i*SCALE, j*SCALE, SCALE, SCALE, null);
+						break;
+					case HEAD:
+						switch(model.getSnakeDirection()){
+			                case 'N':
+			                	g.drawImage(bi[3], i*SCALE, j*SCALE, SCALE, SCALE, null);
+			                    break;
+			                case 'S':
+			                	g.drawImage(bi[4], i*SCALE, j*SCALE, SCALE, SCALE, null);
+			                    break;
+			                case 'E':
+			                	g.drawImage(bi[5], i*SCALE, j*SCALE, SCALE, SCALE, null);
+			                    break;
+			                case 'W':
+			                	g.drawImage(bi[6], i*SCALE, j*SCALE, SCALE, SCALE, null);
+			                    break;
+						}
+						break;
+					case TAIL:
+						g.drawImage(bi[8], i*SCALE, j*SCALE, SCALE, SCALE, null);
+						break;
+					case WORMHOLE:
+						g.drawImage(bi[9], i*SCALE, j*SCALE, null);
+						break;
 				}
-				
-				// draw snake body
-				else if(gameField[i][j].getType() == Objects.SNAKE) {		                	
-					g.drawImage(bi[7], i*SCALE, j*SCALE, SCALE, SCALE, null);
-				}
-				
-				// draw apple
-				else if(gameField[i][j].getType() == Objects.APPLE){
-					g.drawImage(bi[2], i*SCALE, j*SCALE, SCALE, SCALE, null);
-				} 
-					
-				// draw head
-                else if(gameField[i][j].getType() == Objects.HEAD){
-                	switch(model.getSnakeDirection()){
-		                case 'N':
-		                	g.drawImage(bi[3], i*SCALE, j*SCALE, SCALE, SCALE, null);
-		                    break;
-		                case 'S':
-		                	g.drawImage(bi[4], i*SCALE, j*SCALE, SCALE, SCALE, null);
-		                    break;
-		                case 'E':
-		                	g.drawImage(bi[5], i*SCALE, j*SCALE, SCALE, SCALE, null);
-		                    break;
-		                case 'W':
-		                	g.drawImage(bi[6], i*SCALE, j*SCALE, SCALE, SCALE, null);
-		                    break;
-					}
-                }
-                // draw tail
-                else if(gameField[i][j].getType() == Objects.TAIL){
-                	g.drawImage(bi[8], i*SCALE, j*SCALE, SCALE, SCALE, null);
-                }
-                // draw wormhole
-                else if(gameField[i][j].getType() == Objects.WORMHOLE){
-                        g.drawImage(bi[9], i*SCALE, j*SCALE, null);
-                }
 			} // end j
 		} // end i
 	}
