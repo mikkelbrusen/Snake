@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Collections;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -23,8 +24,8 @@ public class Model {
     //#          Variables and constructor              #
     //#                                                 #
     //###################################################
-    
     protected static int MAX_WORMHOLES = 10;
+    private static int MAX_HIGHSCORES = 2;
     private boolean useAI, hasUsedAI, pause, gameOver;
     private int score, theme;
     private String fileName;
@@ -48,8 +49,44 @@ public class Model {
         this.fileName = fileName;
         this.dimension = dimension;
         this.theme = 0;
+        for(int i = 0; i < MAX_HIGHSCORES; i++){
+            setNewHighScore("AI");
+        }
 
         doReset();
+    }
+    
+    //###################################################
+    //#                                                 #
+    //#                  Setters                        #
+    //#                                                 #
+    //###################################################
+    public void setTrack(String fileName){
+        this.fileName = fileName;
+    }
+    public void setPaused(){
+        this.pause = !pause;
+    }
+    public void setUseAI(boolean b){
+        this.hasUsedAI = true;
+        this.useAI = b;
+    }
+    public void setNewHighScore(String name){
+        if(!(hasUsedAI)){
+            this.highScores.add(new HighScore(this.score, name));
+            Collections.sort(highScores);
+            if(highScores.size() > MAX_HIGHSCORES){
+                highScores.removeLast();
+            }
+        }
+    }
+    public void setTheme(int i) {
+    	if(i == 0 || i == 1) {
+    		this.theme = i;
+    	}
+    }
+    public boolean setSnakeHasTakenStep(){
+        return snake.hasTakenStep();
     }
     
     //###################################################
@@ -57,10 +94,29 @@ public class Model {
     //#          Game field generation                  #
     //#                                                 #
     //###################################################
-    public void setTrack(String fileName){
-        this.fileName = fileName;
+    public final void doReset(){
+        this.gameOver = false;
+        this.gameField = new Field[this.dimension.width][dimension.height];
+        this.availableFields = new LinkedList<>();
+        this.gameOver = false;
+        this.hasUsedAI = useAI;
+        
+        if (!(loadTrack(fileName))){
+            for (int i = 0; i < dimension.width; i++){
+                for (int j = 0; j < dimension.height; j++){
+                    Field field = new Field(i,j);
+                    field.setType(Objects.BLANK);
+                    availableFields.addFirst(field);
+                    gameField[i][j] = field;
+                }
+            }
+        }
+        this.snake = new Snake(this);
+        this.apple = new Apple(this);
+        this.score = 0;
+        this.ai = new AI(this);
     }
-
+    
     private boolean loadTrack(String fileName){
         try {
             Scanner sc = new Scanner(new FileReader(fileName));
@@ -139,28 +195,6 @@ public class Model {
         }
     }
     
-    public final void doReset(){
-        this.gameOver = false;
-        this.gameField = new Field[this.dimension.width][dimension.height];
-        this.availableFields = new LinkedList<>();
-        this.gameOver = false;
-        
-        if (!(loadTrack(fileName))){
-            for (int i = 0; i < dimension.width; i++){
-                for (int j = 0; j < dimension.height; j++){
-                    Field field = new Field(i,j);
-                    field.setType(Objects.BLANK);
-                    availableFields.addFirst(field);
-                    gameField[i][j] = field;
-                }
-            }
-        }
-        this.snake = new Snake(this);
-        this.apple = new Apple(this);
-        this.score = 0;
-        this.ai = new AI(this);
-    }
-    
     //###################################################
     //#                                                 #
     //#         Moving the snake                        #
@@ -208,18 +242,23 @@ public class Model {
     }
     
     
-    public void setUseAI(boolean b){
-        this.useAI = b;
-    }
+    
     
     public boolean getUseAI(){
         return this.useAI;
     }
     
+    public boolean getHasUsedAI(){
+        return this.hasUsedAI;
+    }
+    
+    public int getScore(){
+        return this.score;
+    }
+    
     public Field getSnakePosition(){
         return snake.getPosition();
     }
-    
     
     public boolean isGameOver(){
         return gameOver;
@@ -227,49 +266,29 @@ public class Model {
     
     protected void setGameOver(){
         this.gameOver = true;
-        setNewHighScore("Hej");
     }
     
     public boolean isPaused(){
         return pause;
     }
-    
-    public void setPaused(){
-        this.pause = !pause;
-    }
-    
-    
+        
     public LinkedList<Field> getAvailableFields(){
         return this.availableFields;
     }
     
     public int getLowestHighScore(){
-        return this.highScores.getLast().getScore();
-    }
-    
-    public void setNewHighScore(String name){
-        if(!(hasUsedAI)){
-            this.highScores.add(new HighScore(this.score, name));
-            Collections.sort(highScores);
-            if(highScores.size() > 10){
-                highScores.removeLast();
-            }
-            for(int i = 0; i < highScores.size()-1; i++){
-                System.out.println(highScores.get(i).getName() + " : " + highScores.get(i).getScore());
-            }
-            System.out.println();
+        try{
+            return this.highScores.getLast().getScore();
+        }catch(NoSuchElementException e){
+            return 0;
         }
     }
-    
-    
     
     public Field[][] getGameField(){
         return this.gameField;
     }
     
-    public boolean snakeHasTakenStep(){
-        return snake.hasTakenStep();
-    }
+    
     
     
     
@@ -286,11 +305,7 @@ public class Model {
         return this.highScores;
     }
     
-    public void setTheme(int i) {
-    	if(i == 0 || i == 1) {
-    		this.theme = i;
-    	}
-    }
+    
     
     public int getTheme(){
     	return this.theme;

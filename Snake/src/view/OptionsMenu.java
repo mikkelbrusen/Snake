@@ -2,13 +2,17 @@ package view;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
@@ -24,21 +28,22 @@ public class OptionsMenu extends JPanel{
 		super();
 		this.size = size;
 		
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		int screenWidth = (int) screenSize.getWidth();
+		int screenHeight = (int) screenSize.getHeight();
+		
 		BoxLayout box = new BoxLayout(this, BoxLayout.Y_AXIS);
 		this.setLayout(box);
-		this.setBorder(new EmptyBorder(50, 50, 50, 50));
+		this.setBorder(new EmptyBorder((int) (screenHeight*0.3), (int) (screenWidth*0.3), (int) (screenHeight*0.3), (int) (screenWidth*0.3)));
 		
 		JLabel sizeLabel = new JLabel("Tracksize");
 		sizeLabel.setAlignmentX(CENTER_ALIGNMENT);
 		this.add(sizeLabel);
 		
 		//slider with numbers for tracksize
-		JSlider trackSlider = new JSlider(JSlider.HORIZONTAL, 5, 100, 50);
-		trackSlider.setPaintTicks(true);
-		trackSlider.setPaintLabels(true);
-		trackSlider.setMajorTickSpacing(25);
-		trackSlider.setMinorTickSpacing(5);
-		trackSlider.setSnapToTicks(true);
+		int majorTick = 25;
+		int minorTick = 5;
+		JSlider trackSlider = addSlider(JSlider.HORIZONTAL, 5, 100, 50, majorTick, minorTick);
 		
 		trackSlider.setLabelTable(trackSlider.createStandardLabels(15));
 		
@@ -51,12 +56,9 @@ public class OptionsMenu extends JPanel{
 		this.add(speedLabel);
 		
 		//slider with numbers for speed
-		JSlider speedSlider = new JSlider(JSlider.HORIZONTAL, 10, 500, 100);
-		speedSlider.setPaintTicks(true);
-		speedSlider.setPaintLabels(true);
-		speedSlider.setMajorTickSpacing(45);
-		speedSlider.setMinorTickSpacing(15);
-		speedSlider.setSnapToTicks(true);
+		majorTick = 45;
+		minorTick = 15;
+		JSlider speedSlider = addSlider(JSlider.HORIZONTAL, 10, 500, 100, majorTick, minorTick);
 		
 		speedSlider.setLabelTable(speedSlider.createStandardLabels(45));
 		
@@ -90,13 +92,29 @@ public class OptionsMenu extends JPanel{
 	    characterSlider.setLabelTable(labelTable);
 	    this.add(characterSlider, "Icon labels");
 		
-	}
-	
+	    this.add(Box.createRigidArea(new Dimension(0,100)));
 
-	  public static void main(String s[]) {
-	    JFrame frame = new JFrame("Slider Example");
-	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    frame.pack();
-	    frame.setVisible(true);
-	  }
+		JButton back = new JButton("Back");
+		back.setFont(new Font("Start game", Font.PLAIN, 24));
+		back.setAlignmentX(CENTER_ALIGNMENT);
+		back.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				View.toStart();
+			}
+		});
+		this.add(back);
+	}
+
+	public JSlider addSlider(int a, int b, int c, int d, int major, int minor) {
+		JSlider slider = new JSlider(a, b, c, d);
+		slider.setPaintTicks(true);
+	    slider.setPaintLabels(true);
+	    slider.setSnapToTicks(true);
+	    slider.setMajorTickSpacing(major);
+		slider.setMinorTickSpacing(minor);
+		return slider;
+	}
 }
