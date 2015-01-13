@@ -112,12 +112,12 @@ public class Model {
         this.gameOver = true;
     }
     
-    public boolean isPaused(){
+    public boolean isPause(){
         return pause;
     }
     
-    public void setPaused(){
-        this.pause = !pause;
+    public void setPause(boolean b){
+        this.pause = b;
     }
     
     public void changeSnakeDirection(char dir){

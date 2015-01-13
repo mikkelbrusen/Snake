@@ -42,7 +42,7 @@ public class Controller {
                     model.doReset();
                 }
             }
-            else if(model.isPaused()) {
+            else if(model.isPause()) {
             }
             else
                 try {

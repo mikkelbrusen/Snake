@@ -32,8 +32,6 @@ public class View extends JFrame {
 
 
 	public View(Model model, Controller controller) {
-
-
 		super();
 
 		this.setTitle("Snake - the super, mega, awesome quest for epic awesomeness!");

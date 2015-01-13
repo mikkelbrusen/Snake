@@ -30,7 +30,7 @@ public class KeyboardListener implements KeyListener {
 		// Check if the pressed key is a direction key or a shortcut key, and call the respective method,
 		
 		// IMPORTANT!! - Need to check if game is paused to prevent pause+change direction abuse
-		if (Directions.contains(e.getKeyCode())&&!model.isPaused()){
+		if (Directions.contains(e.getKeyCode())&&!model.isPause()){
 		forceDirection(e);
 		}
 		else if (Shortcuts.contains(e.getKeyCode())){
@@ -88,7 +88,7 @@ public class KeyboardListener implements KeyListener {
 			model.doReset();
 		}
 		if (keyCode == 80){
-			model.setPaused();
+			model.setPause(!model.isPause());
 		}
 		if (keyCode == 79){
 //			enter options menu
