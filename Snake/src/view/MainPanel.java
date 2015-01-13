@@ -4,20 +4,24 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-
-
 import javax.swing.JPanel;
 
-import model.*;
+import model.Field;
+import model.Model;
+import model.Objects;
 
 public class MainPanel extends JPanel {
 	
-	public static final int res[] = new int[] {1920,1080};
+	final static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	final static int width = (int) screenSize.getWidth();
+	final static int height = (int) screenSize.getHeight();
+	public static final int res[] = new int[] {width, height};
 	public static int SCALE;
 	
 	static BufferedImage[] THEME_OBAMA = new BufferedImage[10];
