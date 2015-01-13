@@ -38,6 +38,7 @@ public class View extends JFrame {
             this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             this.setResizable(false);
             this.setUndecorated(true);
+            this.setFocusable(true);
             this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
             GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(null);
             this.setVisible(true);
