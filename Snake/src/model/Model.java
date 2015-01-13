@@ -19,25 +19,27 @@ import java.util.Scanner;
 public class Model {
     protected static int MAX_WORMHOLES = 10;
     private boolean useAI;
+    private boolean hasUsedAI;
     private Field[][] gameField;
     private Snake snake;
     private Apple apple;
     private Dimension dimension;
     private boolean gameOver;
-    private String fileName;
+    private String fileName;    
+    private LinkedList<HighScore> highScores;
     private int score;
-    private int highScore;
     private boolean pause;
     private AI ai;
     private int theme;
     
     private LinkedList<Field> availableFields;
-    private Field[] wormHoles;
+    private final Field[] wormHoles;
+    
 
     public Model(Dimension dimension, String fileName){
-        this.useAI = true;
+        this.useAI = false;
         this.availableFields = new LinkedList<>();
-        this.wormHoles = new Field[MAX_WORMHOLES];
+        this.wormHoles = new Field[MAX_WORMHOLES*2];
         this.fileName = fileName;
         this.dimension = dimension;
         this.theme = 0;
@@ -156,10 +158,18 @@ public class Model {
         }
         this.snake = new Snake(this);
         this.apple = new Apple(this);
-        if(this.score > this.highScore)
-            this.highScore = this.score;
+        if(!(hasUsedAI) && this.score > getLowestHighScore())
+            setNewHighScore(score);
         this.score = 0;
         this.ai = new AI(this);
+    }
+    
+    public int getLowestHighScore(){
+        return 0;
+    }
+    
+    public void setNewHighScore(int score){
+        
     }
     
     public void moveSnake() throws InterruptedException{
@@ -244,8 +254,8 @@ public class Model {
         return this.score;
     }
     
-    public int getHighScore(){
-        return this.highScore;
+    public LinkedList<HighScore> getHighScores(){
+        return this.highScores;
     }
     
     public void setTheme(int i) {
