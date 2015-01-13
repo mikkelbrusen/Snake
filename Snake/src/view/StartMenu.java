@@ -2,21 +2,19 @@ package view;
 
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.Controller;
 
-public class StartMenu extends JPanel {
+public class StartMenu extends JPanel implements ActionListener {
 	
 	
 	public StartMenu(Controller controller) {
@@ -40,6 +38,14 @@ public class StartMenu extends JPanel {
 		JButton start = new JButton("Start game");
 		start.setFont(new Font("Start game", Font.PLAIN, 24));
 		start.setAlignmentX(CENTER_ALIGNMENT);
+		start.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				View.toGame();
+			}
+		});
 		this.add(start);
 		
 		//Add space to next button
@@ -49,6 +55,14 @@ public class StartMenu extends JPanel {
 		JButton options = new JButton("Options");
 		options.setFont(new Font("Options", Font.PLAIN, 24));
 		options.setAlignmentX(CENTER_ALIGNMENT);
+		options.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				View.toOptions();
+			}
+		});
 		this.add(options);
 		
 		//Add space to next button
@@ -58,8 +72,22 @@ public class StartMenu extends JPanel {
 		JButton quit = new JButton("Quit game");
 		quit.setFont(new Font("Quit game", Font.PLAIN, 24));
 		quit.setAlignmentX(CENTER_ALIGNMENT);
+		quit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				System.exit(0);
+			}
+		});
 		this.add(quit);
 		
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 }
