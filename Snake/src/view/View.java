@@ -3,6 +3,7 @@ package view;
 import controller.Controller;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 
@@ -27,14 +28,20 @@ public class View extends JFrame {
             super();
             this.setTitle("Snake - the super, mega, awesome quest for epic awesomeness!");
             this.model = model;
+            
+            CardLayout cl = new CardLayout();
+            
+            
+            
+            
             snakePanel = new MainPanel(model.getDimension(),model);
             mainMenu = new MainMenu(controller);
             options = new OptionsMenu(controller);
             startMenu = new StartMenu(controller);
     		BoxLayout layout = new BoxLayout(options, BoxLayout.Y_AXIS);
-    		this.getContentPane().add(startMenu, BorderLayout.CENTER);
-            this.getContentPane().add(mainMenu, BorderLayout.NORTH);
-            this.getContentPane().add(snakePanel, BorderLayout.CENTER);
+    		this.getContentPane().add(startMenu, cl);
+            this.getContentPane().add(mainMenu, cl);
+            this.getContentPane().add(snakePanel, cl);
             this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             this.setResizable(false);
             this.setUndecorated(true);
