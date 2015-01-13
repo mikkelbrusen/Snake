@@ -1,8 +1,10 @@
 package view;
 
 import controller.Controller;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GraphicsEnvironment;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
@@ -16,22 +18,26 @@ public class View extends JFrame {
 	private MainPanel snakePanel;
 	private Model model;
 	private MainMenu mainMenu;
-	private OptionsPanel options;
+	private OptionsMenu options;
+	private StartMenu startMenu;
 	
-	public View(Model model,Controller controller) {
+	public View(Model model, Controller controller) {
             super();
             this.setTitle("Snake - the super, mega, awesome quest for epic awesomeness!");
             this.model = model;
             snakePanel = new MainPanel(model.getDimension(),model);
             mainMenu = new MainMenu(controller);
-            options = new OptionsPanel(new Dimension(640,360));
+            options = new OptionsMenu(controller);
+            startMenu = new StartMenu(controller);
     		BoxLayout layout = new BoxLayout(options, BoxLayout.Y_AXIS);
+    		this.getContentPane().add(startMenu, BorderLayout.CENTER);
             this.getContentPane().add(mainMenu, BorderLayout.NORTH);
             this.getContentPane().add(snakePanel, BorderLayout.CENTER);
             this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             this.setResizable(false);
-            this.pack();
-            this.setLocationRelativeTo(null);
+            this.setUndecorated(true);
+            this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+            GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(null);
             this.setVisible(true);
             
             

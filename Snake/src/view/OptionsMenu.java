@@ -14,14 +14,15 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.border.EmptyBorder;
 
-public class OptionsPanel extends JPanel{
+import controller.Controller;
+
+public class OptionsMenu extends JPanel{
 	
 	private Dimension size;
 	
-	public OptionsPanel(Dimension size){
+	public OptionsMenu(Controller controller){
 		super();
 		this.size = size;
-		this.setPreferredSize(new Dimension(640,360));
 		
 		BoxLayout box = new BoxLayout(this, BoxLayout.Y_AXIS);
 		this.setLayout(box);
@@ -95,7 +96,6 @@ public class OptionsPanel extends JPanel{
 	  public static void main(String s[]) {
 	    JFrame frame = new JFrame("Slider Example");
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    frame.setContentPane(new OptionsPanel(new Dimension(640,360)));
 	    frame.pack();
 	    frame.setVisible(true);
 	  }
