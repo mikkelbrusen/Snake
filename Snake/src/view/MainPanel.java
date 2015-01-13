@@ -45,7 +45,7 @@ public class MainPanel extends JPanel {
 		this.THEME_OBAMA[6] = loadImage("WLeadTerrorist.png");
 		this.THEME_OBAMA[7] = loadImage("BodyTerrorist.png");
 		this.THEME_OBAMA[8] = loadImage("Obama.png");
-		this.THEME_OBAMA[9] = loadImage("BodyTerrorist.png");
+		this.THEME_OBAMA[9] = loadImage("Wormhole.png");
 		
 		this.THEME_SNAKE[0] = loadImage("Sand.png");
 		this.THEME_SNAKE[1] = loadImage("Brick.png");
@@ -56,7 +56,7 @@ public class MainPanel extends JPanel {
 		this.THEME_SNAKE[6] = loadImage("WHead.png");
 		this.THEME_SNAKE[7] = loadImage("Body.png");
 		this.THEME_SNAKE[8] = loadImage("Body.png");
-		this.THEME_SNAKE[9]	= loadImage("Body.png");
+		this.THEME_SNAKE[9]	= loadImage("Wormhole.png");
 		
 		
 	}
