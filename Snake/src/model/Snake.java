@@ -41,6 +41,7 @@ public class Snake {
     protected void setDirection(char direction){
         if (this.reverseDirection == direction){
             this.isReverseDirection = true;
+            this.hasTakenStep = true;
         }
         else if (this.hasTakenStep){
             this.isReverseDirection = false;
@@ -109,7 +110,7 @@ public class Snake {
     protected void walk(int widht, int height){
         if(isReverseDirection){
             //Do nothing at the moment.
-            //Later add function to move the snake in same as last direction.
+            this.hasTakenStep = true;
             }
         else{
             this.hasTakenStep = true;
