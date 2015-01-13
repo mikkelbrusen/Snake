@@ -17,7 +17,7 @@ import model.*;
 
 public class MainPanel extends JPanel {
 	
-	public static final int res[] = new int[] {800,600};
+	public static final int res[] = new int[] {1920,1080};
 	public static int SCALE;
 	
 	static BufferedImage[] THEME_OBAMA = new BufferedImage[10];
@@ -36,6 +36,7 @@ public class MainPanel extends JPanel {
 		this.setOpaque(true);
 		this.model = model;
 		
+		// Load Obama Theme
 		this.THEME_OBAMA[0] = loadImage("Sand.png");
 		this.THEME_OBAMA[1] = loadImage("Brick.png");
 		this.THEME_OBAMA[2] = loadImage("Bomb.png");
@@ -47,6 +48,7 @@ public class MainPanel extends JPanel {
 		this.THEME_OBAMA[8] = loadImage("Obama.png");
 		this.THEME_OBAMA[9] = loadImage("Wormhole.png");
 		
+		// Load Snake Theme
 		this.THEME_SNAKE[0] = loadImage("Sand.png");
 		this.THEME_SNAKE[1] = loadImage("Brick.png");
 		this.THEME_SNAKE[2] = loadImage("Apple.png");
@@ -69,6 +71,7 @@ public class MainPanel extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
+		// depending on the theme, paint it.
 		if (model.getTheme() == 1) {
 			paintFields(g,THEME_SNAKE);
 		} else {
@@ -76,6 +79,7 @@ public class MainPanel extends JPanel {
 		}
 	}
 	
+	/** Method with a try/catch to load image*/
 	private BufferedImage loadImage(String s) {
 		BufferedImage image;
 		try {
@@ -87,6 +91,7 @@ public class MainPanel extends JPanel {
 		}
 	}
 	
+	/** Takes a theme bi and draws images depending on the selected theme. */
 	private void paintFields(Graphics g, BufferedImage[] bi) {
 		Field[][] gameField = model.getGameField();
 		
