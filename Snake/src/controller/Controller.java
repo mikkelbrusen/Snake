@@ -14,7 +14,7 @@ public class Controller {
         private int INTERVAL = 128;
 	private final Model model;
 	private final View view;
-    Timer timer;
+        Timer timer;
 	
 	public Controller(Dimension dimension,String fileName) {
             this.model = new Model(dimension,fileName);
