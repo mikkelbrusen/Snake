@@ -46,14 +46,14 @@ public class View extends JFrame {
         }
 	public void doAnnounce() {
 		String m = "Game Over!\n"
-                        + "Your score is: " + model.getScore() + "\n"
-                        + "High score is: " + model.getHighScore();
-                if(model.getScore() > model.getHighScore())
-                    m += "\n You beat the high score!";
+                        + "Your score is: " + model.getScore() + "\n";
+                        //+ "High score is: " + model.getHighScore();
+               // if(model.getScore() > model.getHighScore())
+                    //m += "\n You beat the high score!";
 		JOptionPane.showMessageDialog(this, m);
 	}
         
         public void showHighScore(){
-            JOptionPane.showMessageDialog(this, "Current Highscore is: " + model.getHighScore());
+            JOptionPane.showMessageDialog(this, "Current Highscore is: ");
         }
 }
