@@ -6,11 +6,11 @@ import java.util.Comparator;
  *
  * @author BusterK
  */
-public class HighScore {
-    private int score;
-    private String name;
-    
-    public void HighScore(int score, String name){
+public class HighScore implements Comparable<HighScore>{
+    private final int score;
+    private final String name;
+
+    public HighScore(int score, String name){
         this.score = score;
         this.name = name;
     }
@@ -22,14 +22,14 @@ public class HighScore {
     public String getName(){
         return this.name;
     }
-}
 
-class CustomComparator implements Comparator<HighScore> {
     @Override
-    public int compare(HighScore o1, HighScore o2) {
-        if(o1.getScore() >= o2.getScore()){
+    public int compareTo(HighScore o) {
+        if(this.score > o.getScore())
+            return 1;
+        else if (this.score == o.getScore())
             return 0;
-        }
-        return 1;
+        else
+            return -1;
     }
 }

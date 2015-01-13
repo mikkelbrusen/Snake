@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.awt.Dimension;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.Collections;
 import java.util.Scanner;
 
 /**
@@ -17,28 +18,32 @@ import java.util.Scanner;
  * @author BusterK
  */
 public class Model {
+    //###################################################
+    //#                                                 #
+    //#          Variables and constructor              #
+    //#                                                 #
+    //###################################################
+    
     protected static int MAX_WORMHOLES = 10;
-    private boolean useAI;
-    private boolean hasUsedAI;
-    private Field[][] gameField;
+    private boolean useAI, hasUsedAI, pause, gameOver;
+    private int score, theme;
+    private String fileName;
+    
+    private AI ai;
     private Snake snake;
     private Apple apple;
     private Dimension dimension;
-    private boolean gameOver;
-    private String fileName;    
-    private LinkedList<HighScore> highScores;
-    private int score;
-    private boolean pause;
-    private AI ai;
-    private int theme;
     
+    private final LinkedList<HighScore> highScores;
     private LinkedList<Field> availableFields;
-    private final Field[] wormHoles;
     
-
+    private final Field[] wormHoles;
+    private Field[][] gameField;
+    
     public Model(Dimension dimension, String fileName){
         this.useAI = false;
         this.availableFields = new LinkedList<>();
+        this.highScores = new LinkedList<>();
         this.wormHoles = new Field[MAX_WORMHOLES*2];
         this.fileName = fileName;
         this.dimension = dimension;
@@ -47,12 +52,13 @@ public class Model {
         doReset();
     }
     
-    public void setUseAI(boolean b){
-        this.useAI = b;
-    }
-    
-    public boolean getUseAI(){
-        return this.useAI;
+    //###################################################
+    //#                                                 #
+    //#          Game field generation                  #
+    //#                                                 #
+    //###################################################
+    public void setTrack(String fileName){
+        this.fileName = fileName;
     }
 
     private boolean loadTrack(String fileName){
@@ -96,114 +102,6 @@ public class Model {
         }
     }
     
-    public Field getSnakePosition(){
-        return snake.getPosition();
-    }
-    
-    public void setTrack(String fileName){
-        this.fileName = fileName;
-    }
-    
-    public boolean isGameOver(){
-        return gameOver;
-    }
-    
-    protected void setGameOver(){
-        this.gameOver = true;
-    }
-    
-    public boolean isPaused(){
-        return pause;
-    }
-    
-    public void setPaused(){
-        this.pause = !pause;
-    }
-    
-    public void changeSnakeDirection(char dir){
-        switch(dir){
-            case 'N':
-                snake.setDirection('N');
-                break;
-            case 'S':
-                snake.setDirection('S');
-                break;
-            case 'E':
-                snake.setDirection('E');
-                break;
-            case 'W':
-                snake.setDirection('W');
-                break;
-        }        
-    }
-    public LinkedList<Field> getAvailableFields(){
-        return this.availableFields;
-    }
-    
-    public final void doReset(){
-        this.gameOver = false;
-        this.gameField = new Field[this.dimension.width][dimension.height];
-        this.availableFields = new LinkedList<>();
-        this.gameOver = false;
-        
-        if (!(loadTrack(fileName))){
-            for (int i = 0; i < dimension.width; i++){
-                for (int j = 0; j < dimension.height; j++){
-                    Field field = new Field(i,j);
-                    field.setType(Objects.BLANK);
-                    availableFields.addFirst(field);
-                    gameField[i][j] = field;
-                }
-            }
-        }
-        this.snake = new Snake(this);
-        this.apple = new Apple(this);
-        if(!(hasUsedAI) && this.score > getLowestHighScore())
-            setNewHighScore(score);
-        this.score = 0;
-        this.ai = new AI(this);
-    }
-    
-    public int getLowestHighScore(){
-        return 0;
-    }
-    
-    public void setNewHighScore(int score){
-        
-    }
-    
-    public void moveSnake() throws InterruptedException{
-        if(useAI){
-            snake.setDirection(ai.run());
-        }
-        switch(snake.getDirection()){
-            case 'N':
-                snake.setDirection('N');
-                snake.walk(0, -1);
-                break;
-            case 'S':
-                snake.setDirection('S');
-                snake.walk(0, 1);
-                break;
-            case 'E':
-                snake.setDirection('E');
-                snake.walk(1, 0);
-                break;
-            case 'W':
-                snake.setDirection('W');
-                snake.walk(-1, 0);
-                break;
-        }
-    }
-    
-    public Field[][] getGameField(){
-        return this.gameField;
-    }
-    
-    public boolean snakeHasTakenStep(){
-        return snake.hasTakenStep();
-    }
-    
     protected void setFieldValue(Objects val, Field field){
         if(field.getType() != Objects.WORMHOLE){
             switch(val){
@@ -241,6 +139,140 @@ public class Model {
         }
     }
     
+    public final void doReset(){
+        this.gameOver = false;
+        this.gameField = new Field[this.dimension.width][dimension.height];
+        this.availableFields = new LinkedList<>();
+        this.gameOver = false;
+        
+        if (!(loadTrack(fileName))){
+            for (int i = 0; i < dimension.width; i++){
+                for (int j = 0; j < dimension.height; j++){
+                    Field field = new Field(i,j);
+                    field.setType(Objects.BLANK);
+                    availableFields.addFirst(field);
+                    gameField[i][j] = field;
+                }
+            }
+        }
+        this.snake = new Snake(this);
+        this.apple = new Apple(this);
+        this.score = 0;
+        this.ai = new AI(this);
+    }
+    
+    //###################################################
+    //#                                                 #
+    //#         Moving the snake                        #
+    //#                                                 #
+    //###################################################
+    public void changeSnakeDirection(char dir){
+        switch(dir){
+            case 'N':
+                snake.setDirection('N');
+                break;
+            case 'S':
+                snake.setDirection('S');
+                break;
+            case 'E':
+                snake.setDirection('E');
+                break;
+            case 'W':
+                snake.setDirection('W');
+                break;
+        }        
+    }
+    
+    public void moveSnake() throws InterruptedException{
+        if(useAI){
+            snake.setDirection(ai.run());
+        }
+        switch(snake.getDirection()){
+            case 'N':
+                snake.setDirection('N');
+                snake.walk(0, -1);
+                break;
+            case 'S':
+                snake.setDirection('S');
+                snake.walk(0, 1);
+                break;
+            case 'E':
+                snake.setDirection('E');
+                snake.walk(1, 0);
+                break;
+            case 'W':
+                snake.setDirection('W');
+                snake.walk(-1, 0);
+                break;
+        }
+    }
+    
+    
+    public void setUseAI(boolean b){
+        this.useAI = b;
+    }
+    
+    public boolean getUseAI(){
+        return this.useAI;
+    }
+    
+    public Field getSnakePosition(){
+        return snake.getPosition();
+    }
+    
+    
+    public boolean isGameOver(){
+        return gameOver;
+    }
+    
+    protected void setGameOver(){
+        this.gameOver = true;
+        setNewHighScore("Hej");
+    }
+    
+    public boolean isPaused(){
+        return pause;
+    }
+    
+    public void setPaused(){
+        this.pause = !pause;
+    }
+    
+    
+    public LinkedList<Field> getAvailableFields(){
+        return this.availableFields;
+    }
+    
+    public int getLowestHighScore(){
+        return this.highScores.getLast().getScore();
+    }
+    
+    public void setNewHighScore(String name){
+        if(!(hasUsedAI)){
+            this.highScores.add(new HighScore(this.score, name));
+            Collections.sort(highScores);
+            if(highScores.size() > 10){
+                highScores.removeLast();
+            }
+            for(int i = 0; i < highScores.size()-1; i++){
+                System.out.println(highScores.get(i).getName() + " : " + highScores.get(i).getScore());
+            }
+            System.out.println();
+        }
+    }
+    
+    
+    
+    public Field[][] getGameField(){
+        return this.gameField;
+    }
+    
+    public boolean snakeHasTakenStep(){
+        return snake.hasTakenStep();
+    }
+    
+    
+    
     protected void newApple(){
         this.score += 1;
         this.apple = new Apple(this);
@@ -248,10 +280,6 @@ public class Model {
     
     public char getSnakeDirection(){
         return snake.getDirection();
-    }
-    
-    public int getScore(){
-        return this.score;
     }
     
     public LinkedList<HighScore> getHighScores(){
