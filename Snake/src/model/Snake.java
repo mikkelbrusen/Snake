@@ -119,14 +119,12 @@ public class Snake {
                 position = model.getGameField()[position.getWidth()+widht][position.getHeight()+height];
             }
             if(hasHitWormHole()){
-                
                 for (Field wh : model.getWormHoles()){
                     if ((position != wh) && (wh.getWhNumber() == position.getWhNumber())) {
                         position = wh;
                         break;
                     }       
                 }
-                
             }
             
             queue.add(position);
@@ -134,10 +132,10 @@ public class Snake {
             
             switch(position.getType()){
                 case APPLE:
-                    model.newApple(position);
                     model.setFieldValue(Objects.HEAD, position);
                     model.setFieldValue(Objects.SNAKE, oldPosition);
                     model.setFieldValue(Objects.TAIL, queue.getFirst());
+                    model.newApple();
                     break;
                 case WALL:
                     model.setGameOver();

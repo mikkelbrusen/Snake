@@ -1,6 +1,5 @@
 package controller;
 
-import AI.AI;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.util.logging.Level;
@@ -13,7 +12,7 @@ import view.*;
 
 public class Controller {
         private int INTERVAL = 128;
-	private Model model;
+	private final Model model;
 	private final View view;
         Timer timer;
 	

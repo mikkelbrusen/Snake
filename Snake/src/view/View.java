@@ -13,10 +13,10 @@ import model.Model;
 public class View extends JFrame {
 	
 
-	private MainPanel snakePanel;
-	private Model model;
-	private MainMenu mainMenu;
-	private OptionsPanel options;
+	private final MainPanel snakePanel;
+	private final Model model;
+	private final MainMenu mainMenu;
+	private final OptionsPanel options;
 	
 	public View(Model model,Controller controller) {
             super();

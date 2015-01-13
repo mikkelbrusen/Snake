@@ -138,12 +138,11 @@ public class Model {
     
     public final void doReset(){
         this.gameOver = false;
-        this.pause = false;
+        this.gameField = new Field[this.dimension.width][dimension.height];
+        this.availableFields = new LinkedList<>();
+        this.gameOver = false;
+        
         if (!(loadTrack(fileName))){
-            this.gameField = new Field[this.dimension.width][dimension.height];
-            this.availableFields = new LinkedList<>();
-            this.gameOver = false;
-
             for (int i = 0; i < dimension.width; i++){
                 for (int j = 0; j < dimension.height; j++){
                     Field field = new Field(i,j);
@@ -163,7 +162,7 @@ public class Model {
     
     public void moveSnake() throws InterruptedException{
         if(useAI){
-            snake.setDirection(ai.runAI());
+            snake.setDirection(ai.run());
         }
         switch(snake.getDirection()){
             case 'N':
@@ -196,34 +195,41 @@ public class Model {
     protected void setFieldValue(Objects val, Field field){
         if(field.getType() != Objects.WORMHOLE){
             switch(val){
+                case BLANK:
+                    this.gameField[field.getWidth()][field.getHeight()].setType(Objects.BLANK);
+                    if (!(this.availableFields.contains(field)))
+                        this.availableFields.add(field);
+                    break;
                 case APPLE:
                     this.gameField[field.getWidth()][field.getHeight()].setType(Objects.APPLE);
-                    this.availableFields.remove(field);
+                    while(this.availableFields.contains(field))
+                        this.availableFields.remove(field);
                     break;
                 case SNAKE:
                     this.gameField[field.getWidth()][field.getHeight()].setType(Objects.SNAKE);
-                    this.availableFields.remove(field);
+                    while(this.availableFields.contains(field))
+                        this.availableFields.remove(field);
                     break;
                 case WALL:
                     this.gameField[field.getWidth()][field.getHeight()].setType(Objects.WALL);
-                    this.availableFields.remove(field);
-                    break;
-                case BLANK:
-                    this.gameField[field.getWidth()][field.getHeight()].setType(Objects.BLANK);
-                    this.availableFields.add(field);
+                    while(this.availableFields.contains(field))
+                        this.availableFields.remove(field);
                     break;
                 case HEAD:
                     this.gameField[field.getWidth()][field.getHeight()].setType(Objects.HEAD);
-                    this.availableFields.remove(field);
+                    while(this.availableFields.contains(field))
+                        this.availableFields.remove(field);
                     break;
                 case TAIL:
                     this.gameField[field.getWidth()][field.getHeight()].setType(Objects.TAIL);
+                    while(this.availableFields.contains(field))
+                        this.availableFields.remove(field);
                     break;
             }
         }
     }
     
-    protected void newApple(Field oldPosition){
+    protected void newApple(){
         this.score += 1;
         this.apple = new Apple(this);
     }

@@ -32,7 +32,7 @@ public class AI {
         this.searching = true;
     }
     
-    public char runAI() throws InterruptedException{
+    public char run() throws InterruptedException{
         this.position = model.getSnakePosition();
         this.queue.clear();
         this.visited.clear();

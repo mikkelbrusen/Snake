@@ -63,20 +63,22 @@ public class MainMenu extends JMenuBar implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getActionCommand() == "New game"){
-            controller.doCmd(Objects.RESET_GAME);
-        }
-        else if(e.getActionCommand() == "Highscores"){
-            controller.doCmd(Objects.SHOW_HIGHSCORES);
-        }
-        else if(e.getActionCommand() == "Artificial Intelligence"){
-            controller.doCmd(Objects.ENABLE_AI);
-        }
-        else if(e.getActionCommand() == "SpeedUp"){
-            controller.doCmd(Objects.SPEED_UP);
-        }
-        else if(e.getActionCommand() == "SpeedDown"){
-            controller.doCmd(Objects.SPEED_DOWN);
+        if(null != e.getActionCommand())switch (e.getActionCommand()) {
+            case "New game":
+                controller.doCmd(Objects.RESET_GAME);
+                break;
+            case "Highscores":
+                controller.doCmd(Objects.SHOW_HIGHSCORES);
+                break;
+            case "Artificial Intelligence":
+                controller.doCmd(Objects.ENABLE_AI);
+                break;
+            case "SpeedUp":
+                controller.doCmd(Objects.SPEED_UP);
+                break;
+            case "SpeedDown":
+                controller.doCmd(Objects.SPEED_DOWN);
+                break;
         }
     }
 }
