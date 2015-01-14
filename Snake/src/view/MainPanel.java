@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 
 import model.Field;
 import model.Model;
-import model.Objects;
 
 public class MainPanel extends JPanel {
 	
