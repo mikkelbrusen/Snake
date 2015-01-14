@@ -1,7 +1,9 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
@@ -12,7 +14,10 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import model.Field;
 import model.Model;
@@ -21,8 +26,6 @@ public class MainPanel extends JPanel {
 	
 	final static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	final static int width = (int) screenSize.getWidth();
-	final static int height = (int) screenSize.getHeight();
-	public static final int res[] = new int[] {width, height};
 	public static int scale;
 	
 	static BufferedImage[] THEME_OBAMA = new BufferedImage[10];
@@ -30,16 +33,26 @@ public class MainPanel extends JPanel {
 	
 	private final Model model;
 	private final Dimension size;
+	private final JLabel paused;
 	
 	public MainPanel(Dimension size, Model model) {
 		super();
 		this.size = size;
-		this.scale = res[0]/size.width;
-		this.setLayout(new GridLayout(size.width*scale,size.height*scale));
+		this.scale = width/size.width;
+		this.setLayout(new BorderLayout(size.width*scale,size.height*scale));
 		this.setBackground(Color.WHITE);
 		this.setPreferredSize(new Dimension(size.width*scale,size.height*scale));
 		this.setOpaque(true);
 		this.model = model;
+		
+		paused = new JLabel("PAUSED");
+		paused.setAlignmentX(CENTER_ALIGNMENT);
+		paused.setFont(new Font("Comic Sans MS", Font.BOLD, 100));
+		paused.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+		paused.setHorizontalAlignment(SwingConstants.CENTER);
+		this.add(paused);
+		paused.setVisible(false);
+		
 		
 		// Load Obama Theme
 		this.THEME_OBAMA[0] = loadImage("Sand.png");
@@ -70,6 +83,10 @@ public class MainPanel extends JPanel {
 	
 	public Dimension getSize(){
 		return this.size;
+	}
+	
+	public void showPause(boolean b){
+		paused.setVisible(b);
 	}
 
 	@Override

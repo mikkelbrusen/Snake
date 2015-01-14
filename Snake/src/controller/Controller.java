@@ -59,6 +59,7 @@ public class Controller {
                 case RESET_GAME:
                     model.playStartAudio();
                     model.doReset();
+                    view.showPaused(false);
                     break;
                 case SHOW_HIGHSCORES:
                     view.showHighScore();
