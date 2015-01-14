@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import model.Field;
 import model.Model;
+import model.Objects;
 
 public class MainPanel extends JPanel {
 	
@@ -75,7 +76,7 @@ public class MainPanel extends JPanel {
 		super.paintComponent(g);
 		
 		// depending on the theme, paint it.
-		if (model.getTheme() == 1) {
+		if (model.getTheme() == 2) {
 			paintFields(g,THEME_SNAKE);
 		} else {
 			paintFields(g,THEME_OBAMA);
