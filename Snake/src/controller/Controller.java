@@ -57,6 +57,7 @@ public class Controller {
         public void doCmd(Objects o){
             switch(o){
                 case RESET_GAME:
+                    model.playStartAudio();
                     model.doReset();
                     break;
                 case SHOW_HIGHSCORES:
@@ -96,6 +97,7 @@ public class Controller {
                 	break;
                 case START_GAME:
                 	view.toGame();
+                        model.playStartAudio();
                 	model.setPaused(false);
                 	break;
             }

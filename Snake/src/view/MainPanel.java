@@ -16,7 +16,6 @@ import javax.swing.JPanel;
 
 import model.Field;
 import model.Model;
-import model.Objects;
 
 public class MainPanel extends JPanel {
 	
@@ -24,7 +23,7 @@ public class MainPanel extends JPanel {
 	final static int width = (int) screenSize.getWidth();
 	final static int height = (int) screenSize.getHeight();
 	public static final int res[] = new int[] {width, height};
-	public static int SCALE;
+	public static int scale;
 	
 	static BufferedImage[] THEME_OBAMA = new BufferedImage[10];
 	static BufferedImage[] THEME_SNAKE = new BufferedImage[10];
@@ -35,10 +34,10 @@ public class MainPanel extends JPanel {
 	public MainPanel(Dimension size, Model model) {
 		super();
 		this.size = size;
-		this.SCALE = res[0]/size.width;
-		this.setLayout(new GridLayout(size.width*SCALE,size.height*SCALE));
+		this.scale = res[0]/size.width;
+		this.setLayout(new GridLayout(size.width*scale,size.height*scale));
 		this.setBackground(Color.WHITE);
-		this.setPreferredSize(new Dimension(size.width*SCALE,size.height*SCALE));
+		this.setPreferredSize(new Dimension(size.width*scale,size.height*scale));
 		this.setOpaque(true);
 		this.model = model;
 		
@@ -110,39 +109,39 @@ public class MainPanel extends JPanel {
 		for(int i = 0; i < size.width; i++) {
 			for(int j = 0; j < size.height; j++) {
 				//draw sand
-				g.drawImage(bi[0], i*SCALE, j*SCALE, SCALE, SCALE, null);
+				g.drawImage(bi[0], i*scale, j*scale, scale, scale, null);
 				
 				switch(gameField[i][j].getType()) {
 					case WALL: 
-						g.drawImage(bi[1], i*SCALE, j*SCALE, SCALE, SCALE, null);
+						g.drawImage(bi[1], i*scale, j*scale, scale, scale, null);
 						break;
 					case SNAKE:
-						g.drawImage(bi[7], i*SCALE, j*SCALE, SCALE, SCALE, null);
+						g.drawImage(bi[7], i*scale, j*scale, scale, scale, null);
 						break;
 					case APPLE: 
-						g.drawImage(bi[2], i*SCALE, j*SCALE, SCALE, SCALE, null);
+						g.drawImage(bi[2], i*scale, j*scale, scale, scale, null);
 						break;
 					case HEAD:
 						switch(model.getSnakeDirection()){
 			                case 'N':
-			                	g.drawImage(bi[3], i*SCALE, j*SCALE, SCALE, SCALE, null);
+			                	g.drawImage(bi[3], i*scale, j*scale, scale, scale, null);
 			                    break;
 			                case 'S':
-			                	g.drawImage(bi[4], i*SCALE, j*SCALE, SCALE, SCALE, null);
+			                	g.drawImage(bi[4], i*scale, j*scale, scale, scale, null);
 			                    break;
 			                case 'E':
-			                	g.drawImage(bi[5], i*SCALE, j*SCALE, SCALE, SCALE, null);
+			                	g.drawImage(bi[5], i*scale, j*scale, scale, scale, null);
 			                    break;
 			                case 'W':
-			                	g.drawImage(bi[6], i*SCALE, j*SCALE, SCALE, SCALE, null);
+			                	g.drawImage(bi[6], i*scale, j*scale, scale, scale, null);
 			                    break;
 						}
 						break;
 					case TAIL:
-						g.drawImage(bi[8], i*SCALE, j*SCALE, SCALE, SCALE, null);
+						g.drawImage(bi[8], i*scale, j*scale, scale, scale, null);
 						break;
 					case WORMHOLE:
-						g.drawImage(bi[9], i*SCALE, j*SCALE, null);
+						g.drawImage(bi[9], i*scale, j*scale, null);
 						break;
 				}
 			} // end j

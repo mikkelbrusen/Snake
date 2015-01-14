@@ -106,6 +106,12 @@ public class Model {
         return snake.hasTakenStep();
     }
     
+    public void playStartAudio(){
+        audio.stopAll();
+        audio.playSound(4);
+        audio.startMusic();
+    }
+    
     //###################################################
     //#                                                 #
     //#          Game field generation                  #
@@ -132,9 +138,6 @@ public class Model {
         this.apple = new Apple(this);
         this.score = 0;
         this.ai = new AI(this);
-        audio.stopAll();
-        audio.playSound(4);
-        audio.startMusic();
     }
     
     private boolean loadTrack(String fileName){

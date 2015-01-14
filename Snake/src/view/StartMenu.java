@@ -73,8 +73,8 @@ public class StartMenu extends JPanel implements ActionListener {
 		// TODO Auto-generated method stub
 		switch(e.getActionCommand()){
 		case "Start game":
-			controller.doCmd(Objects.START_GAME);
 			controller.doCmd(Objects.RESET_GAME);
+                        controller.doCmd(Objects.START_GAME);
 			break;
 		case "Options":
 			controller.doCmd(Objects.OPTIONS);
