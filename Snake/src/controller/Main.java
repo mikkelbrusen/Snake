@@ -14,7 +14,7 @@ public class Main {
             fileName = args[2];
         }
         catch(ArrayIndexOutOfBoundsException e){
-            fileName = "48x27_withComplexWalls";
+            fileName = "32x18_withWalls";
         }
             
         try{
