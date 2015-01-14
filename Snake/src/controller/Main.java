@@ -14,7 +14,7 @@ public class Main {
             fileName = args[2];
         }
         catch(ArrayIndexOutOfBoundsException e){
-            fileName = "48x27_withComplexWalls";
+            fileName = "";
         }
             
         try{
@@ -23,7 +23,7 @@ public class Main {
             Controller controller = new Controller(new Dimension(x,y),fileName);
         }
         catch(ArrayIndexOutOfBoundsException | NumberFormatException e){
-            Controller controller = new Controller(new Dimension(100,80),fileName);
+            Controller controller = new Controller(new Dimension(16,9),fileName);
         }
     }
 }
