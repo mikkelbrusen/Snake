@@ -67,6 +67,9 @@ public class Model {
     public void setPaused(){
         this.pause = !pause;
     }
+    public void setPaused(boolean b){
+        this.pause = b;
+    }
     public void setUseAI(boolean b){
         this.hasUsedAI = true;
         this.useAI = b;

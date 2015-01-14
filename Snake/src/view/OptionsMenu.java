@@ -18,15 +18,18 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.border.EmptyBorder;
 
+import model.Objects;
 import controller.Controller;
 
-public class OptionsMenu extends JPanel{
+public class OptionsMenu extends JPanel implements ActionListener {
 	
 	private Dimension size;
+	private Controller controller;
 	
-	public OptionsMenu(Controller controller){
+	public OptionsMenu (Controller controller) {
 		super();
 		this.size = size;
+		this.controller = controller;
 		
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int screenWidth = (int) screenSize.getWidth();
@@ -95,16 +98,9 @@ public class OptionsMenu extends JPanel{
 	    this.add(Box.createRigidArea(new Dimension(0,100)));
 
 		JButton back = new JButton("Back");
-		back.setFont(new Font("Start game", Font.PLAIN, 24));
+		back.setFont(new Font("Back", Font.PLAIN, 24));
 		back.setAlignmentX(CENTER_ALIGNMENT);
-		back.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				View.toStart();
-			}
-		});
+		back.addActionListener(this);
 		this.add(back);
 	}
 
@@ -116,5 +112,15 @@ public class OptionsMenu extends JPanel{
 	    slider.setMajorTickSpacing(major);
 		slider.setMinorTickSpacing(minor);
 		return slider;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		switch(e.getActionCommand()){
+		case "Back":
+			controller.doCmd(Objects.START_MENU);
+			break;
+		}
 	}
 }

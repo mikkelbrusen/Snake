@@ -80,6 +80,21 @@ public class Controller {
                     newTimer();
                     timer.start();
                     break;
+                case OPTIONS:
+                	view.toOptions();
+                	break;
+                case EXIT_GAME:
+                	System.exit(0);
+                	break;
+                case PAUSE_GAME:
+                	model.setPaused(true);
+                	break;
+                case START_MENU:
+                	view.toStart();
+                	break;
+                case START_GAME:
+                	view.toGame();
+                	break;
             }
         }
 }

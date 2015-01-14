@@ -2,8 +2,6 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-
-
 import java.awt.GraphicsEnvironment;
 
 import javax.swing.JFrame;
@@ -11,13 +9,17 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import model.Model;
+import model.Objects;
 import controller.Controller;
+
 import java.util.LinkedList;
+
 import model.HighScore;
 
 public class View extends JFrame {
 	private final MainPanel snakePanel;
 	private final Model model;
+	private final Controller controller;
 	private final MainMenu mainMenu;
 	private final OptionsMenu options;
 	private final StartMenu startMenu;
@@ -31,6 +33,7 @@ public class View extends JFrame {
 
 		this.setTitle("Snake - the super, mega, awesome quest for epic awesomeness!");
 		this.model = model;
+		this.controller = controller;
 		snakePanel = new MainPanel(model.getDimension(), model);
 		mainMenu = new MainMenu(controller);
 		options = new OptionsMenu(controller);
@@ -47,6 +50,7 @@ public class View extends JFrame {
 		panel.add(snakePanel, "game");
 		panel.add(options, "options");
 
+		controller.doCmd(Objects.PAUSE_GAME);
 		toStart();
 		this.add(panel);
 		
@@ -92,16 +96,17 @@ public class View extends JFrame {
 //		JOptionPane.showMessageDialog(this,	"Current Highscore is: " + model.getHighScore());
 	}
 	
-	public static void toOptions() {
+	public void toOptions() {
 		cl.show(panel, "options");
 	}
 	
-	public static void toStart() {
+	public void toStart() {
 		cl.show(panel, "start");
 	}
 	
-	public static void toGame() {
+	public void toGame() {
 		cl.show(panel, "game");
+		model.setPaused(false);
 	}
 
 
