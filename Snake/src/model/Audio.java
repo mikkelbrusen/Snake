@@ -30,6 +30,9 @@ public class Audio{
 		music = AudioSystem.getClip();
 		music.open(repeat);
 		clip1 = AudioSystem.getClip();
+		clip2 = AudioSystem.getClip();
+		clip3 = AudioSystem.getClip();
+		clip4 = AudioSystem.getClip();
 		clip1.open(apple);
 		clip2.open(bonus);
 		clip3.open(gameOver);
@@ -64,10 +67,10 @@ public class Audio{
 			clip4.start();
 		}
 		
-		}
-		catch(Exception ex){
-			ex.printStackTrace();
-		}
+	}
+	catch(Exception ex){
+		ex.printStackTrace();
+	}
 	}
 	
 	public void startMusic(){

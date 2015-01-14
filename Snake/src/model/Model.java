@@ -29,6 +29,7 @@ public class Model {
     private boolean useAI, hasUsedAI, pause, gameOver;
     private int score, theme;
     private String fileName;
+    private Audio audio;
     
     private AI ai;
     private Snake snake;
@@ -49,6 +50,7 @@ public class Model {
         this.fileName = fileName;
         this.dimension = dimension;
         this.theme = 0;
+        this.audio = new Audio();
         for(int i = 0; i < MAX_HIGHSCORES; i++){
             setNewHighScore("AI");
         }
@@ -66,9 +68,21 @@ public class Model {
     }
     public void setPaused(){
         this.pause = !pause;
+        if (pause){
+        	audio.stopMusic();
+        }
+        else {
+        	audio.startMusic();
+        }
     }
     public void setPaused(boolean b){
         this.pause = b;
+        if (pause){
+        	audio.stopMusic();
+        }
+        else {
+        	audio.startMusic();
+        }
     }
     public void setUseAI(boolean b){
         this.hasUsedAI = true;
@@ -118,6 +132,8 @@ public class Model {
         this.apple = new Apple(this);
         this.score = 0;
         this.ai = new AI(this);
+        audio.playSound(4);
+        audio.startMusic();
     }
     
     private boolean loadTrack(String fileName){
@@ -269,6 +285,8 @@ public class Model {
     
     protected void setGameOver(){
         this.gameOver = true;
+        audio.stopMusic();
+        audio.playSound(3);
     }
     
     public boolean isPaused(){
@@ -296,7 +314,13 @@ public class Model {
     
     
     protected void newApple(){
-        this.score += 1;
+    	this.score += 1;
+    	if (score % 10 == 0){
+    		audio.playSound(2);
+    	}
+    	else {
+    		audio.playSound(1);
+    	}
         this.apple = new Apple(this);
     }
     
