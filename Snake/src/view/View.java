@@ -20,7 +20,6 @@ public class View extends JFrame {
 	private final MainPanel snakePanel;
 	private final Model model;
 	private final Controller controller;
-	private final MainMenu mainMenu;
 	private final OptionsMenu options;
 	private final StartMenu startMenu;
 
@@ -35,14 +34,12 @@ public class View extends JFrame {
 		this.model = model;
 		this.controller = controller;
 		snakePanel = new MainPanel(model.getDimension(), model);
-		mainMenu = new MainMenu(controller);
 		options = new OptionsMenu(controller);
 		startMenu = new StartMenu(controller);
 		// BoxLayout layout = new BoxLayout(options, BoxLayout.Y_AXIS);
 
 
 		this.getContentPane().add(startMenu, BorderLayout.CENTER);
-		this.getContentPane().add(mainMenu, BorderLayout.NORTH);
 		this.getContentPane().add(snakePanel, BorderLayout.CENTER);
 
 		panel.setLayout(cl);
