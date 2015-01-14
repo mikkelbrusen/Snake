@@ -85,8 +85,20 @@ public class View extends JFrame {
                         n = "No Name";
                     m += n + "\n";
                 }
-                JOptionPane.showConfirmDialog(rootPane, m);
-                
+                Object stringArray[] = {"New Game", "Main Menu", "Exit Game"};
+                int confirmDia = JOptionPane.showOptionDialog(rootPane, m, "Please select an option", 
+                		JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, 
+                		null, stringArray, stringArray[0]);
+                if (confirmDia == JOptionPane.YES_OPTION) {
+                	controller.doCmd(Objects.RESET_GAME);
+                }
+                else if (confirmDia == JOptionPane.NO_OPTION) {
+                	controller.doCmd(Objects.START_MENU);
+                	controller.doCmd(Objects.PAUSE_GAME);
+                }
+                else {
+                	controller.doCmd(Objects.EXIT_GAME);
+                }
             }
 	}
 
