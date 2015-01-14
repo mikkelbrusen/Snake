@@ -59,8 +59,8 @@ public class StartMenu extends JPanel implements ActionListener {
 		this.add(Box.createRigidArea(new Dimension(0,50)));
 		
 		//Add quit button
-		JButton quit = new JButton("Quit game");
-		quit.setFont(new Font("Quit game", Font.PLAIN, 24));
+		JButton quit = new JButton("Exit game");
+		quit.setFont(new Font("Exit game", Font.PLAIN, 24));
 		quit.setAlignmentX(CENTER_ALIGNMENT);
 		quit.addActionListener(this);
 		this.add(quit);
@@ -79,7 +79,7 @@ public class StartMenu extends JPanel implements ActionListener {
 		case "Options":
 			controller.doCmd(Objects.OPTIONS);
 			break;
-		case "Quit game":
+		case "Exit game":
 			controller.doCmd(Objects.EXIT_GAME);
 			break;
 		}
