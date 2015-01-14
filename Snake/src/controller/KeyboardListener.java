@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -21,7 +22,7 @@ public class KeyboardListener implements KeyListener {
 		super();
 		// Insert the needed keyCodes so that we can easy check if we are to respond to a keystroke or not.
 		this.Directions = Arrays.asList(38,87,40,83,37,65,39,68); 
-		this.Shortcuts = Arrays.asList(49,50,78,80,79,72,77,KeyEvent.VK_ESCAPE);		
+		this.Shortcuts = Arrays.asList(49,50,51,52,53,78,80,79,72,77,KeyEvent.VK_ESCAPE);		
 		
 		this.model = model;
 		this.view = view;
@@ -85,6 +86,9 @@ public class KeyboardListener implements KeyListener {
 		 * M: 77 
 		 * 1: 49
 		 * 2: 50
+		 * 3: 51
+		 * 4: 52
+		 * 5: 53
 		 * ESC: KeyEvent.VK_ESCAPE
 		 */
 		
@@ -115,8 +119,18 @@ public class KeyboardListener implements KeyListener {
 		if ( keyCode == 50){
 			model.setTheme(2);
 		}
-		
-		
+		if ( keyCode == 51){
+			controller.doCmd(Objects.ENABLE_AI);
+			//AI
+		}
+		if ( keyCode == 52){
+			controller.doCmd(Objects.SPEED_UP);
+			//SpeedUP
+		}
+		if (keyCode == 53){
+			controller.doCmd(Objects.SPEED_DOWN);
+			//SpeedDOWN
+		}
 	}
 	
 	
