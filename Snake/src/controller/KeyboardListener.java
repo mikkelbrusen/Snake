@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import model.Model;
+import model.Objects;
 import view.View;
 
 import java.util.*;
@@ -11,18 +12,20 @@ public class KeyboardListener implements KeyListener {
 	
     private final Model model;
     private final View view;
+    private final Controller controller;
     
     private List<Integer> Directions;
     private List<Integer> Shortcuts;
         
-	public KeyboardListener(Model model, View view) {
+	public KeyboardListener(Model model, View view, Controller controller) {
 		super();
 		// Insert the needed keyCodes so that we can easy check if we are to respond to a keystroke or not.
 		this.Directions = Arrays.asList(38,87,40,83,37,65,39,68); 
-		this.Shortcuts = Arrays.asList(78,80,79,72,77);		
+		this.Shortcuts = Arrays.asList(49,50,78,80,79,72,77,KeyEvent.VK_ESCAPE);		
 		
 		this.model = model;
 		this.view = view;
+		this.controller = controller;
 	}
 
 	@Override
@@ -80,24 +83,37 @@ public class KeyboardListener implements KeyListener {
 		 * O: 79
 		 * H: 72
 		 * M: 77 
+		 * 1: 49
+		 * 2: 50
+		 * ESC: KeyEvent.VK_ESCAPE
 		 */
 		
 		int keyCode = e.getKeyCode();
 		
 		if (keyCode == 78){
-			model.doReset();
+			controller.doCmd(Objects.RESET_GAME);
+			controller.doCmd(Objects.START_GAME);
 		}
 		if (keyCode == 80){
 			model.setPaused();
 		}
 		if (keyCode == 79){
-//			enter options menu
+			controller.doCmd(Objects.OPTIONS);
 		}
 		if (keyCode == 72){
-//			show highscores
+			controller.doCmd(Objects.SHOW_HIGHSCORES);
 		}
 		if (keyCode == 77){
 //			enter menu
+		}
+		if (keyCode == KeyEvent.VK_ESCAPE) {
+			controller.doCmd(Objects.START_MENU);
+		}
+		if (keyCode == 49){
+			model.setTheme(1);
+		}
+		if ( keyCode == 50){
+			model.setTheme(2);
 		}
 		
 		

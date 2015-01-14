@@ -84,7 +84,7 @@ public class Model {
         }
     }
     public void setTheme(int i) {
-    	if(i == 0 || i == 1) {
+    	if(i == 1 || i == 2) {
     		this.theme = i;
     	}
     }
