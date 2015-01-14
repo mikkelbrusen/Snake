@@ -13,6 +13,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
@@ -68,40 +69,21 @@ public class OptionsMenu extends JPanel implements ActionListener {
 		this.add(speedSlider, "Speed");
 		
 		this.add(Box.createRigidArea(new Dimension(0,50)));
-		
-		JLabel characterLabel = new JLabel("Speed");
-		characterLabel.setAlignmentX(CENTER_ALIGNMENT);
-		this.add(characterLabel);
-		
-		// add a slider with icon label
-	    JSlider characterSlider = new JSlider();
-	    characterSlider.setPaintTicks(true);
-	    characterSlider.setPaintLabels(true);
-	    characterSlider.setSnapToTicks(true);
-	    characterSlider.setMajorTickSpacing(20);
-	    characterSlider.setMinorTickSpacing(20);
-
-	    Dictionary<Integer, Component> labelTable = new Hashtable<Integer, Component>();
-
-	    // add card images
-
-	    labelTable.put(0, new JLabel(new ImageIcon("nine.gif")));
-	    labelTable.put(20, new JLabel(new ImageIcon("ten.gif")));
-	    labelTable.put(40, new JLabel(new ImageIcon("jack.gif")));
-	    labelTable.put(60, new JLabel(new ImageIcon("queen.gif")));
-	    labelTable.put(80, new JLabel(new ImageIcon("king.gif")));
-	    labelTable.put(100, new JLabel(new ImageIcon("ace.gif")));
-
-	    characterSlider.setLabelTable(labelTable);
-	    this.add(characterSlider, "Icon labels");
-		
-	    this.add(Box.createRigidArea(new Dimension(0,100)));
 
 		JButton back = new JButton("Back");
 		back.setFont(new Font("Back", Font.PLAIN, 24));
 		back.setAlignmentX(CENTER_ALIGNMENT);
 		back.addActionListener(this);
 		this.add(back);
+		
+		this.add(Box.createRigidArea(new Dimension(0,50)));
+		
+		//Add Checkbox for AI
+		JCheckBox enableAI = new JCheckBox("Enable AI");
+		enableAI.setFont(new Font("Back", Font.PLAIN, 24));
+		enableAI.setAlignmentX(CENTER_ALIGNMENT);
+		enableAI.addActionListener(this);
+		this.add(enableAI);
 	}
 
 	public JSlider addSlider(int a, int b, int c, int d, int major, int minor) {
@@ -120,6 +102,9 @@ public class OptionsMenu extends JPanel implements ActionListener {
 		switch(e.getActionCommand()){
 		case "Back":
 			controller.doCmd(Objects.START_MENU);
+			break;
+		case "Enable AI":
+			controller.doCmd(Objects.ENABLE_AI);
 			break;
 		}
 	}
