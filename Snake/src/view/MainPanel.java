@@ -3,7 +3,9 @@ package view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -73,13 +75,17 @@ public class MainPanel extends JPanel {
 
 	@Override
 	protected void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		
+                Graphics2D g2 = (Graphics2D) g;
+                g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+          RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		g2.setRenderingHint(RenderingHints.KEY_RENDERING,
+          RenderingHints.VALUE_RENDER_QUALITY);
+                super.paintComponent(g);
 		// depending on the theme, paint it.
 		if (model.getTheme() == 2) {
-			paintFields(g,THEME_SNAKE);
+			paintFields(g2,THEME_SNAKE);
 		} else {
-			paintFields(g,THEME_OBAMA);
+			paintFields(g2,THEME_OBAMA);
 		}
 	}
 	
@@ -97,7 +103,7 @@ public class MainPanel extends JPanel {
 	
 	/** Takes a theme bi and draws images depending on the selected theme. */
 	@SuppressWarnings("incomplete-switch")
-	private void paintFields(Graphics g, BufferedImage[] bi) {
+	private void paintFields(Graphics2D g, BufferedImage[] bi) {
 		Field[][] gameField = model.getGameField();
 		
 		// paint fields

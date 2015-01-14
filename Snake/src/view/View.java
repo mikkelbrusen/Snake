@@ -16,7 +16,7 @@ import java.util.LinkedList;
 
 import model.HighScore;
 
-public class View extends JFrame {
+public final class View extends JFrame {
 	private final MainPanel snakePanel;
 	private final Model model;
 	private final Controller controller;
