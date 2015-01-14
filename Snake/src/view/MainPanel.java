@@ -17,7 +17,7 @@ import model.*;
 
 public class MainPanel extends JPanel {
 	
-	public static final int res[] = new int[] {1920,1080};
+	public static final int res[] = new int[] {1080,1080};
 	public static int SCALE;
 	
 	static BufferedImage[] THEME_OBAMA = new BufferedImage[10];

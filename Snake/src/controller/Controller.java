@@ -19,12 +19,15 @@ public class Controller {
 	public Controller(Dimension dimension,String fileName) {
             this.model = new Model(dimension,fileName);
             this.view = new View(model,this);
+            
+           
           
             newTimer();   
             timer.start();
 
             KeyboardListener d = new KeyboardListener(model,view);
             view.addKeyListener(d);
+            
 	}
         
         private void newTimer(){

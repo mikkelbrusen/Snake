@@ -31,6 +31,7 @@ public class Model {
     private boolean pause;
     private AI ai;
     private int theme;
+    private final Audio audio;
     
     private LinkedList<Field> availableFields;
     private final Field[] wormHoles;
@@ -43,6 +44,7 @@ public class Model {
         this.fileName = fileName;
         this.dimension = dimension;
         this.theme = 0;
+        this.audio = new Audio();
 
         doReset();
     }
@@ -242,6 +244,7 @@ public class Model {
     }
     
     protected void newApple(){
+    	audio.playSound(1);
         this.score += 1;
         this.apple = new Apple(this);
     }
