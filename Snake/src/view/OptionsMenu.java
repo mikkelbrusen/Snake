@@ -1,7 +1,9 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -17,11 +19,8 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-
 import javax.swing.JCheckBox;
-
 import javax.swing.JComboBox;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
@@ -34,8 +33,8 @@ public class OptionsMenu extends JPanel implements ActionListener {
 
 	private Controller controller;
 	BufferedImage[] images;
-	private String[] tracks = {"20x10_noAI_empty.png","20x10_straightLine.png","20x10_withWalls.png","50x25_noAI_withWormHoles.png",
-			"50x25_withComplexWalls.png","50x25_withWalls.png"};
+	private String[] tracks = {"16x9_noAI_empty.png","16x9_straightLine.png","32x18_withWalls.png","48x27_noAI_withWormHoles.png",
+			"48x27_withComplexWalls.png","48x27_withWalls.png"};
 	
 	public OptionsMenu (Controller controller) {
 		super();
@@ -49,19 +48,6 @@ public class OptionsMenu extends JPanel implements ActionListener {
 		this.setLayout(box);
 		this.setBorder(new EmptyBorder((int) (screenHeight*0.1), (int) (screenWidth*0.3), (int) (screenHeight*0.1), (int) (screenWidth*0.3)));
 		
-//		JLabel sizeLabel = new JLabel("Tracksize");
-//		sizeLabel.setAlignmentX(CENTER_ALIGNMENT);
-//		this.add(sizeLabel);
-//		
-//		//slider with numbers for tracksize
-//		int majorTick = 25;
-//		int minorTick = 5;
-//		JSlider trackSlider = addSlider(JSlider.HORIZONTAL, 5, 100, 50, majorTick, minorTick);
-//		
-//		trackSlider.setLabelTable(trackSlider.createStandardLabels(15));
-//		
-//		this.add(trackSlider, "Tracksize");
-		
 		//Loading images of tracks
 		images = new BufferedImage[tracks.length];
 		Integer[] intTracks = new Integer[tracks.length];
@@ -69,21 +55,19 @@ public class OptionsMenu extends JPanel implements ActionListener {
 		for (int i = 0; i < tracks.length; i++) {
 			intTracks[i] = new Integer(i);
 			images[i] = createBufferedImage(tracks[i]);
-			if (images[i] != null) {
-//				images[i].setDescription(tracks[i]);
-			}
+//			if (images[i] != null) {
+//				images[i].setDescription(new ImageIcon(tracks[i]));
+//			}
 		}
 		
 		//Add combobox
 		JComboBox trackList = new JComboBox(intTracks);
 		ComboBoxRenderer renderer = new ComboBoxRenderer(this);
-		renderer.setPreferredSize(new Dimension(320,180));
+		renderer.setPreferredSize(new Dimension(320,90));
 		trackList.setRenderer(renderer);
 		trackList.setMaximumRowCount(3);
 		
 		this.add(trackList);
-		
-		
 		
 		this.add(Box.createRigidArea(new Dimension(0,50)));
 		
@@ -101,8 +85,6 @@ public class OptionsMenu extends JPanel implements ActionListener {
 		this.add(speedSlider, "Speed");
 		
 		this.add(Box.createRigidArea(new Dimension(0,50)));
-<<<<<<< HEAD
-=======
 		
 		JLabel characterLabel = new JLabel("Speed");
 		characterLabel.setAlignmentX(CENTER_ALIGNMENT);

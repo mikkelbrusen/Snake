@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.Component;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
@@ -34,9 +36,11 @@ public class ComboBoxRenderer extends JLabel implements ListCellRenderer{
 		
 		BufferedImage image = options.getImages()[selectedBox];
 		String tracks = options.getTracks()[selectedBox];
-		int width = image.getWidth();
-		int heght = image.getHeight();
-//		BufferedImage resizedImg = new BufferedImage();
+		BufferedImage resizedImg = new BufferedImage(32, 18, image.getType());
+		Graphics2D g = resizedImg.createGraphics();
+		g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+		g.drawImage(image, 0, 0, 32, 18, 0, 0, image.getWidth(), image.getHeight(), null);
+		g.dispose();
 		setIcon(new ImageIcon(image));
 		if (image != null) {
 			setText(tracks);
