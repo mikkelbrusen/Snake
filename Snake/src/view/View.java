@@ -2,27 +2,24 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-
-import java.awt.Dimension;
-
 import java.awt.GraphicsEnvironment;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import model.Model;
+import model.Objects;
 import controller.Controller;
 
+import java.util.LinkedList;
+
+import model.HighScore;
+
 public class View extends JFrame {
-
-
-
-
 	private final MainPanel snakePanel;
 	private final Model model;
+	private final Controller controller;
 	private final MainMenu mainMenu;
 	private final OptionsMenu options;
 	private final StartMenu startMenu;
@@ -32,12 +29,11 @@ public class View extends JFrame {
 
 
 	public View(Model model, Controller controller) {
-
-
 		super();
 
 		this.setTitle("Snake - the super, mega, awesome quest for epic awesomeness!");
 		this.model = model;
+		this.controller = controller;
 		snakePanel = new MainPanel(model.getDimension(), model);
 		mainMenu = new MainMenu(controller);
 		options = new OptionsMenu(controller);
@@ -54,6 +50,7 @@ public class View extends JFrame {
 		panel.add(snakePanel, "game");
 		panel.add(options, "options");
 
+		controller.doCmd(Objects.PAUSE_GAME);
 		toStart();
 		this.add(panel);
 		
@@ -62,21 +59,48 @@ public class View extends JFrame {
 		this.setResizable(false);
 		this.setUndecorated(true);
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(null);
+		//GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(null);
 		this.setVisible(true);
 
 	}
 
 
 	public void doAnnounce() {
+            if(!model.getHasUsedAI()){
+                if(model.getScore() > model.getLowestHighScore()){
+                    String m = "Congratulations! You beat a high score!\n"
+                            + " Please enter your name: ";
+                    String name = JOptionPane.showInputDialog(m);
+                    model.setNewHighScore(name);
+                }
+                LinkedList<HighScore> highScores = model.getHighScores();
+                String m = "Current highscores:\n";
+                for (int i = 0; i < highScores.size(); i++){
+                    String n = highScores.get(i).getName();
+                    if (n == null)
+                        n = "No Name";
+                    else if (n == "")
+                        n = "No Name";
+                    n += " : ";
+                    n += highScores.get(i).getScore();
 
-		String m = "Game Over!\n"
-                        + "Your score is: " + model.getScore() + "\n";
-                        //+ "High score is: " + model.getHighScore();
-               // if(model.getScore() > model.getHighScore())
-                    //m += "\n You beat the high score!";
-
-		JOptionPane.showMessageDialog(this, m);
+                    m += n + "\n";
+                }
+                Object stringArray[] = {"New Game", "Main Menu", "Exit Game"};
+                int confirmDia = JOptionPane.showOptionDialog(rootPane, m, "Please select an option", 
+                		JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, 
+                		null, stringArray, stringArray[0]);
+                if (confirmDia == JOptionPane.YES_OPTION) {
+                	controller.doCmd(Objects.RESET_GAME);
+                }
+                else if (confirmDia == JOptionPane.NO_OPTION) {
+                	controller.doCmd(Objects.START_MENU);
+                	controller.doCmd(Objects.PAUSE_GAME);
+                }
+                else {
+                	controller.doCmd(Objects.EXIT_GAME);
+                }
+            }
 	}
 
 
@@ -85,16 +109,17 @@ public class View extends JFrame {
 //		JOptionPane.showMessageDialog(this,	"Current Highscore is: " + model.getHighScore());
 	}
 	
-	public static void toOptions() {
+	public void toOptions() {
 		cl.show(panel, "options");
 	}
 	
-	public static void toStart() {
+	public void toStart() {
 		cl.show(panel, "start");
 	}
 	
-	public static void toGame() {
+	public void toGame() {
 		cl.show(panel, "game");
+		model.setPaused(false);
 	}
 
 

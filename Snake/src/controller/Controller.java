@@ -14,20 +14,17 @@ public class Controller {
         private int INTERVAL = 128;
 	private final Model model;
 	private final View view;
-    Timer timer;
+        Timer timer;
 	
 	public Controller(Dimension dimension,String fileName) {
             this.model = new Model(dimension,fileName);
             this.view = new View(model,this);
-            
-           
           
             newTimer();   
             timer.start();
 
             KeyboardListener d = new KeyboardListener(model,view);
             view.addKeyListener(d);
-            
 	}
         
         private void newTimer(){
@@ -83,6 +80,22 @@ public class Controller {
                     newTimer();
                     timer.start();
                     break;
+                case OPTIONS:
+                	view.toOptions();
+                	break;
+                case EXIT_GAME:
+                	System.exit(0);
+                	break;
+                case PAUSE_GAME:
+                	model.setPaused(true);
+                	break;
+                case START_MENU:
+                	view.toStart();
+                	break;
+                case START_GAME:
+                	view.toGame();
+                	break;
             }
         }
 }
+
