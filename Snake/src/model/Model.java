@@ -25,7 +25,7 @@ public class Model {
     //#                                                 #
     //###################################################
     protected static int MAX_WORMHOLES = 10;
-    private static int MAX_HIGHSCORES = 2;
+    private static final int MAX_HIGHSCORES = 2;
     private boolean useAI, hasUsedAI, pause, gameOver;
     private int score, theme;
     private String fileName;

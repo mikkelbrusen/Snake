@@ -72,11 +72,13 @@ public class View extends JFrame {
                 LinkedList<HighScore> highScores = model.getHighScores();
                 String m = "Current highscores:\n";
                 for (int i = 0; i < highScores.size(); i++){
-                    String n = highScores.get(i).getName();
-                    if(!n.isEmpty()){
+                    String n = "" + highScores.get(i).getName();
+                    
+                    if(!(n == null)){
                         n += " : ";
                         n += highScores.get(i).getScore();
-                    }
+                    }else
+                        n = "No Name";
                     m += n + "\n";
                 }
                 JOptionPane.showConfirmDialog(rootPane, m);
