@@ -106,6 +106,10 @@ public final class View extends JFrame {
 //		JOptionPane.showMessageDialog(this,	"Current Highscore is: " + model.getHighScore());
 	}
 	
+	public void showPaused(boolean b) {
+		snakePanel.showPause(b);
+	}
+	
 	public void toOptions() {
 		cl.show(panel, "options");
 	}
