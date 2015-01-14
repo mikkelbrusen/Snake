@@ -18,14 +18,10 @@ import model.Objects;
 
 public class MainPanel extends JPanel {
 	
-
-	
-
 	final static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	final static int width = (int) screenSize.getWidth();
 	final static int height = (int) screenSize.getHeight();
 	public static final int res[] = new int[] {width, height};
-
 	public static int SCALE;
 	
 	static BufferedImage[] THEME_OBAMA = new BufferedImage[10];
@@ -150,3 +146,4 @@ public class MainPanel extends JPanel {
 	
 
 }
+
