@@ -47,8 +47,8 @@ public class MainPanel extends JPanel {
 		
 		paused = new JLabel("PAUSED");
 		paused.setAlignmentX(CENTER_ALIGNMENT);
-		paused.setFont(new Font("Comic Sans MS", Font.ITALIC, 72));
-		paused.setBorder(BorderFactory.createLineBorder(Color.white));
+		paused.setFont(new Font("Comic Sans MS", Font.BOLD, 100));
+		paused.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 		paused.setHorizontalAlignment(SwingConstants.CENTER);
 		this.add(paused);
 		paused.setVisible(false);

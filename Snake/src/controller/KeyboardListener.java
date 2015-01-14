@@ -22,7 +22,7 @@ public class KeyboardListener implements KeyListener {
 		super();
 		// Insert the needed keyCodes so that we can easy check if we are to respond to a keystroke or not.
 		this.Directions = Arrays.asList(38,87,40,83,37,65,39,68); 
-		this.Shortcuts = Arrays.asList(49,50,51,52,53,78,80,79,72,77,KeyEvent.VK_ESCAPE);		
+		this.Shortcuts = Arrays.asList(49,50,51,52,53,78,80,79,72,KeyEvent.VK_ESCAPE);		
 		
 		this.model = model;
 		this.view = view;
@@ -83,7 +83,6 @@ public class KeyboardListener implements KeyListener {
 		 * P: 80
 		 * O: 79
 		 * H: 72
-		 * M: 77 
 		 * 1: 49
 		 * 2: 50
 		 * 3: 51
@@ -100,15 +99,13 @@ public class KeyboardListener implements KeyListener {
 		}
 		if (keyCode == 80){
 			model.setPaused();
+			view.showPaused(model.isPaused());
 		}
 		if (keyCode == 79){
 			controller.doCmd(Objects.OPTIONS);
 		}
 		if (keyCode == 72){
 			controller.doCmd(Objects.SHOW_HIGHSCORES);
-		}
-		if (keyCode == 77){
-//			enter menu
 		}
 		if (keyCode == KeyEvent.VK_ESCAPE) {
 			controller.doCmd(Objects.START_MENU);
@@ -121,15 +118,12 @@ public class KeyboardListener implements KeyListener {
 		}
 		if ( keyCode == 51){
 			controller.doCmd(Objects.ENABLE_AI);
-			//AI
 		}
 		if ( keyCode == 52){
 			controller.doCmd(Objects.SPEED_UP);
-			//SpeedUP
 		}
 		if (keyCode == 53){
 			controller.doCmd(Objects.SPEED_DOWN);
-			//SpeedDOWN
 		}
 	}
 	
