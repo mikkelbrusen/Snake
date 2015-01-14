@@ -23,7 +23,7 @@ public class Controller {
             newTimer();   
             timer.start();
 
-            KeyboardListener d = new KeyboardListener(model,view);
+            KeyboardListener d = new KeyboardListener(model,view,this);
             view.addKeyListener(d);
 	}
         
@@ -82,6 +82,7 @@ public class Controller {
                     break;
                 case OPTIONS:
                 	view.toOptions();
+                	model.setPaused(true);
                 	break;
                 case EXIT_GAME:
                 	System.exit(0);
@@ -91,9 +92,11 @@ public class Controller {
                 	break;
                 case START_MENU:
                 	view.toStart();
+                	model.setPaused(true);
                 	break;
                 case START_GAME:
                 	view.toGame();
+                	model.setPaused(false);
                 	break;
             }
         }
