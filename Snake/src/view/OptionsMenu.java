@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -63,16 +64,21 @@ public class OptionsMenu extends JPanel implements ActionListener {
 		//Add combobox
 		JComboBox trackList = new JComboBox(intTracks);
 		ComboBoxRenderer renderer = new ComboBoxRenderer(this);
-		renderer.setPreferredSize(new Dimension(320,90));
+		renderer.setPreferredSize(new Dimension(540,180));
 		trackList.setRenderer(renderer);
 		trackList.setMaximumRowCount(3);
+		trackList.addActionListener(this);
 		
-		this.add(trackList);
+		JPanel trackPanel = new JPanel();
+		trackPanel.add(trackList);
+		
+		this.add(trackPanel);
 		
 		this.add(Box.createRigidArea(new Dimension(0,50)));
 		
 		JLabel speedLabel = new JLabel("Speed");
 		speedLabel.setAlignmentX(CENTER_ALIGNMENT);
+		speedLabel.setFont(new Font("Back", Font.PLAIN, 24));
 		this.add(speedLabel);
 		
 		//slider with numbers for speed
@@ -86,25 +92,21 @@ public class OptionsMenu extends JPanel implements ActionListener {
 		
 		this.add(Box.createRigidArea(new Dimension(0,50)));
 		
-		JLabel characterLabel = new JLabel("Speed");
-		characterLabel.setAlignmentX(CENTER_ALIGNMENT);
-		this.add(characterLabel);
-		
+		//Add Checkbox for AI
+		JCheckBox enableAI = new JCheckBox("Enable AI");
+		enableAI.setFont(new Font("Back", Font.PLAIN, 24));
+		enableAI.setAlignmentX(CENTER_ALIGNMENT);
+		enableAI.setPreferredSize(new Dimension(50,50));
+		enableAI.addActionListener(this);
+		this.add(enableAI);
 
+		this.add(Box.createRigidArea(new Dimension(0,50)));
+		
 		JButton back = new JButton("Back");
 		back.setFont(new Font("Back", Font.PLAIN, 24));
 		back.setAlignmentX(CENTER_ALIGNMENT);
 		back.addActionListener(this);
 		this.add(back);
-		
-		this.add(Box.createRigidArea(new Dimension(0,50)));
-		
-		//Add Checkbox for AI
-		JCheckBox enableAI = new JCheckBox("Enable AI");
-		enableAI.setFont(new Font("Back", Font.PLAIN, 24));
-		enableAI.setAlignmentX(CENTER_ALIGNMENT);
-		enableAI.addActionListener(this);
-		this.add(enableAI);
 	}
 
 	public JSlider addSlider(int a, int b, int c, int d, int major, int minor) {
@@ -126,6 +128,10 @@ public class OptionsMenu extends JPanel implements ActionListener {
 			break;
 		case "Enable AI":
 			controller.doCmd(Objects.ENABLE_AI);
+			break;
+		case "comboBoxChanged":
+			controller.doCmd(Objects.TRACK);
+			System.out.println("did something");
 			break;
 		}
 	}

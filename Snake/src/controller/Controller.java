@@ -98,8 +98,11 @@ public class Controller {
                 	break;
                 case START_GAME:
                 	view.toGame();
-                        model.playStartAudio();
+                    model.playStartAudio();
                 	model.setPaused(false);
+                	break;
+                case TRACK:
+                	//something something dark side
                 	break;
             }
         }
