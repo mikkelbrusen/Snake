@@ -289,6 +289,7 @@ public class Model {
     
     protected void setGameOver(){
         this.gameOver = true;
+        audio.stopAll();
         audio.stopMusic();
         audio.playSound(3);
     }
