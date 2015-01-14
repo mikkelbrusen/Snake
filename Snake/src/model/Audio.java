@@ -73,6 +73,13 @@ public class Audio{
 	}
 	}
 	
+        public void stopAll(){
+            clip1.stop();
+            clip2.stop();
+            clip3.stop();
+            clip4.stop();
+        }
+        
 	public void startMusic(){
 		music.loop(Clip.LOOP_CONTINUOUSLY);
 		music.start();

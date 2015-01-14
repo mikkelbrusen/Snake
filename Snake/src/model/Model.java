@@ -132,6 +132,7 @@ public class Model {
         this.apple = new Apple(this);
         this.score = 0;
         this.ai = new AI(this);
+        audio.stopAll();
         audio.playSound(4);
         audio.startMusic();
     }
