@@ -19,7 +19,9 @@ is divided into following sections:
   - cleanup
 
         -->
-<project xmlns:j2seproject1="http://www.netbeans.org/ns/j2se-project/1" xmlns:j2seproject3="http://www.netbeans.org/ns/j2se-project/3" xmlns:jaxrpc="http://www.netbeans.org/ns/j2se-project/jax-rpc" basedir=".." default="default" name="Snake-impl">
+<project xmlns:j2seproject1="http://www.netbeans.org/ns/j2se-project/1"
+         xmlns:j2seproject3="http://www.netbeans.org/ns/j2se-project/3"
+         basedir=".." default="default" name="Snake-impl">
     <fail message="Please build using Ant 1.8.0 or higher.">
         <condition>
             <not>
@@ -55,7 +57,7 @@ is divided into following sections:
     </target>
     <target depends="-pre-init,-init-private,-init-user,-init-project,-init-macrodef-property" name="-do-init">
         <property name="platform.java" value="${java.home}/bin/java"/>
-        <available file="${manifest.file}" property="manifest.available"/>
+        <available file="../data/manifest.mf" property="manifest.available"/>
         <condition property="splashscreen.available">
             <and>
                 <not>
@@ -969,7 +971,7 @@ is divided into following sections:
     </target>
     <target depends="init" if="do.archive+manifest.available" name="-do-jar-copy-manifest">
         <tempfile deleteonexit="true" destdir="${build.dir}" property="tmp.manifest.file"/>
-        <copy file="${manifest.file}" tofile="${tmp.manifest.file}"/>
+        <copy file="../data/manifest.mf" tofile="${tmp.manifest.file}"/>
     </target>
     <target depends="init,-do-jar-create-manifest,-do-jar-copy-manifest" if="do.archive+main.class.available" name="-do-jar-set-mainclass">
         <manifest file="${tmp.manifest.file}" mode="update">
