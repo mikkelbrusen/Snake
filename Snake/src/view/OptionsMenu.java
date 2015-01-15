@@ -1,17 +1,30 @@
 package view;
 
-import controller.Controller;
-import model.Enumerators;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
+import model.Enumerators;
+import controller.Controller;
 
 class OptionsMenu extends JPanel implements ActionListener {
 
@@ -20,6 +33,7 @@ class OptionsMenu extends JPanel implements ActionListener {
 	private final String[] tracks = {"16x9_noAI_empty", "16x9_straightLine", "32x18_snake1", "32x18_snake2", 
 			"32x18_snake3", "32x18_withWalls", "48x27_noAI_withWormHoles", "48x27_withComplexWalls", "48x27_withWalls"};
 	private String trackName;
+	private int value;
 	
 	public OptionsMenu (Controller controller) {
 		super();
@@ -65,8 +79,23 @@ class OptionsMenu extends JPanel implements ActionListener {
 		int majorTick = 45;
 		int minorTick = 15;
 		JSlider speedSlider = addSlider(majorTick, minorTick);
-		
 		speedSlider.setLabelTable(speedSlider.createStandardLabels(45));
+		speedSlider.setValue(128);
+		speedSlider.addChangeListener(new ChangeListener() {
+			private int value;
+
+			@Override
+			public void stateChanged(ChangeEvent evt) {
+				JSlider slider = (JSlider) evt.getSource();
+				if (!slider.getValueIsAdjusting()) {
+					int value = slider.getValue();
+					this.value = value;
+					System.out.println(value);
+					controller.doCmd(Enumerators.SET_SPEED);
+				}
+			}
+		});
+		this.value = value;
 		
 		this.add(speedSlider, "Speed");
 		
@@ -130,6 +159,8 @@ class OptionsMenu extends JPanel implements ActionListener {
 				break;
 		}
 	}
+	
+	
 
 	public BufferedImage[] getImages() {
 		return images;
@@ -137,5 +168,9 @@ class OptionsMenu extends JPanel implements ActionListener {
 
 	public String[] getTracks() {
 		return tracks;
+	}
+	
+	public int getSpeed() {
+		return value;
 	}
 }

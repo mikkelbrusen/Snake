@@ -14,12 +14,14 @@ import java.util.logging.Logger;
 public class Controller {
     private final Model model;
     private final View view;
-    private int INTERVAL = 128;
+    private int INTERVAL;
     private Timer timer;
 
     public Controller(Dimension dimension, String fileName) {
+
         this.model = new Model(dimension,fileName);
         this.view = new View(model,this);
+    	System.out.println(INTERVAL);
 
         newTimer();
         timer.start();
@@ -110,6 +112,10 @@ public class Controller {
                 view.showPaused(false);
                 view.displayGame();
                 break;
+            case SET_SPEED:
+            	int speed = view.getSpeed();
+            	this.INTERVAL = speed;
+            	break;
         }
     }
 }

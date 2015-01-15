@@ -48,9 +48,9 @@ public final class View extends JFrame {
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.setFocusable(true);
 		this.setResizable(false);
-		//this.setUndecorated(true);
-		//this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		this.pack();
+		this.setUndecorated(true);
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		//this.pack();
 		this.setVisible(true);
 
 	}
@@ -124,7 +124,7 @@ public final class View extends JFrame {
 		snakePanel.setDimension(dimension);
 	}
 	
-	public String[] getTracks() {
-		return options.getTracks();
+	public int getSpeed() {
+		return options.getSpeed();
 	}
 }
