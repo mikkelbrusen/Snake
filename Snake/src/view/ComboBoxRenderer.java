@@ -36,6 +36,7 @@ class ComboBoxRenderer extends JLabel implements ListCellRenderer {
         g.dispose();
         setIcon(new ImageIcon(image));
 
+        //Set track names
         setText(tracks);
 
         return this;
