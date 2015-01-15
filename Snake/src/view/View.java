@@ -48,8 +48,9 @@ public final class View extends JFrame {
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.setFocusable(true);
 		this.setResizable(false);
-		this.setUndecorated(true);
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		//this.setUndecorated(true);
+		//this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		this.pack();
 		this.setVisible(true);
 
 	}

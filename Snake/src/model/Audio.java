@@ -16,11 +16,11 @@ class Audio {
 	public Audio(){
 		try{
 
-			AudioInputStream repeat = AudioSystem.getAudioInputStream(new File("data/repeat.wav"));
-			AudioInputStream apple = AudioSystem.getAudioInputStream(new File("data/aevle.wav"));
-			AudioInputStream bonus = AudioSystem.getAudioInputStream(new File("data/bonus.wav"));
-			AudioInputStream gameOver = AudioSystem.getAudioInputStream(new File("data/end_game.wav"));
-			AudioInputStream startGame = AudioSystem.getAudioInputStream(new File("data/start_game.wav"));
+			AudioInputStream repeat = AudioSystem.getAudioInputStream(new File("audio/repeat.wav"));
+			AudioInputStream apple = AudioSystem.getAudioInputStream(new File("audio/aevle.wav"));
+			AudioInputStream bonus = AudioSystem.getAudioInputStream(new File("audio/bonus.wav"));
+			AudioInputStream gameOver = AudioSystem.getAudioInputStream(new File("audio/end_game.wav"));
+			AudioInputStream startGame = AudioSystem.getAudioInputStream(new File("audio/start_game.wav"));
 			music = AudioSystem.getClip();
 			music.open(repeat);
 			clip1 = AudioSystem.getClip();

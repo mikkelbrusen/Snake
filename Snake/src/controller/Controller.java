@@ -48,10 +48,12 @@ public class Controller {
         });
     }
     
-    public void doCmd(Enumerators o, String s) {
+    public void doCmd(Enumerators o, String s, Dimension dimension) {
     	switch (o) {
         	case CHANGE_TRACK:
         		model.setTrack(s);
+                model.setDimension(dimension);
+                System.out.println("Tried to load track: " + s);
         		break;
     	}
     }
@@ -64,7 +66,6 @@ public class Controller {
                 view.showPaused(false);
                 break;
             case SHOW_HIGHSCORES:
-
                 break;
             case ENABLE_AI:
                 model.setUseAI(model.isNotUsingAI());
