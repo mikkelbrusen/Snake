@@ -43,9 +43,8 @@ public class AI {
         }catch(ArrayIndexOutOfBoundsException e){
             model.setUseAI(false);
             this.searching = false;
-            System.out.println("AI: I made a bobo (AI Crashed!):(");
+            //System.out.println("AI: I made a bobo (AI Crashed!):(");
         }
-        
 
         char c = ' ';
         if (!(path.length() == 0)){
@@ -90,8 +89,8 @@ public class AI {
         else if (model.getAvailableFields().contains(map[position.getWidth()][position.getHeight()-1])){
             this.path.append('N');
         }
-        if (path.length() == 0)
-            System.out.println("AI: No more routes, I'm dead!");
+//        if (path.length() == 0)
+//            System.out.println("AI: No more routes, I'm dead!");
     }
     
     private void findPathToApple(Node head){
@@ -135,7 +134,7 @@ public class AI {
     private void findApple(){
             for(int i = 0; i < model.getDimension().width; i++) {
                     for(int j = 0; j < model.getDimension().height; j++) {
-                            if (map[i][j].getType() == Objects.APPLE){
+                            if (map[i][j].getType() == Enumerators.APPLE){
                                     Node head = new Node(i,j);
                                     queue.addFirst(head);
 
@@ -190,7 +189,7 @@ class Node {
         Node prev;
         Node next;
 
-        public Node(int widht, int height) {
-                this.key = new Field(widht,height);
+        public Node(int width, int height) {
+                this.key = new Field(width,height);
         }
 }

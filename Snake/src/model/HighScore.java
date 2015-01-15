@@ -1,11 +1,5 @@
 package model;
 
-import java.util.Comparator;
-
-/**
- *
- * @author BusterK
- */
 public class HighScore implements Comparable<HighScore>{
     private final int score;
     private final String name;

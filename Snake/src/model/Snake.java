@@ -2,45 +2,39 @@ package model;
 
 import java.util.LinkedList;
 
-/**
- * @author Buster K. Mejborn
- * 
- * TODO:
- */
 public class Snake {
     private Field position;
     private Field oldPosition;
-    private final LinkedList<Field> queue;
+    private final LinkedList<Field> queue = new LinkedList<>();
     private final Model model;
     private char reverseDirection;
     private char direction;
-    private boolean isReverseDirection;
-    private boolean hasTakenStep;
+    private boolean isReverseDirection = false;
+    private boolean hasTakenStep = true;
     
     protected Snake(Model model){
         int width = model.getDimension().width/2;
         int height = model.getDimension().height/2;
         
         this.model = model;
-        this.queue = new LinkedList<>();
-        //Sets the snake at length 2 to go 1 
         Field field = model.getGameField()[width][height];
         queue.add(field);
-        model.setFieldValue(Objects.TAIL, field);
+        model.setFieldValue(Enumerators.TAIL, field);
         
         field = model.getGameField()[width-1][height];
         queue.add(field);
-        model.setFieldValue(Objects.HEAD, field);
+        model.setFieldValue(Enumerators.HEAD, field);
         position = field;
-        this.direction = 'W';
-        this.reverseDirection = 'E';
-        this.isReverseDirection = false;
-        this.hasTakenStep = true;
+        setDirection('W');
+//        this.direction = 'W';
+//        this.reverseDirection = 'E';
+//        this.isReverseDirection = false;
+//        this.hasTakenStep = true;
     }
     
     protected void setDirection(char direction){
         if (this.reverseDirection == direction){
-            this.isReverseDirection = true;
+//            this.isReverseDirection = true;
             this.hasTakenStep = true;
         }
         else if (this.hasTakenStep){
@@ -100,7 +94,7 @@ public class Snake {
     }
     
     private boolean hasHitWormHole(){
-        return (position.getType() == Objects.WORMHOLE);
+        return (position.getType() == Enumerators.WORMHOLE);
     }
 
     protected char getDirection(){
@@ -133,9 +127,9 @@ public class Snake {
             
             switch(position.getType()){
                 case APPLE:
-                    model.setFieldValue(Objects.HEAD, position);
-                    model.setFieldValue(Objects.SNAKE, oldPosition);
-                    model.setFieldValue(Objects.TAIL, queue.getFirst());
+                    model.setFieldValue(Enumerators.HEAD, position);
+                    model.setFieldValue(Enumerators.SNAKE, oldPosition);
+                    model.setFieldValue(Enumerators.TAIL, queue.getFirst());
                     model.newApple();
                     break;
                 case WALL:
@@ -145,11 +139,11 @@ public class Snake {
                     model.setGameOver();
                     break;
                 default:
-                    model.setFieldValue(Objects.BLANK, queue.getFirst());
-                    model.setFieldValue(Objects.HEAD, position);
-                    model.setFieldValue(Objects.SNAKE, oldPosition);
+                    model.setFieldValue(Enumerators.BLANK, queue.getFirst());
+                    model.setFieldValue(Enumerators.HEAD, position);
+                    model.setFieldValue(Enumerators.SNAKE, oldPosition);
                     queue.removeFirst();
-                    model.setFieldValue(Objects.TAIL, queue.getFirst());
+                    model.setFieldValue(Enumerators.TAIL, queue.getFirst());
                     break;  
             }
         }

@@ -1,11 +1,10 @@
 package controller;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import model.Enumerators;
 import model.Model;
-import model.Objects;
 import view.View;
 
 import java.util.*;
@@ -94,21 +93,21 @@ public class KeyboardListener implements KeyListener {
 		int keyCode = e.getKeyCode();
 		
 		if (keyCode == 78){
-			controller.doCmd(Objects.RESET_GAME);
-			controller.doCmd(Objects.START_GAME);
+			controller.doCmd(Enumerators.RESET_GAME);
+			controller.doCmd(Enumerators.START_GAME);
 		}
 		if (keyCode == 80){
 			model.setPaused();
 			view.showPaused(model.isPaused());
 		}
 		if (keyCode == 79){
-			controller.doCmd(Objects.OPTIONS);
+			controller.doCmd(Enumerators.OPTIONS);
 		}
 		if (keyCode == 72){
-			controller.doCmd(Objects.SHOW_HIGHSCORES);
+			controller.doCmd(Enumerators.SHOW_HIGHSCORES);
 		}
 		if (keyCode == KeyEvent.VK_ESCAPE) {
-			controller.doCmd(Objects.START_MENU);
+			controller.doCmd(Enumerators.START_MENU);
 		}
 		if (keyCode == 49){
 			model.setTheme(1);
@@ -117,13 +116,13 @@ public class KeyboardListener implements KeyListener {
 			model.setTheme(2);
 		}
 		if ( keyCode == 51){
-			controller.doCmd(Objects.ENABLE_AI);
+			controller.doCmd(Enumerators.ENABLE_AI);
 		}
 		if ( keyCode == 52){
-			controller.doCmd(Objects.SPEED_UP);
+			controller.doCmd(Enumerators.SPEED_UP);
 		}
 		if (keyCode == 53){
-			controller.doCmd(Objects.SPEED_DOWN);
+			controller.doCmd(Enumerators.SPEED_DOWN);
 		}
 	}
 	

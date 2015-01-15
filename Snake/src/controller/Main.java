@@ -2,10 +2,6 @@ package controller;
 
 import java.awt.Dimension;
 
-/**
- *
- * @author BusterK
- */
 public class Main {
     public static void main(String[] args) {
         String fileName;

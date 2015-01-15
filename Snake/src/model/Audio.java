@@ -22,21 +22,22 @@ public class Audio{
 	
 	public Audio(){
 		try{
-		this.repeat = AudioSystem.getAudioInputStream(new File ("repeat.wav"));
-		this.apple = AudioSystem.getAudioInputStream(new File ("aevle.wav"));
-		this.bonus = AudioSystem.getAudioInputStream(new File ("bonus.wav"));
-		this.gameOver = AudioSystem.getAudioInputStream(new File ("end_game.wav"));
-		this.startGame = AudioSystem.getAudioInputStream(new File ("start_game.wav"));
-		music = AudioSystem.getClip();
-		music.open(repeat);
-		clip1 = AudioSystem.getClip();
-		clip2 = AudioSystem.getClip();
-		clip3 = AudioSystem.getClip();
-		clip4 = AudioSystem.getClip();
-		clip1.open(apple);
-		clip2.open(bonus);
-		clip3.open(gameOver);
-		clip4.open(startGame);
+
+			this.repeat = AudioSystem.getAudioInputStream(new File ("data/repeat.wav"));
+			this.apple = AudioSystem.getAudioInputStream(new File ("data/aevle.wav"));
+			this.bonus = AudioSystem.getAudioInputStream(new File ("data/bonus.wav"));
+			this.gameOver = AudioSystem.getAudioInputStream(new File ("data/end_game.wav"));
+			this.startGame = AudioSystem.getAudioInputStream(new File ("data/start_game.wav"));
+			music = AudioSystem.getClip();
+			music.open(repeat);
+			clip1 = AudioSystem.getClip();
+			clip2 = AudioSystem.getClip();
+			clip3 = AudioSystem.getClip();
+			clip4 = AudioSystem.getClip();
+			clip1.open(apple);
+			clip2.open(bonus);
+			clip3.open(gameOver);
+			clip4.open(startGame);
 		
 		}
 		catch(Exception ex){
@@ -44,9 +45,9 @@ public class Audio{
 		}
 		
 	}
-	
 
-	
+
+
 	public void playSound(int sound){
 	try {
 		switch (sound){
