@@ -47,6 +47,14 @@ public class Controller {
             view.repaint();
         });
     }
+    
+    public void doCmd(Enumerators o, String s) {
+    	switch (o) {
+        	case CHANGE_TRACK:
+        		model.setTrack(s);
+        		break;
+    	}
+    }
         
     public void doCmd(Enumerators o){
         switch (o) {

@@ -20,6 +20,7 @@ public final class View extends JFrame {
 	private final MainPanel snakePanel;
 	private final Model model;
 	private final Controller controller;
+	private final OptionsMenu options;
 
 
 	public View(Model model, Controller controller) {
@@ -29,7 +30,7 @@ public final class View extends JFrame {
 		this.model = model;
 		this.controller = controller;
 		snakePanel = new MainPanel(model.getDimension(), model);
-		OptionsMenu options = new OptionsMenu(controller);
+		options = new OptionsMenu(controller);
 		StartMenu startMenu = new StartMenu(controller);
 
 		this.getContentPane().add(startMenu, BorderLayout.CENTER);
@@ -117,6 +118,12 @@ public final class View extends JFrame {
 		cl.show(panel, "game");
 		model.setPaused(false);
 	}
-
-
+	
+	public String[] getTracks() {
+		return options.getTracks();
+	}
+	
+	public String getSelectedTrack() {
+		return options.getSelectedTrack();
+	}
 }
