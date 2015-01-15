@@ -17,8 +17,8 @@ class OptionsMenu extends JPanel implements ActionListener {
 
 	private final Controller controller;
 	private final BufferedImage[] images;
-	private final String[] tracks = {"16x9_noAI_empty.png", "16x9_straightLine.png", "32x18_snake1.png", "32x18_snake2.png", 
-			"32x18_snake3.png", "32x18_withWalls.png", "48x27_noAI_withWormHoles.png", "48x27_withComplexWalls.png", "48x27_withWalls.png"};
+	private final String[] tracks = {"16x9_noAI_empty", "16x9_straightLine", "32x18_snake1", "32x18_snake2", 
+			"32x18_snake3", "32x18_withWalls", "48x27_noAI_withWormHoles", "48x27_withComplexWalls", "48x27_withWalls"};
 	private String trackName;
 	
 	public OptionsMenu (Controller controller) {
@@ -40,9 +40,6 @@ class OptionsMenu extends JPanel implements ActionListener {
 		for (int i = 0; i < tracks.length; i++) {
 			intTracks[i] = i;
 			images[i] = createBufferedImage(tracks[i]);
-//			if (images[i] != null) {
-//				images[i].setDescription(new ImageIcon(tracks[i]));
-//			}
 		}
 
 		//Add combobox
