@@ -3,7 +3,7 @@ package model;
 /**
  * Generates an apple on a random available field
  */
-public class Apple{
+class Apple {
     public Apple(Model model){
         generateNewAppleFromRandomPosition(model);
     }

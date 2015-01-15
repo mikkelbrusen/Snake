@@ -1,23 +1,17 @@
 package view;
 
-import java.awt.Dimension;
-import java.awt.Font;
+import controller.Controller;
+import model.Enumerators;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+class StartMenu extends JPanel implements ActionListener {
 
-import model.Objects;
-import controller.Controller;
-
-public class StartMenu extends JPanel implements ActionListener {
-	
-	Controller controller;
+	private final Controller controller;
 	
 	public StartMenu(Controller controller) {
 		
@@ -73,14 +67,14 @@ public class StartMenu extends JPanel implements ActionListener {
 		// TODO Auto-generated method stub
 		switch(e.getActionCommand()){
 		case "Start game":
-			controller.doCmd(Objects.RESET_GAME);
-                        controller.doCmd(Objects.START_GAME);
+			controller.doCmd(Enumerators.RESET_GAME);
+			controller.doCmd(Enumerators.START_GAME);
 			break;
 		case "Options":
-			controller.doCmd(Objects.OPTIONS);
+			controller.doCmd(Enumerators.OPTIONS);
 			break;
 		case "Exit game":
-			controller.doCmd(Objects.EXIT_GAME);
+			controller.doCmd(Enumerators.EXIT_GAME);
 			break;
 		}
 		

@@ -2,17 +2,22 @@ package model;
 
 import java.util.LinkedList;
 
-public class Snake {
-    private Field position;
-    private Field oldPosition;
-    private final LinkedList<Field> queue = new LinkedList<>();
+class Snake {
+    private final LinkedList<Field> queue;
     private final Model model;
+    private Field position;
     private char reverseDirection;
     private char direction;
-    private boolean isReverseDirection = false;
-    private boolean hasTakenStep = true;
-    
-    protected Snake(Model model){
+    private boolean isReverseDirection;
+    private boolean hasTakenStep;
+
+    {
+        hasTakenStep = true;
+        isReverseDirection = false;
+        queue = new LinkedList<>();
+    }
+
+    Snake(Model model) {
         int width = model.getDimension().width/2;
         int height = model.getDimension().height/2;
         
@@ -31,48 +36,12 @@ public class Snake {
 //        this.isReverseDirection = false;
 //        this.hasTakenStep = true;
     }
-    
-    protected void setDirection(char direction){
-        if (this.reverseDirection == direction){
-//            this.isReverseDirection = true;
-            this.hasTakenStep = true;
-        }
-        else if (this.hasTakenStep){
-            this.isReverseDirection = false;
-            this.hasTakenStep = false;
-            
-            switch(direction){
-            case 'N':
-                this.reverseDirection = 'S';
-                this.direction = 'N';
-                break;
-            case 'S':
-                this.reverseDirection = 'N';
-                this.direction = 'S';
-                break;
-            case 'E':
-                this.reverseDirection = 'W';
-                this.direction = 'E';
-                break;
-            case 'W':
-                this.reverseDirection = 'E';
-                this.direction = 'W';
-                break;
-            }
-        }
-        else{
-            
-        }
-    }
-    protected boolean hasTakenStep(){
-        return this.hasTakenStep;
-    }
-    
-    protected Field getPosition(){
+
+    Field getPosition() {
         return this.position;
     }
-    
-    private boolean hasHitEdge(){
+
+    private boolean hasGoneTroughEdge() {
         if(position.getHeight() == 0 && this.reverseDirection == 'S'){
             this.position = model.getGameField()[position.getWidth()][model.getDimension().height-1];
             return true;
@@ -97,20 +66,49 @@ public class Snake {
         return (position.getType() == Enumerators.WORMHOLE);
     }
 
-    protected char getDirection(){
+    char getDirection() {
         return direction;
     }
-    
-    protected void walk(int widht, int height){
+
+    void setDirection(char direction) {
+        if (this.reverseDirection == direction) {
+//            this.isReverseDirection = true;
+            this.hasTakenStep = true;
+        } else if (this.hasTakenStep) {
+            this.isReverseDirection = false;
+            this.hasTakenStep = false;
+
+            switch (direction) {
+                case 'N':
+                    this.reverseDirection = 'S';
+                    this.direction = 'N';
+                    break;
+                case 'S':
+                    this.reverseDirection = 'N';
+                    this.direction = 'S';
+                    break;
+                case 'E':
+                    this.reverseDirection = 'W';
+                    this.direction = 'E';
+                    break;
+                case 'W':
+                    this.reverseDirection = 'E';
+                    this.direction = 'W';
+                    break;
+            }
+        }
+    }
+
+    void walk(int widht, int height) {
         if(isReverseDirection){
             //Do nothing at the moment.
             this.hasTakenStep = true;
             }
         else{
             this.hasTakenStep = true;
-            this.oldPosition = position;
+            Field oldPosition = position;
             //Check if next position is at the other edge of the screen.
-            if(!hasHitEdge()){
+            if (!hasGoneTroughEdge()) {
                 position = model.getGameField()[position.getWidth()+widht][position.getHeight()+height];
             }
             if(hasHitWormHole()){

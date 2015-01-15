@@ -5,34 +5,43 @@ package AI;
  * @author BusterK
  */
 
-import java.awt.Dimension;
+import model.Enumerators;
+import model.Field;
+import model.Model;
+
+import java.awt.*;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
-import model.*;
 
 public class AI {
-    final Model model;
-    final Dimension dim;
-    final Field[][] map;
-    Field position;
-    final Deque<Node> queue = new LinkedList<>();
-    final LinkedList<Field> visited = new LinkedList<>();
-    
+    private final Model model;
+    private final Dimension dim;
+    private final Field[][] map;
+    private final Deque<Node> queue;
+    private final LinkedList<Field> visited;
+
+    {
+        queue = new LinkedList<>();
+        visited = new LinkedList<>();
+        path = new StringBuilder();
+    }
+
+    private Field position;
     private StringBuilder path;
-    
-    boolean searching;
+    private boolean searching;
+
+
     
     public AI(Model model){
         this.model = model;
         this.dim = model.getDimension();
         this.map = model.getGameField();
         this.position = model.getSnakePosition();
-        this.path = new StringBuilder();
         this.searching = true;
     }
-    
-    public char run() throws InterruptedException{
+
+    public char run() {
         this.position = model.getSnakePosition();
         this.queue.clear();
         this.visited.clear();
@@ -43,7 +52,7 @@ public class AI {
         }catch(ArrayIndexOutOfBoundsException e){
             model.setUseAI(false);
             this.searching = false;
-            //System.out.println("AI: I made a bobo (AI Crashed!):(");
+            //System.out.println("AI: I made a booboo (AI Crashed!):(");
         }
 
         char c = ' ';
@@ -95,8 +104,8 @@ public class AI {
     
     private void findPathToApple(Node head){
         queue.removeFirst();
-        int i = (int) head.key.getWidth();
-        int j = (int) head.key.getHeight();
+        int i = head.key.getWidth();
+        int j = head.key.getHeight();
         
         if(isWithinMap(i,j)){
             if(
@@ -184,8 +193,7 @@ public class AI {
 }
 
 class Node {
-        String path = "";
-        Field key;
+    final Field key;
         Node prev;
         Node next;
 

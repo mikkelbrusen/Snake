@@ -19,20 +19,20 @@ public class Field{
     public int getHeight(){
         return height;
     }
-    
-    protected void setType(Enumerators type){
-        this.type = type;
-    }
-    
-    protected int getWhNumber(){
+
+    int getWhNumber() {
         return this.whNumber;
+    }
+
+    void setWhNumber(int n) {
+        this.whNumber = n;
     }
     
     public Enumerators getType(){
         return type;
     }
-    
-    protected void setWhNumber(int n){
-        this.whNumber = n;
+
+    void setType(Enumerators type) {
+        this.type = type;
     }
 }

@@ -1,22 +1,23 @@
 package controller;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
 import model.Enumerators;
 import model.Model;
 import view.View;
 
-import java.util.*;
-public class KeyboardListener implements KeyListener {
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.Arrays;
+import java.util.List;
+
+class KeyboardListener implements KeyListener {
 	
     private final Model model;
     private final View view;
     private final Controller controller;
-    
-    private List<Integer> Directions;
-    private List<Integer> Shortcuts;
-        
+
+	private final List<Integer> Directions;
+	private final List<Integer> Shortcuts;
+
 	public KeyboardListener(Model model, View view, Controller controller) {
 		super();
 		// Insert the needed keyCodes so that we can easy check if we are to respond to a keystroke or not.

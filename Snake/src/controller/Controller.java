@@ -1,22 +1,23 @@
 package controller;
 
-import java.awt.Dimension;
+import model.Enumerators;
+import model.Model;
+import view.View;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.Timer;
-import model.Model;
-import model.Enumerators;
-import view.*;
 
 
 public class Controller {
+    private final Model model;
+    private final View view;
     private int INTERVAL = 128;
-	private final Model model;
-	private final View view;
-    Timer timer;
-	
-	public Controller(Dimension dimension,String fileName) {
+    private Timer timer;
+
+    public Controller(Dimension dimension, String fileName) {
         this.model = new Model(dimension,fileName);
         this.view = new View(model,this);
 
@@ -29,11 +30,11 @@ public class Controller {
         
     private void newTimer(){
         this.timer = new Timer(INTERVAL, (ActionEvent e) -> {
-        if(model.getGameOver()){
-            if(!model.getUseAI()){
+            if (model.getGameOver()) {
+                if (model.isNotUsingAI()) {
                 view.doAnnounce();
                 model.doReset();
-            }else{
+                } else {
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException ex) {
@@ -42,30 +43,23 @@ public class Controller {
                 model.doReset();
             }
         }
-        else if(model.isPaused()) {
-        }
-        else
-            try {
-                model.moveSnake();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            model.moveSnake();
             view.repaint();
         });
     }
         
     public void doCmd(Enumerators o){
-        switch(o){
+        switch (o) {
             case RESET_GAME:
                 model.playStartAudio();
                 model.doReset();
                 view.showPaused(false);
                 break;
             case SHOW_HIGHSCORES:
-                view.showHighScore();
+
                 break;
             case ENABLE_AI:
-                model.setUseAI(!model.getUseAI());
+                model.setUseAI(model.isNotUsingAI());
                 break;
             case SPEED_UP:
                 timer.stop();
@@ -75,7 +69,7 @@ public class Controller {
                 break;
             case SPEED_DOWN:
                 timer.stop();
-                if(INTERVAL == 0)
+                if (INTERVAL == 0)
                     INTERVAL = 1;
                 else
                     this.INTERVAL *= 2;
@@ -83,7 +77,7 @@ public class Controller {
                 timer.start();
                 break;
             case OPTIONS:
-                view.toOptions();
+                view.displayOptionsMenu();
                 model.setPaused(true);
                 break;
             case EXIT_GAME:
@@ -93,57 +87,17 @@ public class Controller {
                 model.setPaused(true);
                 break;
             case START_MENU:
-                view.toStart();
+                view.displayStartMenu();
                 model.setPaused(true);
                 break;
             case START_GAME:
-                view.toGame();
-                    model.playStartAudio();
-                    model.doReset();
-                    view.showPaused(false);
-                    break;
-                case SHOW_HIGHSCORES:
-                    view.showHighScore();
-                    break;
-                case ENABLE_AI:
-                    model.setUseAI(!model.getUseAI());
-                    break;
-                case SPEED_UP:
-                    timer.stop();
-                    this.INTERVAL *= 0.5;
-                    newTimer();
-                    timer.start();
-                    break;
-                case SPEED_DOWN:
-                    timer.stop();
-                    if(INTERVAL == 0)
-                        INTERVAL = 1;
-                    else
-                        this.INTERVAL *= 2;
-                    newTimer();
-                    timer.start();
-                    break;
-                case OPTIONS:
-                	view.toOptions();
-                	model.setPaused(true);
-                	break;
-                case EXIT_GAME:
-                	System.exit(0);
-                	break;
-                case PAUSE_GAME:
-                	model.setPaused(true);
-                	break;
-                case START_MENU:
-                	view.toStart();
-                	model.setPaused(true);
-                	break;
-                case START_GAME:
-                	view.toGame();
-                        model.playStartAudio();
-                	model.setPaused(false);
-                	break;
-            }
+                view.displayGame();
+                model.playStartAudio();
+                model.doReset();
+                view.showPaused(false);
+                break;
         }
     }
 }
+
 

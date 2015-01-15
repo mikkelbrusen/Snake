@@ -1,8 +1,8 @@
 package controller;
 
-import java.awt.Dimension;
+import java.awt.*;
 
-public class Main {
+class Main {
     public static void main(String[] args) {
         String fileName;
         
@@ -10,10 +10,7 @@ public class Main {
             fileName = args[2];
         }
         catch(ArrayIndexOutOfBoundsException e){
-            fileName = "32x18_withWalls";
-
-            fileName = "50x25_withWalls";
-
+            fileName = "";
         }
             
         try{

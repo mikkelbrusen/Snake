@@ -1,33 +1,26 @@
 package model;
 
-import java.io.File;
-
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import java.io.File;
 
 
+class Audio {
+	private Clip music;
+	private Clip clip1;
+	private Clip clip2;
+	private Clip clip3;
+	private Clip clip4;
 
-public class Audio{
-	Clip music;
-	Clip clip1;
-	Clip clip2;
-	Clip clip3;
-	Clip clip4;
-	AudioInputStream repeat;
-	AudioInputStream apple;
-	AudioInputStream gameOver;
-	AudioInputStream startGame;
-	AudioInputStream bonus;
-	
 	public Audio(){
 		try{
 
-			this.repeat = AudioSystem.getAudioInputStream(new File ("data/repeat.wav"));
-			this.apple = AudioSystem.getAudioInputStream(new File ("data/aevle.wav"));
-			this.bonus = AudioSystem.getAudioInputStream(new File ("data/bonus.wav"));
-			this.gameOver = AudioSystem.getAudioInputStream(new File ("data/end_game.wav"));
-			this.startGame = AudioSystem.getAudioInputStream(new File ("data/start_game.wav"));
+			AudioInputStream repeat = AudioSystem.getAudioInputStream(new File("data/repeat.wav"));
+			AudioInputStream apple = AudioSystem.getAudioInputStream(new File("data/aevle.wav"));
+			AudioInputStream bonus = AudioSystem.getAudioInputStream(new File("data/bonus.wav"));
+			AudioInputStream gameOver = AudioSystem.getAudioInputStream(new File("data/end_game.wav"));
+			AudioInputStream startGame = AudioSystem.getAudioInputStream(new File("data/start_game.wav"));
 			music = AudioSystem.getClip();
 			music.open(repeat);
 			clip1 = AudioSystem.getClip();
@@ -41,7 +34,7 @@ public class Audio{
 		
 		}
 		catch(Exception ex){
-			
+			ex.printStackTrace();
 		}
 		
 	}

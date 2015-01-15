@@ -24,19 +24,16 @@ public class Model {
     //###################################################
     private static final int MAX_WORMHOLES = 10;
     private static final int MAX_HIGHSCORES = 2;
+    private final String fileName;
+    private final Audio audio;
+    private final LinkedList<HighScore> highScores;
+    private final Field[] wormHoles;
     private boolean useAI, hasUsedAI, pause, gameOver;
     private int score, theme;
-    private String fileName;
-    private final Audio audio;
-    
     private AI ai;
     private Snake snake;
     private Dimension dimension;
-    
-    private final LinkedList<HighScore> highScores;
     private LinkedList<Field> availableFields;
-    
-    private final Field[] wormHoles;
     private Field[][] gameField;
     
     public Model(Dimension dimension, String fileName){
@@ -70,44 +67,45 @@ public class Model {
         	audio.startMusic();
         }
     }
-    public void setPaused(boolean b){
-        this.pause = b;
-        if (pause){
-        	audio.stopMusic();
-        }
-        else {
-        	audio.startMusic();
-        }
-    }
-    public void setNewHighScore(String name){
-        if(!(hasUsedAI)){
+
+    public void setNewHighScore(String name) {
+        if (!(hasUsedAI)) {
             this.highScores.add(new HighScore(this.score, name));
             Collections.sort(highScores);
-            if(highScores.size() > MAX_HIGHSCORES){
+            if (highScores.size() > MAX_HIGHSCORES) {
                 highScores.removeLast();
             }
         }
     }
-    public void setTheme(int i) {
-        if(i == 1 || i == 2) {
-            this.theme = i;
-        }
-    }
-    protected void setGameOver(){
+
+    void setGameOver() {
         this.gameOver = true;
         audio.stopAll();
         audio.stopMusic();
         audio.playSound(3);
     }
-    public boolean getGameOver(){
+
+    public boolean getGameOver() {
         return gameOver;
     }
-    public boolean isPaused(){
+
+    public boolean isPaused() {
         return pause;
     }
+
+    public void setPaused(boolean b) {
+        this.pause = b;
+        if (pause) {
+            audio.stopMusic();
+        } else {
+            audio.startMusic();
+        }
+    }
+
     public int getScore(){
         return this.score;
     }
+
     public int getLowestHighScore(){
         try{
             return this.highScores.getLast().getScore();
@@ -115,7 +113,8 @@ public class Model {
             return 0;
         }
     }
-    protected void newApple(){
+
+    void newApple() {
         this.score += 1;
         if (score % 10 == 0){
             audio.playSound(2);
@@ -125,15 +124,16 @@ public class Model {
         }
         new Apple(this);
     }
+
     public void playStartAudio(){
         audio.stopAll();
         audio.playSound(4);
         audio.startMusic();
     }
+
     public LinkedList<HighScore> getHighScores(){
         return this.highScores;
     }
-
 
     //###################################################
     //#                                                 #
@@ -144,9 +144,11 @@ public class Model {
         this.hasUsedAI = true;
         this.useAI = b;
     }
-    public boolean getUseAI(){
-        return this.useAI;
+
+    public boolean isNotUsingAI() {
+        return !this.useAI;
     }
+
     public boolean getHasUsedAI(){
         return this.hasUsedAI;
     }
@@ -166,7 +168,7 @@ public class Model {
         this.availableFields = new LinkedList<>();
         this.gameOver = false;
         this.hasUsedAI = useAI;
-        
+
         if (!(loadTrack(fileName))){
             for (int i = 0; i < dimension.width; i++){
                 for (int j = 0; j < dimension.height; j++){
@@ -182,6 +184,7 @@ public class Model {
         this.score = 0;
         this.ai = new AI(this);
     }
+
     private boolean loadTrack(String fileName){
         try {
             Scanner sc = new Scanner(new FileReader(fileName));
@@ -190,9 +193,9 @@ public class Model {
             int height = sc.nextInt();
             this.dimension = new Dimension(width,height);
             this.gameField = new Field[dimension.width][dimension.height];
-            
+
             sc.nextLine();
-            
+
             int lineno = 0;
             while (sc.hasNextLine()){
                 String line = sc.nextLine();
@@ -217,12 +220,13 @@ public class Model {
             }
             sc.close();
             return true;
-        } 
+        }
         catch (FileNotFoundException e) {
             return false;
         }
     }
-    protected void setFieldValue(Enumerators val, Field field){
+
+    void setFieldValue(Enumerators val, Field field) {
         if(field.getType() != Enumerators.WORMHOLE){
             switch(val){
                 case BLANK:
@@ -258,16 +262,26 @@ public class Model {
             }
         }
     }
+
     public LinkedList<Field> getAvailableFields(){
         return this.availableFields;
     }
+
     public int getTheme(){
         return this.theme;
     }
+
+    public void setTheme(int i) {
+        if (i == 1 || i == 2) {
+            this.theme = i;
+        }
+    }
+
     public Dimension getDimension(){
         return this.dimension;
     }
-    protected Field[] getWormHoles(){
+
+    Field[] getWormHoles() {
         return this.wormHoles;
     }
 
@@ -295,7 +309,8 @@ public class Model {
                 break;
         }        
     }
-    public void moveSnake() throws InterruptedException{
+
+    public void moveSnake() {
         if(useAI){
             snake.setDirection(ai.run());
         }
