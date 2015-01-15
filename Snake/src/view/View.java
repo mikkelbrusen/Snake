@@ -26,7 +26,7 @@ public final class View extends JFrame {
 	public View(Model model, Controller controller) {
 		super();
 
-		this.setTitle("Snake - the super, mega, awesome quest for epic awesomeness!");
+		this.setTitle("Atomic Bomber Snake - the super, mega, awesome quest for epic awesomeness!");
 		this.model = model;
 		this.controller = controller;
 		snakePanel = new MainPanel(model.getDimension(), model);

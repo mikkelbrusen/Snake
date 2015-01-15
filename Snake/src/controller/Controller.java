@@ -100,8 +100,8 @@ public class Controller {
                 model.setPaused(true);
                 break;
             case START_MENU:
-                view.displayStartMenu();
                 model.setPaused(true);
+                view.displayStartMenu();
                 break;
             case START_GAME:
                 model.playStartAudio();

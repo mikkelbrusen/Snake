@@ -316,26 +316,28 @@ public class Model {
     }
 
     public void moveSnake() {
-        if(useAI){
-            snake.setDirection(ai.run());
-        }
-        switch(snake.getDirection()){
-            case 'N':
-                snake.setDirection('N');
-                snake.walk(0, -1);
-                break;
-            case 'S':
-                snake.setDirection('S');
-                snake.walk(0, 1);
-                break;
-            case 'E':
-                snake.setDirection('E');
-                snake.walk(1, 0);
-                break;
-            case 'W':
-                snake.setDirection('W');
-                snake.walk(-1, 0);
-                break;
+        if(!pause){
+            if(useAI){
+                snake.setDirection(ai.run());
+            }
+            switch(snake.getDirection()){
+                case 'N':
+                    snake.setDirection('N');
+                    snake.walk(0, -1);
+                    break;
+                case 'S':
+                    snake.setDirection('S');
+                    snake.walk(0, 1);
+                    break;
+                case 'E':
+                    snake.setDirection('E');
+                    snake.walk(1, 0);
+                    break;
+                case 'W':
+                    snake.setDirection('W');
+                    snake.walk(-1, 0);
+                    break;
+            }
         }
     }
     public char getSnakeDirection(){
