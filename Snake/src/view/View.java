@@ -122,8 +122,4 @@ public final class View extends JFrame {
 	public String[] getTracks() {
 		return options.getTracks();
 	}
-	
-	public String getSelectedTrack() {
-		return options.getSelectedTrack();
-	}
 }

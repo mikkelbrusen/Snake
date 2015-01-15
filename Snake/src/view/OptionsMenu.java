@@ -17,8 +17,8 @@ class OptionsMenu extends JPanel implements ActionListener {
 
 	private final Controller controller;
 	private final BufferedImage[] images;
-	private final String[] tracks = {"16x9_noAI_empty.png", "16x9_straightLine.png", "32x18_withWalls.png", "48x27_noAI_withWormHoles.png",
-			"48x27_withComplexWalls.png", "48x27_withWalls.png"};
+	private final String[] tracks = {"16x9_noAI_empty.png", "16x9_straightLine.png", "32x18_snake1.png", "32x18_snake2.png", 
+			"32x18_snake3.png", "32x18_withWalls.png", "48x27_noAI_withWormHoles.png", "48x27_withComplexWalls.png", "48x27_withWalls.png"};
 	private String trackName;
 	
 	public OptionsMenu (Controller controller) {
@@ -126,10 +126,10 @@ class OptionsMenu extends JPanel implements ActionListener {
 				break;
 			case "comboBoxChanged":
 				JComboBox trackList = (JComboBox) e.getSource();
-				String trackName = trackList.getSelectedItem().toString();
-				this.trackName = trackName;
-				controller.doCmd(Enumerators.CHANGE_TRACK, trackName);
-				System.out.println("did something");
+				int trackNum = (int) trackList.getSelectedItem();
+				this.trackName = tracks[trackNum];
+				System.out.println("did something" + this.trackName);
+				controller.doCmd(Enumerators.CHANGE_TRACK, this.trackName);
 				break;
 		}
 	}
@@ -140,9 +140,5 @@ class OptionsMenu extends JPanel implements ActionListener {
 
 	public String[] getTracks() {
 		return tracks;
-	}
-	
-	public String getSelectedTrack() {
-		return trackName;
 	}
 }

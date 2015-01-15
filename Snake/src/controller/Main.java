@@ -11,7 +11,7 @@ class Main {
         }
         catch(ArrayIndexOutOfBoundsException e){
 
-            fileName = "32x18_snake2";
+            fileName = "";
 
         }
             

@@ -160,7 +160,6 @@ public class Model {
     //###################################################
     public void setTrack(String fileName) {
     	this.fileName = fileName;
-    	doReset();
     }
     
     public Field[][] getGameField(){
@@ -191,6 +190,7 @@ public class Model {
     }
 
     private boolean loadTrack(String fileName){
+    	System.out.println("Try to load filename " + fileName);
         try {
             Scanner sc = new Scanner(new FileReader(fileName));
             int whcount = 0;
