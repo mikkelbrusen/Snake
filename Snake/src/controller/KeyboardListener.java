@@ -1,28 +1,28 @@
 package controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
+import model.Enumerators;
 import model.Model;
-import model.Objects;
 import view.View;
 
-import java.util.*;
-public class KeyboardListener implements KeyListener {
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.Arrays;
+import java.util.List;
+
+class KeyboardListener implements KeyListener {
 	
     private final Model model;
     private final View view;
     private final Controller controller;
-    
-    private List<Integer> Directions;
-    private List<Integer> Shortcuts;
-        
+
+	private final List<Integer> Directions;
+	private final List<Integer> Shortcuts;
+
 	public KeyboardListener(Model model, View view, Controller controller) {
 		super();
 		// Insert the needed keyCodes so that we can easy check if we are to respond to a keystroke or not.
 		this.Directions = Arrays.asList(38,87,40,83,37,65,39,68); 
-		this.Shortcuts = Arrays.asList(49,50,51,52,53,78,80,79,72,77,KeyEvent.VK_ESCAPE);		
+		this.Shortcuts = Arrays.asList(49,50,51,52,53,78,80,79,72,KeyEvent.VK_ESCAPE);		
 		
 		this.model = model;
 		this.view = view;
@@ -83,7 +83,6 @@ public class KeyboardListener implements KeyListener {
 		 * P: 80
 		 * O: 79
 		 * H: 72
-		 * M: 77 
 		 * 1: 49
 		 * 2: 50
 		 * 3: 51
@@ -95,23 +94,21 @@ public class KeyboardListener implements KeyListener {
 		int keyCode = e.getKeyCode();
 		
 		if (keyCode == 78){
-			controller.doCmd(Objects.RESET_GAME);
-			controller.doCmd(Objects.START_GAME);
+			controller.doCmd(Enumerators.RESET_GAME);
+			controller.doCmd(Enumerators.START_GAME);
 		}
 		if (keyCode == 80){
 			model.setPaused();
+			view.showPaused(model.isPaused());
 		}
 		if (keyCode == 79){
-			controller.doCmd(Objects.OPTIONS);
+			controller.doCmd(Enumerators.OPTIONS);
 		}
 		if (keyCode == 72){
-			controller.doCmd(Objects.SHOW_HIGHSCORES);
-		}
-		if (keyCode == 77){
-//			enter menu
+			controller.doCmd(Enumerators.SHOW_HIGHSCORES);
 		}
 		if (keyCode == KeyEvent.VK_ESCAPE) {
-			controller.doCmd(Objects.START_MENU);
+			controller.doCmd(Enumerators.START_MENU);
 		}
 		if (keyCode == 49){
 			model.setTheme(1);
@@ -120,16 +117,13 @@ public class KeyboardListener implements KeyListener {
 			model.setTheme(2);
 		}
 		if ( keyCode == 51){
-			controller.doCmd(Objects.ENABLE_AI);
-			//AI
+			controller.doCmd(Enumerators.ENABLE_AI);
 		}
 		if ( keyCode == 52){
-			controller.doCmd(Objects.SPEED_UP);
-			//SpeedUP
+			controller.doCmd(Enumerators.SPEED_UP);
 		}
 		if (keyCode == 53){
-			controller.doCmd(Objects.SPEED_DOWN);
-			//SpeedDOWN
+			controller.doCmd(Enumerators.SPEED_DOWN);
 		}
 	}
 	

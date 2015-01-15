@@ -1,14 +1,9 @@
 package model;
 
-
-/**
- *
- * @author BusterK
- */
 public class Field{
     private final int height;
     private final int width;
-    private Objects type;
+    private Enumerators type;
     private int whNumber;
     
     public Field(int width, int height){
@@ -24,20 +19,20 @@ public class Field{
     public int getHeight(){
         return height;
     }
-    
-    protected void setType(Objects type){
-        this.type = type;
-    }
-    
-    protected int getWhNumber(){
+
+    int getWhNumber() {
         return this.whNumber;
     }
-    
-    public Objects getType(){
-        return type;
+
+    void setWhNumber(int n) {
+        this.whNumber = n;
     }
     
-    protected void setWhNumber(int n){
-        this.whNumber = n;
+    public Enumerators getType(){
+        return type;
+    }
+
+    void setType(Enumerators type) {
+        this.type = type;
     }
 }

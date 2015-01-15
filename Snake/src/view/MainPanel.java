@@ -1,75 +1,78 @@
 package view;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GridLayout;
-import java.awt.RenderingHints;
-import java.awt.Toolkit;
+import model.Field;
+import model.Model;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-import javax.imageio.ImageIO;
-import javax.swing.JPanel;
+class MainPanel extends JPanel {
 
-import model.Field;
-import model.Model;
-
-public class MainPanel extends JPanel {
-	
-	final static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	final static int width = (int) screenSize.getWidth();
-	final static int height = (int) screenSize.getHeight();
-	public static final int res[] = new int[] {width, height};
-	public static int scale;
-	
-	static BufferedImage[] THEME_OBAMA = new BufferedImage[10];
-	static BufferedImage[] THEME_SNAKE = new BufferedImage[10];
-	
+	private final static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	private final static int width = (int) screenSize.getWidth();
+	private static final BufferedImage[] THEME_OBAMA = new BufferedImage[10];
+	private static final BufferedImage[] THEME_SNAKE = new BufferedImage[10];
+	private static int scale;
 	private final Model model;
 	private final Dimension size;
+	private final JLabel paused;
 	
 	public MainPanel(Dimension size, Model model) {
 		super();
 		this.size = size;
-		this.scale = res[0]/size.width;
-		this.setLayout(new GridLayout(size.width*scale,size.height*scale));
+		scale = width / size.width;
+		this.setLayout(new BorderLayout(size.width*scale,size.height*scale));
 		this.setBackground(Color.WHITE);
 		this.setPreferredSize(new Dimension(size.width*scale,size.height*scale));
 		this.setOpaque(true);
 		this.model = model;
 		
+		paused = new JLabel("PAUSED");
+		paused.setAlignmentX(CENTER_ALIGNMENT);
+		paused.setFont(new Font("Comic Sans MS", Font.BOLD, 100));
+		paused.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+		paused.setHorizontalAlignment(SwingConstants.CENTER);
+		this.add(paused);
+		paused.setVisible(false);
+		
+		
 		// Load Obama Theme
-		this.THEME_OBAMA[0] = loadImage("Sand.png");
-		this.THEME_OBAMA[1] = loadImage("Brick.png");
-		this.THEME_OBAMA[2] = loadImage("Bomb.png");
-		this.THEME_OBAMA[3] = loadImage("NLeadTerrorist.png");
-		this.THEME_OBAMA[4] = loadImage("SLeadTerrorist.png");
-		this.THEME_OBAMA[5] = loadImage("ELeadTerrorist.png");
-		this.THEME_OBAMA[6] = loadImage("WLeadTerrorist.png");
-		this.THEME_OBAMA[7] = loadImage("BodyTerrorist.png");
-		this.THEME_OBAMA[8] = loadImage("Obama.png");
-		this.THEME_OBAMA[9] = loadImage("Wormhole.png");
+		THEME_OBAMA[0] = loadImage("Sand.png");
+		THEME_OBAMA[1] = loadImage("Brick.png");
+		THEME_OBAMA[2] = loadImage("Bomb.png");
+		THEME_OBAMA[3] = loadImage("NLeadTerrorist.png");
+		THEME_OBAMA[4] = loadImage("SLeadTerrorist.png");
+		THEME_OBAMA[5] = loadImage("ELeadTerrorist.png");
+		THEME_OBAMA[6] = loadImage("WLeadTerrorist.png");
+		THEME_OBAMA[7] = loadImage("BodyTerrorist.png");
+		THEME_OBAMA[8] = loadImage("Obama.png");
+		THEME_OBAMA[9] = loadImage("Wormhole.png");
 		
 		// Load Snake Theme
-		this.THEME_SNAKE[0] = loadImage("Sand.png");
-		this.THEME_SNAKE[1] = loadImage("Brick.png");
-		this.THEME_SNAKE[2] = loadImage("Apple.png");
-		this.THEME_SNAKE[3] = loadImage("NHead.png");
-		this.THEME_SNAKE[4] = loadImage("SHead.png");
-		this.THEME_SNAKE[5] = loadImage("EHead.png");
-		this.THEME_SNAKE[6] = loadImage("WHead.png");
-		this.THEME_SNAKE[7] = loadImage("Body.png");
-		this.THEME_SNAKE[8] = loadImage("Body.png");
-		this.THEME_SNAKE[9]	= loadImage("Wormhole.png");
+		THEME_SNAKE[0] = loadImage("Sand.png");
+		THEME_SNAKE[1] = loadImage("Brick.png");
+		THEME_SNAKE[2] = loadImage("Apple.png");
+		THEME_SNAKE[3] = loadImage("NHead.png");
+		THEME_SNAKE[4] = loadImage("SHead.png");
+		THEME_SNAKE[5] = loadImage("EHead.png");
+		THEME_SNAKE[6] = loadImage("WHead.png");
+		THEME_SNAKE[7] = loadImage("Body.png");
+		THEME_SNAKE[8] = loadImage("Body.png");
+		THEME_SNAKE[9] = loadImage("Wormhole.png");
 		
 		
 	}
 	
 	public Dimension getSize(){
 		return this.size;
+	}
+	
+	public void showPause(boolean b){
+		paused.setVisible(b);
 	}
 
 	@Override

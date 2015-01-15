@@ -1,12 +1,8 @@
 package controller;
 
-import java.awt.Dimension;
+import java.awt.*;
 
-/**
- *
- * @author BusterK
- */
-public class Main {
+class Main {
     public static void main(String[] args) {
         String fileName;
         

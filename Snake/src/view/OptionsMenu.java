@@ -1,34 +1,27 @@
 package view;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Toolkit;
+import controller.Controller;
+import model.Enumerators;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Dictionary;
-import java.util.Hashtable;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JSlider;
-import javax.swing.border.EmptyBorder;
+class OptionsMenu extends JPanel implements ActionListener {
 
-import model.Objects;
-import controller.Controller;
-
-public class OptionsMenu extends JPanel implements ActionListener {
-	
-	private Dimension size;
-	private Controller controller;
+	private final Controller controller;
+	private final BufferedImage[] images;
+	private final String[] tracks = {"16x9_noAI_empty.png", "16x9_straightLine.png", "32x18_withWalls.png", "48x27_noAI_withWormHoles.png",
+			"48x27_withComplexWalls.png", "48x27_withWalls.png"};
 	
 	public OptionsMenu (Controller controller) {
 		super();
-		this.size = size;
 		this.controller = controller;
 		
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -37,66 +30,61 @@ public class OptionsMenu extends JPanel implements ActionListener {
 		
 		BoxLayout box = new BoxLayout(this, BoxLayout.Y_AXIS);
 		this.setLayout(box);
-		this.setBorder(new EmptyBorder((int) (screenHeight*0.3), (int) (screenWidth*0.3), (int) (screenHeight*0.3), (int) (screenWidth*0.3)));
-		
-		JLabel sizeLabel = new JLabel("Tracksize");
-		sizeLabel.setAlignmentX(CENTER_ALIGNMENT);
-		this.add(sizeLabel);
-		
-		//slider with numbers for tracksize
-		int majorTick = 25;
-		int minorTick = 5;
-		JSlider trackSlider = addSlider(JSlider.HORIZONTAL, 5, 100, 50, majorTick, minorTick);
-		
-		trackSlider.setLabelTable(trackSlider.createStandardLabels(15));
-		
-		this.add(trackSlider, "Tracksize");
+		this.setBorder(new EmptyBorder((int) (screenHeight * 0.1), (int) (screenWidth * 0.3), (int) (screenHeight * 0.1), (int) (screenWidth * 0.3)));
+
+		//Loading images of tracks
+		images = new BufferedImage[tracks.length];
+		Integer[] intTracks = new Integer[tracks.length];
+
+		for (int i = 0; i < tracks.length; i++) {
+			intTracks[i] = i;
+			images[i] = createBufferedImage(tracks[i]);
+//			if (images[i] != null) {
+//				images[i].setDescription(new ImageIcon(tracks[i]));
+//			}
+		}
+
+		//Add combobox
+		JComboBox trackList = new JComboBox(intTracks);
+		ComboBoxRenderer renderer = new ComboBoxRenderer(this);
+		renderer.setPreferredSize(new Dimension(540, 180));
+		trackList.setRenderer(renderer);
+		trackList.setMaximumRowCount(3);
+		trackList.addActionListener(this);
+
+		JPanel trackPanel = new JPanel();
+		trackPanel.add(trackList);
+
+		this.add(trackPanel);
 		
 		this.add(Box.createRigidArea(new Dimension(0,50)));
 		
 		JLabel speedLabel = new JLabel("Speed");
 		speedLabel.setAlignmentX(CENTER_ALIGNMENT);
+		speedLabel.setFont(new Font("Back", Font.PLAIN, 24));
 		this.add(speedLabel);
 		
 		//slider with numbers for speed
-		majorTick = 45;
-		minorTick = 15;
-		JSlider speedSlider = addSlider(JSlider.HORIZONTAL, 10, 500, 100, majorTick, minorTick);
+		int majorTick = 45;
+		int minorTick = 15;
+		JSlider speedSlider = addSlider(majorTick, minorTick);
 		
 		speedSlider.setLabelTable(speedSlider.createStandardLabels(45));
 		
 		this.add(speedSlider, "Speed");
 		
 		this.add(Box.createRigidArea(new Dimension(0,50)));
+
+		//Add Checkbox for AI
+		JCheckBox enableAI = new JCheckBox("Enable AI");
+		enableAI.setFont(new Font("Back", Font.PLAIN, 24));
+		enableAI.setAlignmentX(CENTER_ALIGNMENT);
+		enableAI.setPreferredSize(new Dimension(50, 50));
+		enableAI.addActionListener(this);
+		this.add(enableAI);
+
+		this.add(Box.createRigidArea(new Dimension(0, 50)));
 		
-		JLabel characterLabel = new JLabel("Speed");
-		characterLabel.setAlignmentX(CENTER_ALIGNMENT);
-		this.add(characterLabel);
-		
-		// add a slider with icon label
-	    JSlider characterSlider = new JSlider();
-	    characterSlider.setPaintTicks(true);
-	    characterSlider.setPaintLabels(true);
-	    characterSlider.setSnapToTicks(true);
-	    characterSlider.setMajorTickSpacing(20);
-	    characterSlider.setMinorTickSpacing(20);
-
-	    Dictionary<Integer, Component> labelTable = new Hashtable<Integer, Component>();
-
-	    // add card images
-
-	    labelTable.put(0, new JLabel(new ImageIcon("nine.gif")));
-	    labelTable.put(20, new JLabel(new ImageIcon("ten.gif")));
-	    labelTable.put(40, new JLabel(new ImageIcon("jack.gif")));
-	    labelTable.put(60, new JLabel(new ImageIcon("queen.gif")));
-	    labelTable.put(80, new JLabel(new ImageIcon("king.gif")));
-	    labelTable.put(100, new JLabel(new ImageIcon("ace.gif")));
-
-	    characterSlider.setLabelTable(labelTable);
-	    this.add(characterSlider, "Icon labels");
-		
-	    this.add(Box.createRigidArea(new Dimension(0,100)));
-
 		JButton back = new JButton("Back");
 		back.setFont(new Font("Back", Font.PLAIN, 24));
 		back.setAlignmentX(CENTER_ALIGNMENT);
@@ -104,8 +92,20 @@ public class OptionsMenu extends JPanel implements ActionListener {
 		this.add(back);
 	}
 
-	public JSlider addSlider(int a, int b, int c, int d, int major, int minor) {
-		JSlider slider = new JSlider(a, b, c, d);
+	private static BufferedImage createBufferedImage(String path) {
+		BufferedImage images;
+		try {
+			System.out.println(path);
+			images = ImageIO.read(new File(path));
+			return images;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	JSlider addSlider(int major, int minor) {
+		JSlider slider = new JSlider(SwingConstants.HORIZONTAL, 10, 500, 100);
 		slider.setPaintTicks(true);
 	    slider.setPaintLabels(true);
 	    slider.setSnapToTicks(true);
@@ -119,8 +119,23 @@ public class OptionsMenu extends JPanel implements ActionListener {
 		// TODO Auto-generated method stub
 		switch(e.getActionCommand()){
 		case "Back":
-			controller.doCmd(Objects.START_MENU);
+			controller.doCmd(Enumerators.START_MENU);
 			break;
+			case "Enable AI":
+				controller.doCmd(Enumerators.ENABLE_AI);
+				break;
+			case "comboBoxChanged":
+				controller.doCmd(Enumerators.TRACK);
+				System.out.println("did something");
+				break;
 		}
+	}
+
+	public BufferedImage[] getImages() {
+		return images;
+	}
+
+	public String[] getTracks() {
+		return tracks;
 	}
 }
