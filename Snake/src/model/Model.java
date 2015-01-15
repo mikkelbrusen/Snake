@@ -24,7 +24,7 @@ public class Model {
     //###################################################
     private static final int MAX_WORMHOLES = 10;
     private static final int MAX_HIGHSCORES = 2;
-    private final String fileName;
+    private String fileName;
     private final Audio audio;
     private final LinkedList<HighScore> highScores;
     private final Field[] wormHoles;
@@ -158,6 +158,11 @@ public class Model {
     //#                  Game field                     #
     //#                                                 #
     //###################################################
+    public void setTrack(String fileName) {
+    	this.fileName = fileName;
+    	doReset();
+    }
+    
     public Field[][] getGameField(){
         return this.gameField;
     }

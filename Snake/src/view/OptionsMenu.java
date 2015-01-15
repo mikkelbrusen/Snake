@@ -19,6 +19,7 @@ class OptionsMenu extends JPanel implements ActionListener {
 	private final BufferedImage[] images;
 	private final String[] tracks = {"16x9_noAI_empty.png", "16x9_straightLine.png", "32x18_withWalls.png", "48x27_noAI_withWormHoles.png",
 			"48x27_withComplexWalls.png", "48x27_withWalls.png"};
+	private String trackName;
 	
 	public OptionsMenu (Controller controller) {
 		super();
@@ -51,13 +52,12 @@ class OptionsMenu extends JPanel implements ActionListener {
 		trackList.setRenderer(renderer);
 		trackList.setMaximumRowCount(3);
 		trackList.addActionListener(this);
+		
 
 		JPanel trackPanel = new JPanel();
 		trackPanel.add(trackList);
 
 		this.add(trackPanel);
-		
-		this.add(Box.createRigidArea(new Dimension(0,50)));
 		
 		JLabel speedLabel = new JLabel("Speed");
 		speedLabel.setAlignmentX(CENTER_ALIGNMENT);
@@ -125,7 +125,10 @@ class OptionsMenu extends JPanel implements ActionListener {
 				controller.doCmd(Enumerators.ENABLE_AI);
 				break;
 			case "comboBoxChanged":
-				controller.doCmd(Enumerators.TRACK);
+				JComboBox trackList = (JComboBox) e.getSource();
+				String trackName = trackList.getSelectedItem().toString();
+				this.trackName = trackName;
+				controller.doCmd(Enumerators.CHANGE_TRACK, trackName);
 				System.out.println("did something");
 				break;
 		}
@@ -137,5 +140,9 @@ class OptionsMenu extends JPanel implements ActionListener {
 
 	public String[] getTracks() {
 		return tracks;
+	}
+	
+	public String getSelectedTrack() {
+		return trackName;
 	}
 }
