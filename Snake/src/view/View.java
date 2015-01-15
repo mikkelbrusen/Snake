@@ -124,7 +124,7 @@ public final class View extends JFrame {
 		snakePanel.setDimension(dimension);
 	}
 	
-	public String[] getTracks() {
-		return options.getTracks();
+	public int getSpeed() {
+		return options.getSpeed();
 	}
 }
