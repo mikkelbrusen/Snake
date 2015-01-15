@@ -119,6 +119,10 @@ public final class View extends JFrame {
 		cl.show(panel, "game");
 		model.setPaused(false);
 	}
+
+	public void changeDimension(Dimension dimension){
+		snakePanel.setDimension(dimension);
+	}
 	
 	public String[] getTracks() {
 		return options.getTracks();

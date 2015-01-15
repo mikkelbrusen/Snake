@@ -158,10 +158,6 @@ public class Model {
     //#                  Game field                     #
     //#                                                 #
     //###################################################
-    public void setDimension(Dimension dimension){
-        this.dimension = dimension;
-    }
-
     public void setTrack(String fileName) {
     	this.fileName = fileName;
     }

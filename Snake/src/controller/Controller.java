@@ -47,15 +47,18 @@ public class Controller {
             view.repaint();
         });
     }
+
+    void changeDimension(){
+        view.changeDimension(model.getDimension());
+    }
     
-    public void doCmd(Enumerators o, String s, Dimension dimension) {
-    	switch (o) {
-        	case CHANGE_TRACK:
-        		model.setTrack(s);
-                model.setDimension(dimension);
+    public void doCmd(Enumerators o, String s) {
+        switch (o) {
+            case CHANGE_TRACK:
+                model.setTrack(s);
                 System.out.println("Tried to load track: " + s);
-        		break;
-    	}
+                break;
+        }
     }
         
     public void doCmd(Enumerators o){
@@ -63,6 +66,7 @@ public class Controller {
             case RESET_GAME:
                 model.playStartAudio();
                 model.doReset();
+                changeDimension();
                 view.showPaused(false);
                 break;
             case SHOW_HIGHSCORES:
@@ -100,10 +104,11 @@ public class Controller {
                 model.setPaused(true);
                 break;
             case START_GAME:
-                view.displayGame();
                 model.playStartAudio();
                 model.doReset();
+                changeDimension();
                 view.showPaused(false);
+                view.displayGame();
                 break;
         }
     }

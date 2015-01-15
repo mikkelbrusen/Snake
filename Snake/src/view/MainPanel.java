@@ -18,13 +18,13 @@ class MainPanel extends JPanel {
 	private static final BufferedImage[] THEME_SNAKE = new BufferedImage[10];
 	private static int scale;
 	private final Model model;
-	private final Dimension size;
+	private Dimension size;
 	private final JLabel paused;
 	
 	public MainPanel(Dimension size, Model model) {
 		super();
 		this.size = size;
-		scale = width / size.width;
+		scale = this.width / size.width;
 		this.setLayout(new BorderLayout(size.width*scale,size.height*scale));
 		this.setBackground(Color.WHITE);
 		this.setPreferredSize(new Dimension(size.width*scale,size.height*scale));
@@ -65,6 +65,14 @@ class MainPanel extends JPanel {
 		THEME_SNAKE[9] = loadImage("Wormhole.png");
 		
 		
+	}
+	protected void setDimension(Dimension dimension){
+		this.size = dimension;
+		this.scale = this.width / size.width;
+		this.setLayout(new BorderLayout(size.width*scale,size.height*scale));
+		this.setBackground(Color.WHITE);
+		this.setPreferredSize(new Dimension(size.width*scale,size.height*scale));
+		this.setOpaque(true);
 	}
 	
 	public Dimension getSize(){
