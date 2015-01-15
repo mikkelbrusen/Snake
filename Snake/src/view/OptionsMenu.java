@@ -39,7 +39,7 @@ class OptionsMenu extends JPanel implements ActionListener {
 
 		for (int i = 0; i < tracks.length; i++) {
 			intTracks[i] = i;
-			images[i] = createBufferedImage(tracks[i]);
+			images[i] = createBufferedImage(tracks[i] + ".png");
 		}
 
 		//Add combobox
