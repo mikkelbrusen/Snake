@@ -99,8 +99,50 @@ public class Controller {
             case START_GAME:
                 view.toGame();
                     model.playStartAudio();
-                model.setPaused(false);
-                break;
+                    model.doReset();
+                    view.showPaused(false);
+                    break;
+                case SHOW_HIGHSCORES:
+                    view.showHighScore();
+                    break;
+                case ENABLE_AI:
+                    model.setUseAI(!model.getUseAI());
+                    break;
+                case SPEED_UP:
+                    timer.stop();
+                    this.INTERVAL *= 0.5;
+                    newTimer();
+                    timer.start();
+                    break;
+                case SPEED_DOWN:
+                    timer.stop();
+                    if(INTERVAL == 0)
+                        INTERVAL = 1;
+                    else
+                        this.INTERVAL *= 2;
+                    newTimer();
+                    timer.start();
+                    break;
+                case OPTIONS:
+                	view.toOptions();
+                	model.setPaused(true);
+                	break;
+                case EXIT_GAME:
+                	System.exit(0);
+                	break;
+                case PAUSE_GAME:
+                	model.setPaused(true);
+                	break;
+                case START_MENU:
+                	view.toStart();
+                	model.setPaused(true);
+                	break;
+                case START_GAME:
+                	view.toGame();
+                        model.playStartAudio();
+                	model.setPaused(false);
+                	break;
+            }
         }
     }
 }
