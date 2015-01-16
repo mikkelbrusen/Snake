@@ -37,7 +37,7 @@ class MainPanel extends JPanel {
 		paused.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 		paused.setHorizontalAlignment(SwingConstants.CENTER);
 		this.add(paused);
-		paused.setVisible(false);
+		paused.setVisible(true);
 		
 		
 		// Load Obama Theme
@@ -81,6 +81,8 @@ class MainPanel extends JPanel {
 	
 	public void showPause(boolean b){
 		paused.setVisible(b);
+		if(b){System.out.println("SHOW");}
+		if(!b){System.out.println("HIDE");}
 	}
 
 	@Override

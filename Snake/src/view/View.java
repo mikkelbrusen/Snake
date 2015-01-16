@@ -103,7 +103,7 @@ public final class View extends JFrame {
 		}
 	}
 
-	public void showPaused(boolean b) {
+	public void showPause(boolean b) {
 		snakePanel.showPause(b);
 	}
 
