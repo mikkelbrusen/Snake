@@ -17,7 +17,7 @@ public final class View extends JFrame {
 		cl = new CardLayout();
 		panel = new JPanel();
 	}
-	private final MainPanel snakePanel;
+	private final GamePanel snakePanel;
 	private final Model model;
 	private final Controller controller;
 	private final OptionsMenu options;
@@ -29,7 +29,7 @@ public final class View extends JFrame {
 		this.setTitle("Atomic Bomber Snake - the super, mega, awesome quest for epic awesomeness!");
 		this.model = model;
 		this.controller = controller;
-		snakePanel = new MainPanel(model.getDimension(), model);
+		snakePanel = new GamePanel(model.getDimension(), model);
 		options = new OptionsMenu(controller);
 		StartMenu startMenu = new StartMenu(controller);
 

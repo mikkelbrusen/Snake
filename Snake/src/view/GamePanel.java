@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-class MainPanel extends JPanel {
+class GamePanel extends JPanel {
 
 	private final static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	private final static int width = (int) screenSize.getWidth();
@@ -21,7 +21,7 @@ class MainPanel extends JPanel {
 	private Dimension size;
 	private final JLabel paused;
 	
-	public MainPanel(Dimension size, Model model) {
+	public GamePanel(Dimension size, Model model) {
 		super();
 		this.size = size;
 		scale = this.width / size.width;
