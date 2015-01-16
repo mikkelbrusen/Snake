@@ -59,6 +59,12 @@ public class Controller {
                 model.setTrack(s);
                 System.out.println("Tried to load track: " + s);
                 break;
+            case SET_SPEED:
+                timer.stop();
+                INTERVAL = Integer.parseInt(s);
+                newTimer();
+                timer.start();
+                break;
         }
     }
         
@@ -74,21 +80,6 @@ public class Controller {
                 break;
             case ENABLE_AI:
                 model.setUseAI(model.isNotUsingAI());
-                break;
-            case SPEED_UP:
-                timer.stop();
-                this.INTERVAL *= 0.5;
-                newTimer();
-                timer.start();
-                break;
-            case SPEED_DOWN:
-                timer.stop();
-                if (INTERVAL == 0)
-                    INTERVAL = 1;
-                else
-                    this.INTERVAL *= 2;
-                newTimer();
-                timer.start();
                 break;
             case OPTIONS:
                 view.displayOptionsMenu();
@@ -111,14 +102,6 @@ public class Controller {
                 view.showPaused(false);
                 view.displayGame();
                 break;
-            case SET_SPEED:
-            	timer.stop();
-            	int speed = view.getSpeed();
-            	INTERVAL = speed;
-            	System.out.println(INTERVAL);
-            	newTimer();
-                timer.start();
-            	break;
         }
     }
 }

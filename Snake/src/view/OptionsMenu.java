@@ -90,7 +90,7 @@ class OptionsMenu extends JPanel implements ActionListener {
 				if (!slider.getValueIsAdjusting()) {
 					this.value = slider.getValue();
 					System.out.println(value);
-					controller.doCmd(Enumerators.SET_SPEED);
+					controller.doCmd(Enumerators.SET_SPEED, Integer.toString(value));
 				}
 			}
 			

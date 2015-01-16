@@ -31,10 +31,6 @@ class Snake {
         model.setFieldValue(Enumerators.HEAD, field);
         position = field;
         setDirection('W');
-//        this.direction = 'W';
-//        this.reverseDirection = 'E';
-//        this.isReverseDirection = false;
-//        this.hasTakenStep = true;
     }
 
     Field getPosition() {
