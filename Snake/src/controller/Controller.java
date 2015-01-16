@@ -22,6 +22,7 @@ public class Controller {
         this.model = new Model(dimension,fileName);
         this.view = new View(model,this);
 
+        if (INTERVAL == 0) INTERVAL = 150;
         newTimer();
         timer.start();
 

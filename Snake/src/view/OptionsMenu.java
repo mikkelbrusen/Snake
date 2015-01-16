@@ -76,10 +76,10 @@ class OptionsMenu extends JPanel implements ActionListener {
 		this.add(speedLabel);
 		
 		//slider with numbers for speed
-		int majorTick = 45;
-		int minorTick = 15;
+		int majorTick = 70;
+		int minorTick = 10;
 		JSlider speedSlider = addSlider(majorTick, minorTick);
-		speedSlider.setLabelTable(speedSlider.createStandardLabels(45));
+		speedSlider.setLabelTable(speedSlider.createStandardLabels(70));
 		speedSlider.setValue(128);
 		speedSlider.addChangeListener(new ChangeListener() {
 			private int value;
@@ -88,15 +88,12 @@ class OptionsMenu extends JPanel implements ActionListener {
 			public void stateChanged(ChangeEvent evt) {
 				JSlider slider = (JSlider) evt.getSource();
 				if (!slider.getValueIsAdjusting()) {
-					this.value = slider.getValue();
-					System.out.println(value);
-					controller.doCmd(Enumerators.SET_SPEED, Integer.toString(value));
+					value = slider.getValue();
+					double d = (1/(double)value)*10000;
+					String sValue = Integer.toString((int)d);
+					System.out.println(sValue);
+					controller.doCmd(Enumerators.SET_SPEED, sValue);
 				}
-			}
-			
-			public int getValue() {
-				System.out.println(this.value);
-				return this.value;
 			}
 		});
 		this.value = speedSlider.getValue();
