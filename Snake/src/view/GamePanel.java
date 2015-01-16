@@ -41,28 +41,28 @@ class GamePanel extends JPanel {
 		
 		
 		// Load Obama Theme
-		THEME_OBAMA[0] = loadImage("Sand.png");
-		THEME_OBAMA[1] = loadImage("Brick.png");
-		THEME_OBAMA[2] = loadImage("Bomb.png");
-		THEME_OBAMA[3] = loadImage("NLeadTerrorist.png");
-		THEME_OBAMA[4] = loadImage("SLeadTerrorist.png");
-		THEME_OBAMA[5] = loadImage("ELeadTerrorist.png");
-		THEME_OBAMA[6] = loadImage("WLeadTerrorist.png");
-		THEME_OBAMA[7] = loadImage("BodyTerrorist.png");
-		THEME_OBAMA[8] = loadImage("Obama.png");
-		THEME_OBAMA[9] = loadImage("Wormhole.png");
+		THEME_OBAMA[0] = loadImage("t_theme/Sand.png");
+		THEME_OBAMA[1] = loadImage("t_theme/Brick.png");
+		THEME_OBAMA[2] = loadImage("t_theme/Bomb.png");
+		THEME_OBAMA[3] = loadImage("t_theme/NLeadTerrorist.png");
+		THEME_OBAMA[4] = loadImage("t_theme/SLeadTerrorist.png");
+		THEME_OBAMA[5] = loadImage("t_theme/ELeadTerrorist.png");
+		THEME_OBAMA[6] = loadImage("t_theme/WLeadTerrorist.png");
+		THEME_OBAMA[7] = loadImage("t_theme/BodyTerrorist.png");
+		THEME_OBAMA[8] = loadImage("t_theme/Obama.png");
+		THEME_OBAMA[9] = loadImage("t_theme/Wormhole.png");
 		
 		// Load Snake Theme
-		THEME_SNAKE[0] = loadImage("Sand.png");
-		THEME_SNAKE[1] = loadImage("Brick.png");
-		THEME_SNAKE[2] = loadImage("Apple.png");
-		THEME_SNAKE[3] = loadImage("NHead.png");
-		THEME_SNAKE[4] = loadImage("SHead.png");
-		THEME_SNAKE[5] = loadImage("EHead.png");
-		THEME_SNAKE[6] = loadImage("WHead.png");
-		THEME_SNAKE[7] = loadImage("Body.png");
-		THEME_SNAKE[8] = loadImage("Body.png");
-		THEME_SNAKE[9] = loadImage("Wormhole.png");
+		THEME_SNAKE[0] = loadImage("s_theme/Grass.png");
+		THEME_SNAKE[1] = loadImage("s_theme/Water.png");
+		THEME_SNAKE[2] = loadImage("s_theme/Apple.png");
+		THEME_SNAKE[3] = loadImage("s_theme/NSnakeHead.png");
+		THEME_SNAKE[4] = loadImage("s_theme/SSnakeHead.png");
+		THEME_SNAKE[5] = loadImage("s_theme/ESnakeHead.png");
+		THEME_SNAKE[6] = loadImage("s_theme/WSnakeHead.png");
+		THEME_SNAKE[7] = loadImage("s_theme/SnakeBody.png");
+		THEME_SNAKE[8] = loadImage("s_theme/SnakeTail.png");
+		THEME_SNAKE[9] = loadImage("s_theme/Wormhole.png");
 		
 		
 	}
