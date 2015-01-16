@@ -18,10 +18,9 @@ public class Controller {
     private Timer timer;
 
     public Controller(Dimension dimension, String fileName) {
-
+    	
         this.model = new Model(dimension,fileName);
         this.view = new View(model,this);
-    	System.out.println(INTERVAL);
 
         newTimer();
         timer.start();
@@ -113,8 +112,12 @@ public class Controller {
                 view.displayGame();
                 break;
             case SET_SPEED:
+            	timer.stop();
             	int speed = view.getSpeed();
-            	this.INTERVAL = speed;
+            	INTERVAL = speed;
+            	System.out.println(INTERVAL);
+            	newTimer();
+                timer.start();
             	break;
         }
     }

@@ -125,6 +125,9 @@ public final class View extends JFrame {
 	}
 	
 	public int getSpeed() {
-		return options.getSpeed();
+		System.out.println(options.getSpeed());
+		//if (options.getSpeed() != 0)
+			return options.getSpeed();
+		//else return 128;
 	}
 }

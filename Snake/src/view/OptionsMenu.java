@@ -88,14 +88,18 @@ class OptionsMenu extends JPanel implements ActionListener {
 			public void stateChanged(ChangeEvent evt) {
 				JSlider slider = (JSlider) evt.getSource();
 				if (!slider.getValueIsAdjusting()) {
-					int value = slider.getValue();
-					this.value = value;
+					this.value = slider.getValue();
 					System.out.println(value);
 					controller.doCmd(Enumerators.SET_SPEED);
 				}
 			}
+			
+			public int getValue() {
+				System.out.println(this.value);
+				return this.value;
+			}
 		});
-		this.value = value;
+		this.value = speedSlider.getValue();
 		
 		this.add(speedSlider, "Speed");
 		
@@ -171,6 +175,7 @@ class OptionsMenu extends JPanel implements ActionListener {
 	}
 	
 	public int getSpeed() {
+		System.out.println(value);
 		return value;
 	}
 }
