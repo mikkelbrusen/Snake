@@ -23,9 +23,10 @@ II. Instructions
 ----------------
 
 A. To run the program do one of the following:
+	0. Make sure you have java 8 installed.
 	1. Double click on Jar file.
-	2. Run Main.java
-	3. Write the following in CMD :   ###########################################################
+	2. Run Snake.jar
+	3. Write the following in CMD :   java -jar Snake.jar X Y ZZZZ , where X is desired width, Y is desired height, ZZZZ Desired start track to load
 
 B. Full list of available hotkeys
    
@@ -53,6 +54,6 @@ Other Hotkeys
 -------------
 
 Buster Kim Mejborn 	s122421
-Mikkel Møller Brusen	s134568
+Mikkel MÃ¸ller Brusen	s134568
 Gustav Madslund		s142800
 Gabriel Kihembo Broholm	s144554
