@@ -226,7 +226,7 @@ public class Model {
             sc.close();
             return true;
         }
-        catch (FileNotFoundException e) {
+        catch (FileNotFoundException|ArrayIndexOutOfBoundsException e) {
             return false;
         }
     }

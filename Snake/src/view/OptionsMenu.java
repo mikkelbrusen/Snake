@@ -91,7 +91,6 @@ class OptionsMenu extends JPanel implements ActionListener {
 					value = slider.getValue();
 					double d = (1/(double)value)*10000;
 					String sValue = Integer.toString((int)d);
-					System.out.println(sValue);
 					controller.doCmd(Enumerators.SET_SPEED, sValue);
 				}
 			}
@@ -122,7 +121,6 @@ class OptionsMenu extends JPanel implements ActionListener {
 	private static BufferedImage createBufferedImage(String path) {
 		BufferedImage images;
 		try {
-			System.out.println(path);
 			images = ImageIO.read(new File(path));
 			return images;
 		} catch (IOException e) {
@@ -155,7 +153,6 @@ class OptionsMenu extends JPanel implements ActionListener {
 				JComboBox trackList = (JComboBox) e.getSource();
 				int trackNum = (int) trackList.getSelectedItem();
 				this.trackName = tracks[trackNum];
-				System.out.println("did something" + this.trackName);
 				controller.doCmd(Enumerators.CHANGE_TRACK, this.trackName);
 				break;
 		}
@@ -172,7 +169,6 @@ class OptionsMenu extends JPanel implements ActionListener {
 	}
 	
 	public int getSpeed() {
-		System.out.println(value);
 		return value;
 	}
 }

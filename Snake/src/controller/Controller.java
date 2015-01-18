@@ -77,7 +77,6 @@ public class Controller {
         switch (o) {
             case CHANGE_TRACK:
                 model.setTrack(s);
-                System.out.println("Tried to load track: " + s);
                 break;
             case SET_SPEED:
                 timer.stop();
