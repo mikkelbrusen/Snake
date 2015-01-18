@@ -79,6 +79,7 @@ public class Controller {
                 timer.start();
                 break;
             case SPEED_UP:
+                timer.stop();
                 INTERVAL *= 0.8;
                 newTimer();
                 timer.start();
