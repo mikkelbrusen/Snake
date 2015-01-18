@@ -99,7 +99,7 @@ class KeyboardListener implements KeyListener {
 		}
 		if (keyCode == 80){
 			model.setPaused();
-			view.showPaused(model.isPaused());
+			view.showPause(model.isPaused());
 		}
 		if (keyCode == 79){
 			controller.doCmd(Enumerators.OPTIONS);

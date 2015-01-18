@@ -87,7 +87,7 @@ public class Controller {
                 model.playStartAudio();
                 model.doReset();
                 changeDimension();
-                view.showPaused(false);
+                view.showPause(false);
                 break;
             case SHOW_HIGHSCORES:
                 break;
@@ -112,7 +112,7 @@ public class Controller {
                 model.playStartAudio();
                 model.doReset();
                 changeDimension();
-                view.showPaused(false);
+                view.showPause(false);
                 view.displayGame();
                 break;
         }
