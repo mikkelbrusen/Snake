@@ -6,11 +6,15 @@ public class Field{
     private Enumerators type;
     private int whNumber;
     
+    // Constructor
+    
     public Field(int width, int height){
         this.width = width;
         this.height = height;
         this.whNumber = 0;
     }
+    
+    // Getters
     
     public int getWidth(){
         return width;
@@ -23,13 +27,15 @@ public class Field{
     int getWhNumber() {
         return this.whNumber;
     }
-
-    void setWhNumber(int n) {
-        this.whNumber = n;
-    }
     
     public Enumerators getType(){
         return type;
+    }
+    
+    // Setters 
+    
+    void setWhNumber(int n) {
+        this.whNumber = n;
     }
 
     void setType(Enumerators type) {

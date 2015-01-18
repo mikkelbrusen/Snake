@@ -13,6 +13,13 @@ import java.util.logging.Logger;
 
 
 public class Controller {
+	
+	//###################################################
+    //#                                                 #
+    //#          Variables and constructor              #
+    //#                                                 #
+    //###################################################
+	
     private final Model model;
     private final View view;
     private int INTERVAL;
@@ -30,7 +37,12 @@ public class Controller {
         KeyboardListener d = new KeyboardListener(model,view,this);
         view.addKeyListener(d);
 	}
-        
+    
+    //###################################################
+    //#                                                 #
+    //#          			Timer		                #
+    //#                                                 #
+    //###################################################
     private void newTimer(){
         this.timer = new Timer(INTERVAL, (ActionEvent e) -> {
             if (model.getGameOver()) {
@@ -54,6 +66,12 @@ public class Controller {
     void changeDimension(){
         view.changeDimension(model.getDimension());
     }
+    
+    //###################################################
+    //#                                                 #
+    //#             Important Commands                  #
+    //#                                                 #
+    //###################################################
     
     public void doCmd(Enumerators o, String s) {
         switch (o) {

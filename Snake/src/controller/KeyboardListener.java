@@ -11,6 +11,12 @@ import java.util.List;
 
 class KeyboardListener implements KeyListener {
 	
+	//###################################################
+    //#                                                 #
+    //#          Variables and constructor              #
+    //#                                                 #
+    //###################################################
+	
     private final Model model;
     private final View view;
     private final Controller controller;
@@ -93,42 +99,39 @@ class KeyboardListener implements KeyListener {
 		
 		int keyCode = e.getKeyCode();
 		
-		if (keyCode == 78){
-			controller.doCmd(Enumerators.RESET_GAME);
-			controller.doCmd(Enumerators.START_GAME);
-		}
-		if (keyCode == 80){
-			model.setPaused();
-			view.showPause(model.isPaused());
-		}
-		if (keyCode == 79){
-			controller.doCmd(Enumerators.OPTIONS);
-		}
-		if (keyCode == 72){
-			controller.doCmd(Enumerators.SHOW_HIGHSCORES);
-		}
-		if (keyCode == KeyEvent.VK_ESCAPE) {
-			controller.doCmd(Enumerators.START_MENU);
-		}
-		if (keyCode == 49){
-			model.setTheme(1);
-		}
-		if ( keyCode == 50){
-			model.setTheme(2);
-		}
-		if ( keyCode == 51){
-			controller.doCmd(Enumerators.ENABLE_AI);
-		}
-		if ( keyCode == 52){
-			controller.doCmd(Enumerators.SPEED_UP);
-		}
-		if (keyCode == 53){
-			controller.doCmd(Enumerators.SPEED_DOWN);
+		switch(keyCode) {
+			case 78:
+				controller.doCmd(Enumerators.RESET_GAME);
+				controller.doCmd(Enumerators.START_GAME);
+				break;
+			case 80: 
+				model.setPaused();
+				view.showPause(model.isPaused());
+				break;
+			case 79:
+				controller.doCmd(Enumerators.OPTIONS);
+				break;
+			case 72:
+				controller.doCmd(Enumerators.SHOW_HIGHSCORES);
+				break;
+			case KeyEvent.VK_ESCAPE:
+				controller.doCmd(Enumerators.START_MENU);
+				break;
+			case 49: 
+				model.setTheme(1);
+				break;
+			case 50:
+				model.setTheme(2);
+				break;
+			case 51: 
+				controller.doCmd(Enumerators.ENABLE_AI);
+				break;
+			case 52: 
+				controller.doCmd(Enumerators.SPEED_UP);
+				break;
+			case 53:
+				controller.doCmd(Enumerators.SPEED_DOWN);
+				break;
 		}
 	}
-	
-	
-	
-	
-
 }

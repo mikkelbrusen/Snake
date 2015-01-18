@@ -31,6 +31,8 @@ class GamePanel extends JPanel {
 		this.setOpaque(true);
 		this.model = model;
 		
+		
+		// Pause Label
 		paused = new JLabel("PAUSED");
 		paused.setAlignmentX(CENTER_ALIGNMENT);
 		paused.setFont(new Font("Comic Sans MS", Font.BOLD, 100));
