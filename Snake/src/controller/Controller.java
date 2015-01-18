@@ -2,6 +2,7 @@ package controller;
 
 import model.Enumerators;
 import model.Model;
+import org.omg.CORBA.INV_FLAG;
 import view.View;
 
 import javax.swing.*;
@@ -71,6 +72,17 @@ public class Controller {
         
     public void doCmd(Enumerators o){
         switch (o) {
+            case SPEED_DOWN:
+                timer.stop();
+                INTERVAL *= 1.2;
+                newTimer();
+                timer.start();
+                break;
+            case SPEED_UP:
+                INTERVAL *= 0.8;
+                newTimer();
+                timer.start();
+                break;
             case RESET_GAME:
                 model.playStartAudio();
                 model.doReset();

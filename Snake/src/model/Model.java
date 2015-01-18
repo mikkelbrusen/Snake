@@ -23,7 +23,7 @@ public class Model {
     //#                                                 #
     //###################################################
     private static final int MAX_WORMHOLES = 10;
-    private static final int MAX_HIGHSCORES = 2;
+    private static final int MAX_HIGHSCORES = 10;
     private String fileName;
     private final Audio audio;
     private final LinkedList<HighScore> highScores;
