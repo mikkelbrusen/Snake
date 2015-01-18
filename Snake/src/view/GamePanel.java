@@ -24,7 +24,7 @@ class GamePanel extends JPanel {
 	public GamePanel(Dimension size, Model model) {
 		super();
 		this.size = size;
-		scale = this.width / size.width;
+		scale = width / size.width;
 		this.setLayout(new BorderLayout(size.width*scale,size.height*scale));
 		this.setBackground(Color.WHITE);
 		this.setPreferredSize(new Dimension(size.width*scale,size.height*scale));
@@ -70,7 +70,7 @@ class GamePanel extends JPanel {
 	}
 	protected void setDimension(Dimension dimension){
 		this.size = dimension;
-		this.scale = this.width / size.width;
+		scale = width / size.width;
 		this.setLayout(new BorderLayout(size.width*scale,size.height*scale));
 		this.setBackground(Color.WHITE);
 		this.setPreferredSize(new Dimension(size.width*scale,size.height*scale));
@@ -97,9 +97,9 @@ class GamePanel extends JPanel {
                 super.paintComponent(g);
 		// depending on the theme, paint it.
 		if (model.getTheme() == 2) {
-			paintFields(g2,THEME_SNAKE);
-		} else {
 			paintFields(g2,THEME_OBAMA);
+		} else {
+			paintFields(g2,THEME_SNAKE);
 		}
 	}
 	
