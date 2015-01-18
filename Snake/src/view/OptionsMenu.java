@@ -53,7 +53,7 @@ class OptionsMenu extends JPanel implements ActionListener {
 
 		for (int i = 0; i < tracks.length; i++) {
 			intTracks[i] = i;
-			images[i] = createBufferedImage(tracks[i] + ".png");
+			images[i] = createBufferedImage("src/tracks/" + tracks[i] + ".png");
 		}
 
 		//Add combobox
@@ -153,7 +153,7 @@ class OptionsMenu extends JPanel implements ActionListener {
 				JComboBox trackList = (JComboBox) e.getSource();
 				int trackNum = (int) trackList.getSelectedItem();
 				this.trackName = tracks[trackNum];
-				controller.doCmd(Enumerators.CHANGE_TRACK, this.trackName);
+				controller.doCmd(Enumerators.CHANGE_TRACK, "src/tracks/" + this.trackName);
 				break;
 		}
 	}

@@ -2,7 +2,6 @@ package controller;
 
 import model.Enumerators;
 import model.Model;
-import org.omg.CORBA.INV_FLAG;
 import view.View;
 
 import javax.swing.*;
